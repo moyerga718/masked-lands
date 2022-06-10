@@ -1,4 +1,5 @@
 import { useNavigate, Link } from "react-router-dom"
+import "./Navbar.css"
 
 
 // Check to see if user is staff or customer. Render EmployeeNav or CustomerNav depending on this. 
@@ -8,19 +9,7 @@ export const Navbar = () => {
     return (
         <ul className="navbar">
             <li className="navbar__item navbar__locations">
-                <Link className="navbar__link" to="/locations">Locations</Link>
-            </li>
-
-            <li className="navbar__item navbar__locations">
-                <Link className="navbar__link" to="/products">Product List</Link>
-            </li>
-
-            <li className="navbar__item navbar__locations">
-                <Link className="navbar__link" to="/employees">Employees</Link>
-            </li>
-
-            <li className="navbar__item navbar__locations">
-                <Link className="navbar__link" to="/customers">Customers</Link>
+                <Link className="navbar__link" to="/profile">My Profile</Link>
             </li>
 
             <li className="navbar__item navbar__logout">
