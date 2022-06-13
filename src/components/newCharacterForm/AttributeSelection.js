@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 export const AttributeSelection = ( {characterObj, setCharacter, attributes }) => {
-    const [newAttribueValues, setNewAttributeValues]
+    const [newAttribueValues, setNewAttributeValues] = useState([])
 
     //write a function that rolls 4 d6, takes away the lowest value
     // make a button that when clicked, run that function six times, store that info in a new state?
