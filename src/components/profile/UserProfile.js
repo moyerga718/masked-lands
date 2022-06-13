@@ -31,6 +31,11 @@ export const UserProfile = () => {
     }>Update User Information</button>
 
     <h2>{currentUser.firstName}'s Characters</h2>
+    <button onClick={
+        () => {
+            navigate(`/create`)
+        }
+    }> + Create</button>
     {
         currentUserCharacters.map( character => <PublicCharacterCard 
             key={`character--${character.id}`}

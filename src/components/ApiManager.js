@@ -30,6 +30,16 @@ export const getUserByUsernameFetch = (userObj) => {
         .then(response => response.json())
 }
 
+export const getAllClassesFetch = () => {
+    return fetch(`http://localhost:8088/classes`)
+        .then(response => response.json())
+}
+
+export const getAllAttributesFetch = () => {
+    return fetch(`http://localhost:8088/attributes`)
+        .then(response => response.json())
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~PUT FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 export const saveUserProfileFetch = (profile) => {
