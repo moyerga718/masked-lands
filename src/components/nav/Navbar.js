@@ -6,10 +6,17 @@ import "./Navbar.css"
 export const Navbar = () => {
     const navigate = useNavigate() 
 
+    const localMlUser = localStorage.getItem("ml_user")
+    const mlUserObject = JSON.parse(localMlUser)
+
     return (
         <ul className="navbar">
-            <li className="navbar__item navbar__locations">
-                <Link className="navbar__link" to="/profile">My Profile</Link>
+            <li className="navbar__item navbar__home">
+                <Link className="navbar__link" to={`/`}>Home</Link>
+            </li>
+
+            <li className="navbar__item navbar__profile">
+                <Link className="navbar__link" to={`/profile/${mlUserObject.id}`}>My Profile</Link>
             </li>
 
             <li className="navbar__item navbar__logout">
