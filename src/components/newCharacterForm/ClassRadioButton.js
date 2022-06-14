@@ -1,7 +1,7 @@
 //component to make class radio buttons, put this in a separate component so each button could have its own key.
 
-export const ClassRadioButton = ( {classObj, characterObj, setCharacter, attributes} ) => {
-    const classAttribute = attributes.find(attribute => attribute.id === classObj.bonusAttributeId)
+export const ClassRadioButton = ( {classObj, characterObj, setCharacter, allAttributes} ) => {
+    const classAttribute = allAttributes.find(attribute => attribute.id === classObj.bonusAttributeId)
 
     return <>
         <div >

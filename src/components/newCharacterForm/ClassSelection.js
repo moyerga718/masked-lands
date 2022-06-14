@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { getAllClassesFetch } from "../ApiManager"
 import { ClassRadioButton } from "./ClassRadioButton"
 
-export const ClassSelection = ({ characterObj, setCharacter, attributes }) => {
+export const ClassSelection = ({ characterObj, setCharacter, allAttributes }) => {
     const [classes, setClasses] = useState([])
 
     useEffect(
@@ -22,7 +22,7 @@ export const ClassSelection = ({ characterObj, setCharacter, attributes }) => {
                 classObj={classObj}
                 characterObj={characterObj}
                 setCharacter={setCharacter}
-                attributes={attributes}
+                allAttributes={allAttributes}
                 />)
             }
         </fieldset>

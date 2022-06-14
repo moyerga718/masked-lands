@@ -19,6 +19,40 @@ export const NewCharacterFormContainer = () => {
         weaponId: 0,
         armorId: 0
     })
+
+    const [newCharacterAttributes, setNewCharacterAttributes] = useState([
+        {
+            characterId: 0,
+            attributeId: 1,
+            value: 0
+        },
+        {
+            characterId: 0,
+            attributeId: 2,
+            value: 0
+        },
+        {
+            characterId: 0,
+            attributeId: 3,
+            value: 0
+        },
+        {
+            characterId: 0,
+            attributeId: 4,
+            value: 0
+        },
+        {
+            characterId: 0,
+            attributeId: 5,
+            value: 0
+        },
+        {
+            characterId: 0,
+            attributeId: 6,
+            value: 0
+        },
+    ])
+
     const [allAttributes, setAllAttributes] = useState([])
 
     const localMlUser = localStorage.getItem("ml_user")
@@ -36,8 +70,11 @@ export const NewCharacterFormContainer = () => {
 
     return <>
         <h2>Make a New Character</h2>
-        <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} attributes={allAttributes}/>
-        <AttributeSelection characterObj={newCharacter} setCharacter={setNewCharacter} attributes={allAttributes}/>
+        <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes}/>
+        <AttributeSelection 
+            characterAttributes={newCharacterAttributes}
+            setCharacterAttributes={setNewCharacterAttributes}
+            allAttributes={allAttributes} />
         <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter}/>
         <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter}/>
         <CharacterSubmitButton characterObj={newCharacter}/>

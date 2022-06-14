@@ -3,13 +3,17 @@
 
 import { useEffect, useState } from "react"
 import "./newCharacterForm.css"
+import { AttributeValueSelection } from "./AttributeValueSelection"
 
-export const AttributeSelection = ( {characterObj, setCharacter, attributes }) => {
+export const AttributeSelection = ( {characterAttributes, setCharacterAttributes, allAttributes}) => {
     const [newAttributeValues, setNewAttributeValues] = useState([])
   
 
     //write a function that rolls 4 d6, takes away the lowest value
     // make a button that when clicked, run that function six times, store that info in a new state? - DONE
+    
+    // okay so attribute values are now displaying. But now I need to make radio buttons for each attribute value so the user can choose which stat 
+    // that value goes to. 
 
     
     const generateOneAttributeValue = () => {
@@ -48,7 +52,11 @@ export const AttributeSelection = ( {characterObj, setCharacter, attributes }) =
         const attributeValues = []
         for (let i = 0; i < 6; i++) {
             let attVal = generateOneAttributeValue()
-            attributeValues.push(attVal)
+            let attObj = {
+                id: i+1,
+                value: attVal
+            }
+            attributeValues.push(attObj)
         }
         setNewAttributeValues(attributeValues)
     }
@@ -60,20 +68,21 @@ export const AttributeSelection = ( {characterObj, setCharacter, attributes }) =
             ? <>
                 <button onClick={()=>generateAllAttributeValues()} >Click to roll your stats... exciting!!</button>
             </>
-            : <>
+             : <>
                 <div className="attributes-container">
                     {
-                        newAttributeValues.map(
-                            attribute => {
-                                return <div className="attribute-value">{attribute}</div>
-                            }
-                        )
+                        newAttributeValues.map(attribute => <AttributeValueSelection key={`newAttribute--${attribute.id}`}
+                        newAttributeId={attribute.id}
+                        newAttributeValue={attribute.value}
+                        characterAttributes={characterAttributes}
+                        setCharacterAttributes={setCharacterAttributes}
+                        allAttributeNames={allAttributes}
+                        />)
                     }
 
                 </div>
-            </>
+             </>
     
         }
-        <p>values for str, dex, con, int, att, cha</p>
         </div>
 }
