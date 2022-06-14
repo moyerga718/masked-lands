@@ -1,0 +1,13 @@
+.attributes-container {
+    display: flex;
+}
+
+.equipment-container {
+    display: flex;
+}
+
+.attribute-value {
+    border: solid 1px black; 
+    margin: 1rem;
+    padding: 1rem;
+}

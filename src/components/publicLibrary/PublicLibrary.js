@@ -7,6 +7,9 @@ import "./PublicLibrary.css"
 export const PublicLibrary = () => {
     const [characters, setCharacters] = useState([])
 
+    const localMlUser = localStorage.getItem("ml_user")
+    const mlUserObject = JSON.parse(localMlUser)
+
     useEffect(
         () => {
             getAllCharactersDetailedFetch().then(setCharacters)
@@ -22,7 +25,8 @@ export const PublicLibrary = () => {
         {
             characters.map( character => <PublicCharacterCard 
                 key={`character--${character.id}`}
-                characterObj={character}/>)
+                characterObj={character}
+                userObj={mlUserObject}/>)
         }
         </div>
     </section>

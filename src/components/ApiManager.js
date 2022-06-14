@@ -20,6 +20,11 @@ export const getAllCharactersForCurrentUserFetch = (userId) => {
         .then(response => response.json())
 }
 
+export const getCharacterById = (characterId) => {
+    return fetch(`http://localhost:8088/characters?_expand=class&_expand=weapon&_embed=characterAttributes&id=${characterId}`)
+        .then(response => response.json())
+}
+
 export const getUserByEmailFetch = (userObj) => {
     return fetch(`http://localhost:8088/users?email=${userObj.email}`)
         .then(response => response.json())
@@ -40,6 +45,17 @@ export const getAllAttributesFetch = () => {
         .then(response => response.json())
 }
 
+export const getAllWeaponsFetch = () => {
+    return fetch(`http://localhost:8088/weapons`)
+        .then(response => response.json())
+}
+
+export const getAllArmorFetch = () => {
+    return fetch(`http://localhost:8088/armor`)
+        .then(response => response.json())
+}
+
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~PUT FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 export const saveUserProfileFetch = (profile) => {
@@ -51,4 +67,25 @@ export const saveUserProfileFetch = (profile) => {
         body: JSON.stringify(profile)
     })
         .then(response => response.json())
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~POST FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+export const createCharacterFetch = (characterToSendToAPI) => {
+    return fetch(`http://localhost:8088/characters`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(characterToSendToAPI)
+    })
+        .then(response => response.json())
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~DELETE FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+export const deleteCharacterFetch = (characterId) => {
+    return fetch(`http://localhost:8088/characters/${characterId}`, {
+        method: "DELETE"
+    })
 }

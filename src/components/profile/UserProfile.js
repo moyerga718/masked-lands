@@ -39,7 +39,8 @@ export const UserProfile = () => {
     {
         currentUserCharacters.map( character => <PublicCharacterCard 
             key={`character--${character.id}`}
-            characterObj={character}/>)
+            characterObj={character}
+            userObj={mlUserObject}/>)
     }
 
     </>

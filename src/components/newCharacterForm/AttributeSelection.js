@@ -1,10 +1,16 @@
+// STATUS: attribute values generate when I click a button, they display on-screen. Need to generate dropdown box for each and store
+// selections in state.
+
 import { useEffect, useState } from "react"
+import "./newCharacterForm.css"
 
 export const AttributeSelection = ( {characterObj, setCharacter, attributes }) => {
-    const [newAttribueValues, setNewAttributeValues] = useState([])
+    const [newAttributeValues, setNewAttributeValues] = useState([])
+  
 
     //write a function that rolls 4 d6, takes away the lowest value
-    // make a button that when clicked, run that function six times, store that info in a new state?
+    // make a button that when clicked, run that function six times, store that info in a new state? - DONE
+
     
     const generateOneAttributeValue = () => {
         const arrayOfRolls = []
@@ -44,13 +50,30 @@ export const AttributeSelection = ( {characterObj, setCharacter, attributes }) =
             let attVal = generateOneAttributeValue()
             attributeValues.push(attVal)
         }
-        console.log(attributeValues)
-        return attributeValues
+        setNewAttributeValues(attributeValues)
     }
 
     return <div>
         <h2>ATTRIBUTE SELECTION</h2>
-        <button onClick={()=>generateAllAttributeValues()} >Click to roll one state</button>
+        {
+            (newAttributeValues.length === 0)
+            ? <>
+                <button onClick={()=>generateAllAttributeValues()} >Click to roll your stats... exciting!!</button>
+            </>
+            : <>
+                <div className="attributes-container">
+                    {
+                        newAttributeValues.map(
+                            attribute => {
+                                return <div className="attribute-value">{attribute}</div>
+                            }
+                        )
+                    }
+
+                </div>
+            </>
+    
+        }
         <p>values for str, dex, con, int, att, cha</p>
         </div>
 }

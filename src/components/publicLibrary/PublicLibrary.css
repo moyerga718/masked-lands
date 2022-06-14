@@ -3,3 +3,19 @@
     flex-direction: column;
     align-items: center;
 }
+
+.Character-Card-Container {
+    display: flex; 
+}
+
+.publicCharacterCard {
+    border: solid 1px black;
+    padding: 1rem;
+    margin: 1rem;
+    width: 15rem;
+}
+
+.character-card-header {
+    display: flex;
+    justify-content: space-between
+}

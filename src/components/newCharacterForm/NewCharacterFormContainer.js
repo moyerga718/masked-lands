@@ -4,6 +4,7 @@ import { ClassSelection } from "./ClassSelection"
 import { AttributeSelection } from "./AttributeSelection"
 import { EquipmentSelection } from "./EquipmentSelection"
 import { CharacterInfoSelection } from "./CharacterInfoSelection"
+import { CharacterSubmitButton } from "./CharacterSubmitButton"
 import { getAllAttributesFetch } from "../ApiManager"
 
 export const NewCharacterFormContainer = () => {
@@ -20,10 +21,17 @@ export const NewCharacterFormContainer = () => {
     })
     const [allAttributes, setAllAttributes] = useState([])
 
+    const localMlUser = localStorage.getItem("ml_user")
+    const mlUserObject = JSON.parse(localMlUser)
+
     useEffect(
         () => {
             getAllAttributesFetch().then(setAllAttributes)
-        }
+            const copy = {...newCharacter}
+            copy.userId = mlUserObject.id
+            setNewCharacter(copy) 
+        },
+        []
     )
 
     return <>
@@ -32,5 +40,6 @@ export const NewCharacterFormContainer = () => {
         <AttributeSelection characterObj={newCharacter} setCharacter={setNewCharacter} attributes={allAttributes}/>
         <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter}/>
         <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter}/>
+        <CharacterSubmitButton characterObj={newCharacter}/>
     </>
 }
