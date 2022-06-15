@@ -14,6 +14,7 @@ export const EditUserProfile = () => {
         lastName: ""
     })
   
+    //get user obj for current user
     useEffect(
         () => {
             getCurrentUserInformationFetch(userId).then(updateProfile)
@@ -21,11 +22,10 @@ export const EditUserProfile = () => {
         []
     )
 
+    //Once button is clicked, update data in api
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
-        //Fetch calls to see if any other users are using email/username user just inputted. 
         return saveUserProfileFetch(profile)
-            
                 .then(
                     () => {
                         navigate(`/profile/${userId}`)
@@ -34,6 +34,8 @@ export const EditUserProfile = () => {
 
     }
 
+    //return all form and button jsx.
+    
     return (
         <>
         <form className="profile">

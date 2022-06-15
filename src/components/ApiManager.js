@@ -82,6 +82,17 @@ export const createCharacterFetch = (characterToSendToAPI) => {
         .then(response => response.json())
 }
 
+export const createCharacterAttributeFetch = (charAttToSendToAPI) => {
+    return fetch(`http://localhost:8088/characterAttributes`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(charAttToSendToAPI)
+    })
+        .then(response => response.json())
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~DELETE FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 export const deleteCharacterFetch = (characterId) => {

@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react"
 import { getAllArmorFetch, getAllWeaponsFetch } from "../ApiManager"
+import { WeaponSelectionDropdown } from "./WeaponSelectionDropdown"
+import { ArmorSelectionDropdown } from "./ArmorSelectionDropdown"
 import "./newCharacterForm.css"
+
+//This component renders drop down boxes for weapon and armor selection
 
 export const EquipmentSelection = ( {characterObj, setCharacter} ) => {
 
     const [weapons, setWeapons] = useState([])
     const [armor, setArmor] = useState([])
 
+    //get weapons and armor data when state is initialized 
     useEffect(
         () => {
             getAllWeaponsFetch().then(setWeapons)
@@ -15,6 +20,7 @@ export const EquipmentSelection = ( {characterObj, setCharacter} ) => {
         []
     )
 
+    //render jsx for weapon/armor dropdowns. WeaponSelectionDropdown and ArmorSelectionDropdown components render an option for each weapon/armor obj.
     return <div>
         <h2>EQUIPMENT SELECTION</h2>
         <div className="equipment-container">
@@ -27,7 +33,9 @@ export const EquipmentSelection = ( {characterObj, setCharacter} ) => {
                 }}>
                     <option value="0">Choose a Weapon</option>
                     {
-                        weapons.map(weapon => <option value={weapon.id}>{weapon.name}: 1d{weapon.damageDie}</option>)
+                        weapons.map(weapon => <WeaponSelectionDropdown 
+                            key={`weapon--${weapon.id}`}
+                            weaponObj={weapon}/>)
                     }
                 </select>
             </section>
@@ -40,7 +48,9 @@ export const EquipmentSelection = ( {characterObj, setCharacter} ) => {
                 }}>
                     <option value="0">Choose your Armor</option>
                     {
-                        armor.map(armor => <option value={armor.id}>{armor.name}: AC {armor.defenseRating}</option>)
+                        armor.map(armor => <ArmorSelectionDropdown
+                            key={`armor--${armor.id}`}
+                            armorObj={armor} />)
                     }
                 </select>
             </section>

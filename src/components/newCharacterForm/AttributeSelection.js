@@ -1,21 +1,22 @@
-// STATUS: attribute values generate when I click a button, they display on-screen. Need to generate dropdown box for each and store
-// selections in state.
-
 import { useEffect, useState } from "react"
 import "./newCharacterForm.css"
 import { AttributeValueSelection } from "./AttributeValueSelection"
+
+//This component uses two other components to do the following things:
+    // 1. Generate six attribute values that the user will be able to assign to a single attribute
+    //     a. To generate an attribute value, roll 4d6. Sum the values of the highest three rolls. This will be done six times.
+    //     b. The six attributes are: Strength, Dexterity, Constitution, Intelligence, Attunement, and Charisma. 
+    // 2. For each generated value, render six radio buttons - one for each attribute.
+    // 3. User can select which attribute they want for each value. 
+        
 
 export const AttributeSelection = ( {characterAttributes, setCharacterAttributes, allAttributes}) => {
     const [newAttributeValues, setNewAttributeValues] = useState([])
   
 
-    //write a function that rolls 4 d6, takes away the lowest value
-    // make a button that when clicked, run that function six times, store that info in a new state? - DONE
+    //~~~~~~~~~~~~~~~~~~~~FUNCTIONS FOR GENERATING ATTRIBUTE VALUES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     
-    // okay so attribute values are now displaying. But now I need to make radio buttons for each attribute value so the user can choose which stat 
-    // that value goes to. 
-
-    
+    //This function rolls 4d6
     const generateOneAttributeValue = () => {
         const arrayOfRolls = []
         //roll 4d6, add that to arrayOfRolls
@@ -31,6 +32,7 @@ export const AttributeSelection = ( {characterAttributes, setCharacterAttributes
         return sortedArraySum
     }
 
+    //This function removes smallest value from 4d6 roll (called within generateOneAttributeValue())
     const removeSmallest = (array) => {
         //sort array in descending order
         const sortedArray = array.sort().reverse()
@@ -40,6 +42,7 @@ export const AttributeSelection = ( {characterAttributes, setCharacterAttributes
         return sortedArray
     }
 
+    //This function finds the sum of the highest 3d6 array (called within generateOneAttributeValue())
     const sumArray = (array) => {
         let sum = 0
         array.forEach( num => {
@@ -48,6 +51,7 @@ export const AttributeSelection = ( {characterAttributes, setCharacterAttributes
         return sum
     }
 
+    //This function calls generateOneAttributeValue() six times, stores all new values in an array of objects {id, attributeValue}
     const generateAllAttributeValues = () => {
         const attributeValues = []
         for (let i = 0; i < 6; i++) {
@@ -61,8 +65,18 @@ export const AttributeSelection = ( {characterAttributes, setCharacterAttributes
         setNewAttributeValues(attributeValues)
     }
 
+    //~~~~~~~~~~~~~~~~~~~~END FUNCTIONS FOR GENERATING ATTRIBUTE VALUES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+
+    
+
     return <div>
         <h2>ATTRIBUTE SELECTION</h2>
+
+        {/* Ternary statement checks to see if attribute values have been generated yet. 
+                If not, display a button that will call generateAllAttributeValues
+                If values have been generated, call <AttributeValueSelection /> for each new attribute to render JSX */}
+
         {
             (newAttributeValues.length === 0)
             ? <>

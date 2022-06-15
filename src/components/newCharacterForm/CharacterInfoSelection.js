@@ -1,3 +1,5 @@
+//Render text inputs for character name, bio, and imageURL. 
+
 export const CharacterInfoSelection = ({characterObj, setCharacter}) => {
     return <div>
         <h2>CHARACTER INFO SELECTION</h2>

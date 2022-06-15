@@ -1,4 +1,3 @@
-//This component is just a container for the different pages of the character creation form so that character state can be passed from one page to another? Will it work? who knows
 import { useState, useEffect } from "react"
 import { ClassSelection } from "./ClassSelection"
 import { AttributeSelection } from "./AttributeSelection"
@@ -7,8 +6,12 @@ import { CharacterInfoSelection } from "./CharacterInfoSelection"
 import { CharacterSubmitButton } from "./CharacterSubmitButton"
 import { getAllAttributesFetch } from "../ApiManager"
 
+// This component is a parent component for all of the different sections of the character creation form. Temp objects for character and character attributes
+// are initialized in state here.
+
 export const NewCharacterFormContainer = () => {
 
+    // create empty character obj to be populated
     const [newCharacter, setNewCharacter] = useState({
         id: 0,
         userId: 0,
@@ -20,6 +23,7 @@ export const NewCharacterFormContainer = () => {
         armorId: 0
     })
 
+    // create array of empty attribute objects to be populated
     const [newCharacterAttributes, setNewCharacterAttributes] = useState([
         {
             characterId: 0,
@@ -53,11 +57,15 @@ export const NewCharacterFormContainer = () => {
         },
     ])
 
+    // Get all attribute raw data (name/id pairings)
     const [allAttributes, setAllAttributes] = useState([])
 
+    // Get current user id from local storage
     const localMlUser = localStorage.getItem("ml_user")
     const mlUserObject = JSON.parse(localMlUser)
 
+    //upon state initializing, get all attribute name/id pairings
+    //Add userId to new character object
     useEffect(
         () => {
             getAllAttributesFetch().then(setAllAttributes)
@@ -68,15 +76,13 @@ export const NewCharacterFormContainer = () => {
         []
     )
 
+    //Call all necessary components, passing down character / character attribute / attribute name data as props 
     return <>
         <h2>Make a New Character</h2>
         <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes}/>
-        <AttributeSelection 
-            characterAttributes={newCharacterAttributes}
-            setCharacterAttributes={setNewCharacterAttributes}
-            allAttributes={allAttributes} />
+        <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} />
         <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter}/>
         <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter}/>
-        <CharacterSubmitButton characterObj={newCharacter}/>
+        <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes}/>
     </>
 }

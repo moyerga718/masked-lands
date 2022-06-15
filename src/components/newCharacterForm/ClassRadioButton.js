@@ -1,8 +1,9 @@
-//component to make class radio buttons, put this in a separate component so each button could have its own key.
-
 export const ClassRadioButton = ( {classObj, characterObj, setCharacter, allAttributes} ) => {
+
+    //For the given classObj, find the name of the attribute that class gives a bonus to.
     const classAttribute = allAttributes.find(attribute => attribute.id === classObj.bonusAttributeId)
 
+    //Create a radio button that displays the class name and associated attribute bonus. When selected, update the main character object
     return <>
         <div >
             <input

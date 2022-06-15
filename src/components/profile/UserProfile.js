@@ -8,40 +8,56 @@ export const UserProfile = () => {
     const [currentUser, setCurrentUser] = useState({})
     const [currentUserCharacters, setCurrentUserCharacters] = useState([])
 
+    //Get id of logged in user
     const localMlUser = localStorage.getItem("ml_user")
     const mlUserObject = JSON.parse(localMlUser)
 
+    //Upon state initializing...
     useEffect(
         () => {
+            //Get user information based on ID found in local storage
             getCurrentUserInformationFetch(mlUserObject.id).then(setCurrentUser)
+            //Get all characters for current user
             getAllCharactersForCurrentUserFetch(mlUserObject.id).then(setCurrentUserCharacters)
         },
         []
     )
 
-    return <>
-    <h2>{currentUser.firstName}'s Profile</h2>
-    <p>Full Name: {currentUser.firstName} {currentUser.lastName}</p>
-    <p>Username: {currentUser.username}</p>
-    <p>Email: {currentUser.email}</p>
-    <button onClick={
-        () => {
-            navigate(`/profile/${currentUser.id}/edit`)
-        }
-    }>Update User Information</button>
 
-    <h2>{currentUser.firstName}'s Characters</h2>
-    <button onClick={
-        () => {
-            navigate(`/create`)
+    return <>
+
+        {/* Display current user information */}
+
+        <h2>{currentUser.firstName}'s Profile</h2>
+        <p>Full Name: {currentUser.firstName} {currentUser.lastName}</p>
+        <p>Username: {currentUser.username}</p>
+        <p>Email: {currentUser.email}</p>
+
+        {/* Button links to editing user information */}
+
+        <button onClick={
+            () => {
+                navigate(`/profile/${currentUser.id}/edit`)
+            }
+        }>Update User Information</button>
+
+        {/* Button links to character creation form */}
+
+        <h2>{currentUser.firstName}'s Characters</h2>
+        <button onClick={
+            () => {
+                navigate(`/create`)
+            }
+        }> + Create</button>
+
+        {/* Render character cards for all of this users characters */}
+
+        {
+            currentUserCharacters.map(character => <PublicCharacterCard
+                key={`character--${character.id}`}
+                characterObj={character}
+                userObj={mlUserObject} />)
         }
-    }> + Create</button>
-    {
-        currentUserCharacters.map( character => <PublicCharacterCard 
-            key={`character--${character.id}`}
-            characterObj={character}
-            userObj={mlUserObject}/>)
-    }
 
     </>
 }

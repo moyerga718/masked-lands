@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom"
 import { getAllClassesFetch } from "../ApiManager"
 import { ClassRadioButton } from "./ClassRadioButton"
 
+//This component renders a section where user can choose a class
+
 export const ClassSelection = ({ characterObj, setCharacter, allAttributes }) => {
     const [classes, setClasses] = useState([])
 
+    //Get all class information
     useEffect(
         () => {
             getAllClassesFetch().then(setClasses)
@@ -13,6 +16,7 @@ export const ClassSelection = ({ characterObj, setCharacter, allAttributes }) =>
         []
     )
 
+    // For every class, invoke the ClassRadioButton component to create all radio buttons.
     return <>
         <h2>Class</h2>
         <fieldset>
