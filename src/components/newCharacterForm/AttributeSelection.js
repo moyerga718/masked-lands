@@ -12,6 +12,15 @@ import { AttributeValueSelection } from "./AttributeValueSelection"
 
 export const AttributeSelection = ( {characterAttributes, setCharacterAttributes, allAttributes}) => {
     const [newAttributeValues, setNewAttributeValues] = useState([])
+    const [attributeDependencyMatrix, setAttributeDependencyMatrix] = useState([
+        [false, false, false, false, false, false],
+        [false, false, false, false, false, false],
+        [false, false, false, false, false, false],
+        [false, false, false, false, false, false],
+        [false, false, false, false, false, false],
+        [false, false, false, false, false, false]
+    ]
+    )
   
 
     //~~~~~~~~~~~~~~~~~~~~FUNCTIONS FOR GENERATING ATTRIBUTE VALUES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -89,7 +98,9 @@ export const AttributeSelection = ( {characterAttributes, setCharacterAttributes
                         newAttributeValues.map(attribute => <AttributeValueSelection key={`newAttribute--${attribute.id}`}
                         newAttributeId={attribute.id}
                         newAttributeValue={attribute.value}
-                        setNewAttributes={setNewAttributeValues}
+                        // setNewAttributes={setNewAttributeValues}
+                        attributeDependencyMatrix={attributeDependencyMatrix}
+                        setAttributeDependencyMatrix={setAttributeDependencyMatrix}
                         characterAttributes={characterAttributes}
                         setCharacterAttributes={setCharacterAttributes}
                         allAttributeNames={allAttributes}
