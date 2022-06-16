@@ -24,6 +24,8 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes} ) => 
                 createCharacterFetch(characterObj)
                     //Get that response, call it newCharacter, use that ID to set characterId for each character Attribute
                     .then((newCharacter) => {
+                        //Create an array that will hold all fetch calls...
+                        const fetchPromiseArray = []
                         //for each character attribute....
                         for (const charAtt of characterAttributes) {
                             //create an object to send to API that has new characterId
@@ -32,10 +34,12 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes} ) => 
                                 characterId: newCharacter.id,
                                 value: charAtt.value
                             }
-                            //post character attribute object to api
-                            createCharacterAttributeFetch(charAttToSendToAPI)
-                            .then( () => {} )
-                        }})
+                            //Add fetch call to promise array
+                            fetchPromiseArray.push(createCharacterAttributeFetch(charAttToSendToAPI))
+                        }
+                        //trigger all fetch calls
+                        Promise.all(fetchPromiseArray)
+                        })
                         // once everything has been posted, navigate to home page
                         .then(()=> navigate("/"))
             } else {

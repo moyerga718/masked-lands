@@ -9,6 +9,7 @@ export const CharacterSheet = () => {
     const [characterInfo, setCharacterInfo] = useState({})
     const [characterAttributes, setCharacterAttributes] = useState([])
     const [effectiveAttributes, setEffectiveAttributes] = useState([])
+    const [sortedEffective, setSortedEffective] = useState([])
     const [effectiveModifiers, setEffectiveModifiers] = useState([])
     const [attributes, setAttributes] = useState([])
     const [weapons, setWeapons] = useState([])
@@ -91,11 +92,21 @@ export const CharacterSheet = () => {
         [characterAttributes]
     )
 
+    useEffect(
+        () => {
+            const sorted = effectiveAttributes.sort((a, b) => {
+                return a.attributeId - b.attributeId
+            })
+            setSortedEffective(sorted)
+        },
+        [effectiveAttributes]
+    )
+
     //Once we have effective attributes, calculate effective modifiers for that attribute. save to state.
     useEffect(
         () => {
-            if (effectiveAttributes) {
-                const modArray = effectiveAttributes.map(
+            if (sortedEffective) {
+                const modArray = sortedEffective.map(
                     (att) => {
                         const modObj = {
                             attributeId: att.attributeId,
@@ -111,8 +122,9 @@ export const CharacterSheet = () => {
                 setEffectiveModifiers(modArray)
             }
         },
-        [effectiveAttributes]
+        [sortedEffective]
     )
+
 
     // Function to that calls delete fetch if delete button is clicked.
     const deleteCharacter = () => {
@@ -140,10 +152,10 @@ export const CharacterSheet = () => {
         <div>
             <h3>Attributes</h3>
             {
-                (effectiveAttributes && effectiveModifiers)
+                (sortedEffective && effectiveModifiers)
                     ? <>
                         {
-                            effectiveAttributes.map(charAtt => <AttributeList
+                            sortedEffective.map(charAtt => <AttributeList
                                 key={`characterAttribute--${charAtt.attributeId}`}
                                 charAtt={charAtt}
                                 charMods={effectiveModifiers}
