@@ -6,6 +6,7 @@
 
 .Character-Card-Container {
     display: flex; 
+    flex-wrap: wrap;
 }
 
 .publicCharacterCard {
@@ -15,7 +16,3 @@
     width: 15rem;
 }
 
-.character-card-header {
-    display: flex;
-    justify-content: space-between
-}

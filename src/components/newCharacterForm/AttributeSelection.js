@@ -58,7 +58,8 @@ export const AttributeSelection = ( {characterAttributes, setCharacterAttributes
             let attVal = generateOneAttributeValue()
             let attObj = {
                 id: i+1,
-                value: attVal
+                value: attVal,
+                selectedAttributeId: 0
             }
             attributeValues.push(attObj)
         }
@@ -88,6 +89,7 @@ export const AttributeSelection = ( {characterAttributes, setCharacterAttributes
                         newAttributeValues.map(attribute => <AttributeValueSelection key={`newAttribute--${attribute.id}`}
                         newAttributeId={attribute.id}
                         newAttributeValue={attribute.value}
+                        setNewAttributes={setNewAttributeValues}
                         characterAttributes={characterAttributes}
                         setCharacterAttributes={setCharacterAttributes}
                         allAttributeNames={allAttributes}

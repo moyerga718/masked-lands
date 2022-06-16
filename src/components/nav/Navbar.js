@@ -1,10 +1,12 @@
+import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
+
 import "./Navbar.css"
 
 
 // Check to see if user is staff or customer. Render EmployeeNav or CustomerNav depending on this. 
 export const Navbar = () => {
-    const navigate = useNavigate() 
+    const navigate = useNavigate()
 
     const localMlUser = localStorage.getItem("ml_user")
     const mlUserObject = JSON.parse(localMlUser)
@@ -16,7 +18,7 @@ export const Navbar = () => {
             </li>
 
             <li className="navbar__item navbar__profile">
-                <Link className="navbar__link" to={`/profile/${mlUserObject.id}`}>My Profile</Link>
+                <Link className="navbar__link" to={`/profile/${mlUserObject?.id}`}>My Profile</Link>
             </li>
 
             <li className="navbar__item navbar__logout">
@@ -25,6 +27,7 @@ export const Navbar = () => {
                     navigate("/", { replace: true })
                 }}>Logout</Link>
             </li>
+
         </ul>
     )
 }

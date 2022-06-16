@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { getAllCharactersForCurrentUserFetch, getCurrentUserInformationFetch } from "../ApiManager"
 import { PublicCharacterCard } from "../publicLibrary/PublicCharacterCard"
+import "./Profile.css"
 
 export const UserProfile = () => {
     const navigate = useNavigate()
+    const [users, setUsers] = useState({})
     const [currentUser, setCurrentUser] = useState({})
     const [currentUserCharacters, setCurrentUserCharacters] = useState([])
 
@@ -15,6 +17,7 @@ export const UserProfile = () => {
     //Upon state initializing...
     useEffect(
         () => {
+            
             //Get user information based on ID found in local storage
             getCurrentUserInformationFetch(mlUserObject.id).then(setCurrentUser)
             //Get all characters for current user
@@ -44,6 +47,7 @@ export const UserProfile = () => {
         {/* Button links to character creation form */}
 
         <h2>{currentUser.firstName}'s Characters</h2>
+        
         <button onClick={
             () => {
                 navigate(`/create`)
@@ -52,12 +56,15 @@ export const UserProfile = () => {
 
         {/* Render character cards for all of this users characters */}
 
+        <div className="profile-character-card-container">
         {
             currentUserCharacters.map(character => <PublicCharacterCard
                 key={`character--${character.id}`}
                 characterObj={character}
+                currentUser={currentUser}
                 userObj={mlUserObject} />)
         }
+        </div>
 
     </>
 }

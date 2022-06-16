@@ -1,26 +1,54 @@
 import { createCharacterAttributeFetch, createCharacterFetch } from "../ApiManager"
 import { useNavigate } from "react-router-dom"
 
+//This component submits newly selected data to api when submit button is clicked.
 
 export const CharacterSubmitButton = ( {characterObj, characterAttributes} ) => {
     const navigate = useNavigate()
 
-    // ok so right now this checks to see if all character fields have been filled, and if so, post object to characters section of API.
-    // Now that my attribute generation/selection section is working, i need to add this data to database.
-
-    // I'm gonna make a goddamn function that does all this shit.
-
-    // *. Check to see if all character fields have been filled
-    //     *.  if they have, iterate through all attributes and make sure all values are above 0
-    //             *. if all attributes are above zero, 
-    //                 *. make a fetch call to post character
-    //                 *. grab the response from that fetch call so we can get new character id
-    //                 *. iterate through character attributes, add characterId to each, make a post fetch for each to add to characterAttributes API
-    //             *. if all attributes are not above zero,
-    //                 *. give a window alert that says "SELECT ALL YOUR ATTRIBUTES"
-    //     *.  if they HAVENT, give a window alert that says "fill out yer shit"
+    //when button is clicked, run saveCharacter()
+    const handleSaveButtonClick = (event) => {
+        event.preventDefault()
+        saveCharacter()
+    }
+  
+    //This function checks to see if the whole form has been filled out. If so, post all data to API
+    const saveCharacter = () => {
+        //Check to see if all character fields have been filled
+        if (characterObj.name && characterObj.bio && characterObj.imageUrl && characterObj.classId && characterObj.weaponId && characterObj.armorId) {
+            //if all character fields are filled, check to see if all attributes are selected by calling checkAttributes. This returns a boolean
+            const allAttributesSelectedBoolean = checkAttributes()
+            // if allAttributesSelectedBoolean is true, all attributes have been selected
+            if (allAttributesSelectedBoolean) {
+                //Post new character obj to API
+                createCharacterFetch(characterObj)
+                    //Get that response, call it newCharacter, use that ID to set characterId for each character Attribute
+                    .then((newCharacter) => {
+                        //for each character attribute....
+                        for (const charAtt of characterAttributes) {
+                            //create an object to send to API that has new characterId
+                            const charAttToSendToAPI = {
+                                attributeId: charAtt.attributeId,
+                                characterId: newCharacter.id,
+                                value: charAtt.value
+                            }
+                            //post character attribute object to api
+                            createCharacterAttributeFetch(charAttToSendToAPI)
+                            .then( () => {} )
+                        }})
+                        // once everything has been posted, navigate to home page
+                        .then(()=> navigate("/"))
+            } else {
+                // if all attributes have not been selected, return window w/ error message
+                window.alert("Please fill out all fields")
+            }
+        } else {
+            // if all character fields have not been filled, return window w/ error message.
+            window.alert("Please fill out all fields")
+        }
+    }
     
-
+    //If all attributes have been filled, return true.If all attributes have not been filled, return false.
     const checkAttributes = () => {
         for (const charAtt of characterAttributes) {
             if (charAtt.value === 0) {
@@ -30,44 +58,6 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes} ) => 
         return true
     }
 
-    const saveCharacter = () => {
-        if (characterObj.name && characterObj.bio && characterObj.imageUrl && characterObj.classId && characterObj.weaponId && characterObj.armorId) {
-            const allAttributesSelectedBoolean = checkAttributes()
-            if (allAttributesSelectedBoolean) {
-                createCharacterFetch(characterObj)
-                    .then((newCharacter) => {
-                        for (const charAtt of characterAttributes) {
-                            const charAttToSendToAPI = {
-                                attributeId: charAtt.attributeId,
-                                characterId: newCharacter.id,
-                                value: charAtt.value
-                            }
-                            createCharacterAttributeFetch(charAttToSendToAPI)
-                            .then( () => {} )
-                        }})
-                        .then(()=> navigate("/"))
-            } else {
-                window.alert("Please fill out all fields")
-            }
-            // createCharacterFetch(characterObj).then(()=> navigate("/"))
-        } else {
-            window.alert("Please fill out all fields")
-        }
-    }
-
-
-
-
-
-    const handleSaveButtonClick = (event) => {
-        event.preventDefault()
-        saveCharacter()
-        // if (characterObj.name && characterObj.bio && characterObj.imageUrl && characterObj.classId && characterObj.weaponId && characterObj.armorId) {
-        //     createCharacterFetch(characterObj).then(()=> navigate("/"))
-        // } else {
-        //     window.alert("Please fill out all fields")
-        // }
-    }
     
     return <button
         onClick={(event) => handleSaveButtonClick(event)}

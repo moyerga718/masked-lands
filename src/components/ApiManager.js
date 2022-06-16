@@ -46,7 +46,7 @@ export const getAllAttributesFetch = () => {
 }
 
 export const getAllWeaponsFetch = () => {
-    return fetch(`http://localhost:8088/weapons`)
+    return fetch(`http://localhost:8088/weapons/?_expand=attribute`)
         .then(response => response.json())
 }
 
