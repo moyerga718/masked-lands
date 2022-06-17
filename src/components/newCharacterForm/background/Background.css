@@ -1,0 +1,8 @@
+.background-att-bonus-list-container {
+    display: flex;
+}
+
+.background-selection-container {
+    display: flex;
+    align-items: center;
+}
