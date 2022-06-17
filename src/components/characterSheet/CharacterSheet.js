@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { deleteCharacterFetch, getCharacterById, getAllAttributesFetch, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch } from "../ApiManager"
+import { deleteCharacterFetch, getCharacterById, getAllAttributesFetch, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch, getCharacterBackgroundFetch } from "../ApiManager"
 import { AttributeList } from "./AttributeList"
 
 export const CharacterSheet = () => {
@@ -15,6 +15,7 @@ export const CharacterSheet = () => {
     const [weapons, setWeapons] = useState([])
     const [armor, setArmor] = useState([])
     const [species, setSpecies] = useState([])
+    const [charBackground, setCharBackground] = useState({})
     const [charSpecies, setCharSpecies] = useState({})
     const [charWeapon, setCharWeapon] = useState({})
     const [charArmor, setCharArmor] = useState({})
@@ -55,7 +56,10 @@ export const CharacterSheet = () => {
     // once we have character object, get matching character attributes, save to state
     useEffect(
         () => {
-            setCharacterAttributes(characterInfo.characterAttributes)
+            if (characterInfo.backgroundId) {
+                setCharacterAttributes(characterInfo.characterAttributes)
+                getCharacterBackgroundFetch(characterInfo?.backgroundId).then(setCharBackground)
+            }
         },
         [characterInfo]
     )
@@ -161,6 +165,7 @@ export const CharacterSheet = () => {
                 : <></>
             } */}
             <p>Species: {charSpecies?.name}</p>
+            <p>Background: {charBackground?.name}</p>
             <p>Class: {characterInfo?.class?.name}</p>
         </div>
 

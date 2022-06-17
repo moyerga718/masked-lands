@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { SpeciesSelection } from "./SpeciesSelection"
+import { BackgroundSelection } from "./BackgroundSelection"
 import { ClassSelection } from "./ClassSelection"
 import { AttributeSelection } from "./AttributeSelection"
 import { EquipmentSelection } from "./EquipmentSelection"
@@ -22,6 +23,7 @@ export const NewCharacterFormContainer = () => {
         bio: "",
         imageUrl: "",
         speciesId: 0,
+        backgroundId: 0,
         classId: 0,
         weaponId: 0,
         armorId: 0
@@ -105,25 +107,32 @@ export const NewCharacterFormContainer = () => {
         case 2: 
           return (
             <>
-            <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
+            <BackgroundSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
             <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
             </>
           )
         case 3: 
           return (
             <>
+            <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
+            <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
+            </>
+          )
+        case 4: 
+          return (
+            <>
                 <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} />
                 <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
             </>
           )
-        case 4: 
+        case 5: 
           return (
             <>
                 <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
                 <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
             </>
           )
-        case 5:
+        case 6:
             return (
             <>
                 <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
