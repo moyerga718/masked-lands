@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
-import { getAllArmorFetch, getAllWeaponsFetch } from "../ApiManager"
+import { getAllArmorFetch, getAllWeaponsFetch } from "../../ApiManager"
 import { WeaponSelectionDropdown } from "./WeaponSelectionDropdown"
 import { ArmorSelectionDropdown } from "./ArmorSelectionDropdown"
-import "./newCharacterForm.css"
+import "../newCharacterForm.css"
 
 //This component renders drop down boxes for weapon and armor selection
 

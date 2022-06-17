@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getAllSpeciesFetch } from "../ApiManager"
+import { getAllSpeciesFetch } from "../../ApiManager"
 import { SpeciesRadioButton } from "./SpeciesRadioButton"
 
 //This component renders a section where user can choose a species

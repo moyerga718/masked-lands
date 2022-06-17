@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getSpeciesBackgroundsFetch, getSpeciesByIdFetch } from "../ApiManager"
+import { getSpeciesBackgroundsFetch, getSpeciesByIdFetch } from "../../ApiManager"
 import { BackgroundRadioButton } from "./BackgroundRadioButton"
 
 //This component renders a section where user can choose a background

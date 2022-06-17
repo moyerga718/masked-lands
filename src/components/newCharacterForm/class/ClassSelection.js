@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { getAllClassesFetch } from "../ApiManager"
+import { getAllClassesFetch } from "../../ApiManager"
 import { ClassRadioButton } from "./ClassRadioButton"
 
 //This component renders a section where user can choose a class
