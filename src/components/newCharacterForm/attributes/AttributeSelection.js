@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import "./newCharacterForm.css"
+import "../newCharacterForm.css"
 import { AttributeValueSelection } from "./AttributeValueSelection"
 
 //This component uses two other components to do the following things:
