@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { SpeciesSelection } from "./SpeciesSelection"
 import { ClassSelection } from "./ClassSelection"
 import { AttributeSelection } from "./AttributeSelection"
 import { EquipmentSelection } from "./EquipmentSelection"
@@ -20,6 +21,7 @@ export const NewCharacterFormContainer = () => {
         name: "",
         bio: "",
         imageUrl: "",
+        speciesId: 0,
         classId: 0,
         weaponId: 0,
         armorId: 0
@@ -91,29 +93,37 @@ export const NewCharacterFormContainer = () => {
         []
     )
     
+    //Render necessary components depending on which step we are on, breaking form into multiple "pages"
     switch (step) {
         case 1: 
           return (
             <>
-            <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
+            <SpeciesSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
             <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
             </>
           )
         case 2: 
           return (
             <>
+            <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
+            <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
+            </>
+          )
+        case 3: 
+          return (
+            <>
                 <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} />
                 <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
             </>
           )
-        case 3: 
+        case 4: 
           return (
             <>
                 <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
                 <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
             </>
           )
-        case 4:
+        case 5:
             return (
             <>
                 <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
@@ -124,13 +134,5 @@ export const NewCharacterFormContainer = () => {
         default: 
            // do nothing
       }
-    //Call all necessary components, passing down character / character attribute / attribute name data as props 
-    // return <>
-    //     <h2>Make a New Character</h2>
-    //     <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
-    //     <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} />
-    //     <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
-    //     <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
-    //     <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} />
-    // </>
+   
 }

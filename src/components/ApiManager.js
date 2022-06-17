@@ -40,6 +40,11 @@ export const getAllClassesFetch = () => {
         .then(response => response.json())
 }
 
+export const getAllSpeciesFetch = () => {
+    return fetch(`http://localhost:8088/species`)
+        .then(response => response.json())
+}
+
 export const getAllAttributesFetch = () => {
     return fetch(`http://localhost:8088/attributes`)
         .then(response => response.json())
