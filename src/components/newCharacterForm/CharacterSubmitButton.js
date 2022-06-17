@@ -35,10 +35,10 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes} ) => 
                                 value: charAtt.value
                             }
                             //Add fetch call to promise array
-                            // fetchPromiseArray.push(createCharacterAttributeFetch(charAttToSendToAPI))
-                            createCharacterAttributeFetch(charAttToSendToAPI).then(
-                                (myPromise) => {fetchPromiseArray.push(myPromise)}
-                            )
+                            fetchPromiseArray.push(createCharacterAttributeFetch(charAttToSendToAPI))
+                            // createCharacterAttributeFetch(charAttToSendToAPI).then(
+                            //     (myPromise) => {fetchPromiseArray.push(myPromise)}
+                            // )
                         }
                         //trigger all fetch calls
                         console.log(fetchPromiseArray)
@@ -66,7 +66,6 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes} ) => 
         return true
     }
 
-    
     return <button
         onClick={(event) => handleSaveButtonClick(event)}
         className="btn btn-primary">

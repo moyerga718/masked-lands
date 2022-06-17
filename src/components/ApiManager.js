@@ -60,6 +60,21 @@ export const getAllArmorFetch = () => {
         .then(response => response.json())
 }
 
+export const getCharacterBackgroundFetch = (backgroundId) => {
+    return fetch(`http://localhost:8088/backgrounds/${backgroundId}`)
+        .then(response => response.json())
+}
+
+export const getSpeciesBackgroundsFetch = (speciesId) => {
+    return fetch(`http://localhost:8088/backgrounds/?speciesId=${speciesId}`)
+    .then(response => response.json())
+}
+
+export const getSpeciesByIdFetch = (speciesId) => {
+    return fetch(`http://localhost:8088/species/${speciesId}`)
+        .then(response => response.json())
+}
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~PUT FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
@@ -95,7 +110,7 @@ export const createCharacterAttributeFetch = (charAttToSendToAPI) => {
         },
         body: JSON.stringify(charAttToSendToAPI)
     })
-        .then(response => response.json())
+        // .then(response => response.json())
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~DELETE FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//

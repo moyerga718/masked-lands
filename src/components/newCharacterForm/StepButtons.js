@@ -3,7 +3,7 @@
 export const StepButtons = ({step, nextStep, prevStep}) => {
     if (step === 1) {
         return <button onClick={()=>nextStep(step)}>Next</button>
-    } else if (step === 5) {
+    } else if (step === 6) {
         // return <button onClick={()=>prevStep(step)}>Previous</button>
     } else {
         return <div>
