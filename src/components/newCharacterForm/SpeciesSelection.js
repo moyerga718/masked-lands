@@ -30,5 +30,4 @@ export const SpeciesSelection = ({ characterObj, setCharacter, allAttributes }) 
             }
         </fieldset>
         </>
-
 }

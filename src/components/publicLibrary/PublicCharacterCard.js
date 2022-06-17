@@ -24,7 +24,7 @@ export const PublicCharacterCard = ( {characterObj, currentUser, allUsers, allSp
             <h3><Link to={`/character/${characterObj.id}`}>{characterObj.name}</Link></h3>
             <p>Created by {username}</p>
         </header>
-        <h4>Species: {foundSpecies.name}</h4>
+        <h4>Species: {foundSpecies?.name}</h4>
         <h4>Class: {characterObj.class.name}</h4>
         <p>Bio: {characterObj.bio}</p>
         <p>Primary Weapon: {characterObj.weapon.name}</p>

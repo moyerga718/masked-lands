@@ -35,7 +35,10 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes} ) => 
                                 value: charAtt.value
                             }
                             //Add fetch call to promise array
-                            fetchPromiseArray.push(createCharacterAttributeFetch(charAttToSendToAPI))
+                            // fetchPromiseArray.push(createCharacterAttributeFetch(charAttToSendToAPI))
+                            createCharacterAttributeFetch(charAttToSendToAPI).then(
+                                (myPromise) => {fetchPromiseArray.push(myPromise)}
+                            )
                         }
                         //trigger all fetch calls
                         Promise.all(fetchPromiseArray)

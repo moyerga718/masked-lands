@@ -169,6 +169,7 @@ export const CharacterSheet = () => {
             <p>Life: {characterInfo?.class?.maxLife}</p>
             <p>Will: {characterInfo?.class?.will}</p>
             <p>Stamina: {characterInfo?.class?.stamina}</p>
+            <p>Speed: {charSpecies?.speed} ft</p>
         </div>
 
         <div>
