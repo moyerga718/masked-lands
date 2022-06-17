@@ -22,23 +22,7 @@ export const AttributeSelection = ({ characterAttributes, setCharacterAttributes
         [false, false, false, false, false, false]
     ]
     )
-
-    useEffect(
-        () => {
-            setAreAttributesGenerated(checkIfAttributesHaveBeenGenerated())
-        },
-        []
-    )
-
-    useEffect(
-        () => {
-            setAreAttributesGenerated(checkIfAttributesHaveBeenGenerated())
-        },
-        [newAttributeValues]
-    )
-
-
-
+    
     //~~~~~~~~~~~~~~~~~~~~FUNCTIONS FOR GENERATING ATTRIBUTE VALUES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
     //This function rolls 4d6
@@ -93,7 +77,22 @@ export const AttributeSelection = ({ characterAttributes, setCharacterAttributes
 
     //~~~~~~~~~~~~~~~~~~~~END FUNCTIONS FOR GENERATING ATTRIBUTE VALUES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-    //have attributesBeenSelected
+
+    
+    //~~~~~~~~~~~~~~~~~OKAY this is all stuff I was trying to get attributes to stay when I go back to the page. Not working yet really. ~~~~~~~~~~~~~~~~//
+    useEffect(
+        () => {
+            setAreAttributesGenerated(checkIfAttributesHaveBeenGenerated())
+        },
+        []
+    )
+
+    useEffect(
+        () => {
+            setAreAttributesGenerated(checkIfAttributesHaveBeenGenerated())
+        },
+        [newAttributeValues]
+    )
 
     const checkIfAttributesHaveBeenSelected = () => {
         let counter = 0
@@ -118,7 +117,10 @@ export const AttributeSelection = ({ characterAttributes, setCharacterAttributes
             return false
         }
     }
+    //~~~~~~~~~~~~~~~~~OKAY this is all stuff I was trying to get attributes to stay when I go back to the page. Not working yet really. ~~~~~~~~~~~~~~~~//
 
+
+    //return jsx depending on if attributes have been generated. 
 
     if (areAttributesGenerated === false) {
         return <>
@@ -147,37 +149,5 @@ export const AttributeSelection = ({ characterAttributes, setCharacterAttributes
         </>
     }
 
-    // return <div>
-    //     <h2>ATTRIBUTE SELECTION</h2>
-
-    //     {/* Ternary statement checks to see if attribute values have been generated yet. 
-    //             If not, display a button that will call generateAllAttributeValues
-    //             If values have been generated, call <AttributeValueSelection /> for each new attribute to render JSX */}
-
-    //     {
-    //         // (newAttributeValues.length === 0)
-    //         (areAttributesSelected === false)
-    //             ? <>
-    //                 <button onClick={() => generateAllAttributeValues()} >Click to roll your stats... exciting!!</button>
-    //             </>
-    //             : <>
-    //                 <div className="attributes-container">
-    //                     {
-    //                         newAttributeValues.map(attribute => <AttributeValueSelection key={`newAttribute--${attribute.id}`}
-    //                             newAttributeId={attribute.id}
-    //                             newAttributeValue={attribute.value}
-    //                             // setNewAttributes={setNewAttributeValues}
-    //                             attributeDependencyMatrix={attributeDependencyMatrix}
-    //                             setAttributeDependencyMatrix={setAttributeDependencyMatrix}
-    //                             characterAttributes={characterAttributes}
-    //                             setCharacterAttributes={setCharacterAttributes}
-    //                             allAttributeNames={allAttributes}
-    //                         />)
-    //                     }
-
-    //                 </div>
-    //             </>
-
-    //     }
-    // </div>
+    
 }
