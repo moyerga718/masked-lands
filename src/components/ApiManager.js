@@ -65,8 +65,8 @@ export const getCharacterBackgroundFetch = (backgroundId) => {
         .then(response => response.json())
 }
 
-export const getSpeciesBackgroundsFetch = (speciesId) => {
-    return fetch(`http://localhost:8088/backgrounds/?speciesId=${speciesId}`)
+export const getSpeciesBackgroundsWithAttBonusesFetch = (speciesId) => {
+    return fetch(`http://localhost:8088/backgrounds/?_embed=backgroundAttributeBonuses&speciesId=${speciesId}`)
     .then(response => response.json())
 }
 

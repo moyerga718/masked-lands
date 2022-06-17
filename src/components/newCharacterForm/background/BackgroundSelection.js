@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getSpeciesBackgroundsFetch, getSpeciesByIdFetch } from "../../ApiManager"
+import { getSpeciesBackgroundsWithAttBonusesFetch, getSpeciesByIdFetch } from "../../ApiManager"
 import { BackgroundRadioButton } from "./BackgroundRadioButton"
 
 //This component renders a section where user can choose a background
@@ -12,7 +12,7 @@ export const BackgroundSelection = ({ characterObj, setCharacter, allAttributes 
     useEffect(
         () => {
             if (characterObj.speciesId) {
-                getSpeciesBackgroundsFetch(characterObj.speciesId).then(setBackgrounds)
+                getSpeciesBackgroundsWithAttBonusesFetch(characterObj.speciesId).then(setBackgrounds)
                 getSpeciesByIdFetch(characterObj.speciesId).then(setCharSpecies)
             }
         },
