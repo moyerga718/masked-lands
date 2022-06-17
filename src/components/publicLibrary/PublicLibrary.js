@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import { getAllCharactersDetailedFetch, getAllUserInformationFetch } from "../ApiManager"
+import { getAllCharactersDetailedFetch, getAllSpeciesFetch, getAllUserInformationFetch } from "../ApiManager"
 import { PublicCharacterCard } from "./PublicCharacterCard"
 import "./PublicLibrary.css"
 
@@ -11,12 +11,14 @@ export const PublicLibrary = () => {
     const [characters, setCharacters] = useState([])
     const [filteredCharacters, setFilteredCharacters] = useState([])
     const [users, setUsers] = useState([])
+    const [species,setSpecies] = useState([])
 
     //Get all detailed characters
     useEffect(
         () => {
             getAllCharactersDetailedFetch().then(setCharacters)
             getAllUserInformationFetch().then(setUsers)
+            getAllSpeciesFetch().then(setSpecies)
         },
         []
     )
@@ -41,6 +43,7 @@ export const PublicLibrary = () => {
         {
             filteredCharacters.map( character => <PublicCharacterCard 
                 key={`character--${character.id}`}
+                allSpecies={species}
                 allUsers={users}
                 characterObj={character}/>)
         }

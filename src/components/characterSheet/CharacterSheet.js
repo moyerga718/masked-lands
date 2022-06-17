@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { deleteCharacterFetch, getCharacterById, getAllAttributesFetch, getAllWeaponsFetch, getAllArmorFetch } from "../ApiManager"
+import { deleteCharacterFetch, getCharacterById, getAllAttributesFetch, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch } from "../ApiManager"
 import { AttributeList } from "./AttributeList"
 
 export const CharacterSheet = () => {
@@ -14,6 +14,8 @@ export const CharacterSheet = () => {
     const [attributes, setAttributes] = useState([])
     const [weapons, setWeapons] = useState([])
     const [armor, setArmor] = useState([])
+    const [species, setSpecies] = useState([])
+    const [charSpecies, setCharSpecies] = useState({})
     const [charWeapon, setCharWeapon] = useState({})
     const [charArmor, setCharArmor] = useState({})
 
@@ -28,11 +30,17 @@ export const CharacterSheet = () => {
                     setCharacterInfo(characterArray[0])
                 })
             getAllAttributesFetch().then(setAttributes)
+            getAllSpeciesFetch().then(setSpecies)
             getAllWeaponsFetch().then(setWeapons)
             getAllArmorFetch().then(setArmor)
         },
         []
     )
+
+    const findCharSpecies = () => {
+        const foundSpecies = species.find(species => species.id === characterInfo.speciesId)
+        return foundSpecies
+    }
 
     const findCharWeapon = () => {
         const foundWeapon = weapons.find(weapon => weapon.id === characterInfo.weaponId)
@@ -66,6 +74,14 @@ export const CharacterSheet = () => {
             setCharArmor(findCharArmor())
         },
         [armor]
+    )
+
+    //Once we have armor data, get matching character weapon, save to state. 
+    useEffect(
+        () => {
+            setCharSpecies(findCharSpecies())
+        },
+        [species]
     )
 
     //Once we have all character attributes, make a new array with effective character attributes that take species/class bonuses into account
@@ -139,6 +155,12 @@ export const CharacterSheet = () => {
 
         <div>
             <h2>{characterInfo.name}</h2>
+            {/* {
+                (charSpecies)
+                ? <p>Species: {charSpecies}</p>
+                : <></>
+            } */}
+            <p>Species: {charSpecies?.name}</p>
             <p>Class: {characterInfo?.class?.name}</p>
         </div>
 
