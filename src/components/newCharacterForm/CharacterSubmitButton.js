@@ -41,6 +41,7 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes} ) => 
                             )
                         }
                         //trigger all fetch calls
+                        console.log(fetchPromiseArray)
                         Promise.all(fetchPromiseArray)
                         })
                         // once everything has been posted, navigate to home page
