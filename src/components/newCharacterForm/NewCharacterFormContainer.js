@@ -5,12 +5,14 @@ import { EquipmentSelection } from "./EquipmentSelection"
 import { CharacterInfoSelection } from "./CharacterInfoSelection"
 import { CharacterSubmitButton } from "./CharacterSubmitButton"
 import { getAllAttributesFetch } from "../ApiManager"
+import { StepButtons } from "./StepButtons"
 
 // This component is a parent component for all of the different sections of the character creation form. Temp objects for character and character attributes
 // are initialized in state here.
 
 export const NewCharacterFormContainer = () => {
 
+    const [ step, setStep ] = useState(1)
     // create empty character obj to be populated
     const [newCharacter, setNewCharacter] = useState({
         id: 0,
@@ -57,6 +59,19 @@ export const NewCharacterFormContainer = () => {
         },
     ])
 
+
+    //~~~~~~~~~~~~~~~~~TBH Im not sure what this does but I think this'll help set up a multipage form??~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    const prevStep = (step) => {
+        setStep(step-1)
+    }
+
+    const nextStep = (step) => {
+        setStep(step+1)
+    }
+ 
+    //~~~~~~~~~~~~~~~~~TBH Im not sure what this does but I think this'll help set up a multipage form??~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+
     // Get all attribute raw data (name/id pairings)
     const [allAttributes, setAllAttributes] = useState([])
 
@@ -69,20 +84,53 @@ export const NewCharacterFormContainer = () => {
     useEffect(
         () => {
             getAllAttributesFetch().then(setAllAttributes)
-            const copy = {...newCharacter}
+            const copy = { ...newCharacter }
             copy.userId = mlUserObject.id
-            setNewCharacter(copy) 
+            setNewCharacter(copy)
         },
         []
     )
-
+    
+    switch (step) {
+        case 1: 
+          return (
+            <>
+            <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
+            <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
+            </>
+          )
+        case 2: 
+          return (
+            <>
+                <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} />
+                <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
+            </>
+          )
+        case 3: 
+          return (
+            <>
+                <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
+                <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
+            </>
+          )
+        case 4:
+            return (
+            <>
+                <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
+                <StepButtons step={step} nextStep={nextStep} prevStep={prevStep}/>
+                <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} />
+            </>
+            )
+        default: 
+           // do nothing
+      }
     //Call all necessary components, passing down character / character attribute / attribute name data as props 
-    return <>
-        <h2>Make a New Character</h2>
-        <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes}/>
-        <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} />
-        <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter}/>
-        <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter}/>
-        <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes}/>
-    </>
+    // return <>
+    //     <h2>Make a New Character</h2>
+    //     <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
+    //     <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} />
+    //     <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
+    //     <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
+    //     <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} />
+    // </>
 }

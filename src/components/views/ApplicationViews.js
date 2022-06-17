@@ -6,6 +6,7 @@ import { UserProfile } from "../profile/UserProfile"
 import { EditUserProfile } from "../profile/EditUserProfile"
 import { NewCharacterFormContainer } from "../newCharacterForm/NewCharacterFormContainer"
 import { CharacterSheet } from "../characterSheet/CharacterSheet"
+import { ClassSelection } from "../newCharacterForm/ClassSelection"
 
 export const ApplicationViews = () => {
     return <>
