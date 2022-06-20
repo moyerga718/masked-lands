@@ -61,7 +61,7 @@ export const getAllArmorFetch = () => {
 }
 
 export const getCharacterBackgroundFetch = (backgroundId) => {
-    return fetch(`http://localhost:8088/backgrounds/${backgroundId}`)
+    return fetch(`http://localhost:8088/backgrounds/${backgroundId}/?_embed=backgroundAttributeBonuses`)
         .then(response => response.json())
 }
 

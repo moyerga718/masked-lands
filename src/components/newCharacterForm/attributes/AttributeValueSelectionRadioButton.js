@@ -22,20 +22,20 @@ Okay I'm trying to figure out how the FRICK to make these radio buttons to work 
                 * 
 */
 
-export const AttributeValueSelectionRadioButton = ({ newAttributeId, newAttributeValue,  attributeDependencyMatrix, setAttributeDependencyMatrix, setNewAttributes, characterAttributes, setCharacterAttributes, oneAttributeNameObj }) => {
+export const AttributeValueSelectionRadioButton = ({ newAttributeId, newAttributeValue, attributeDependencyMatrix, setAttributeDependencyMatrix, setNewAttributes, characterAttributes, setCharacterAttributes, oneAttributeNameObj }) => {
 
     const [selected, setSelected] = useState(false)
-    
+
     useEffect(
         () => {
-            setSelected(attributeDependencyMatrix[newAttributeId-1][oneAttributeNameObj.id-1])
+            setSelected(attributeDependencyMatrix[newAttributeId - 1][oneAttributeNameObj.id - 1])
         },
         []
     )
 
     useEffect(
         () => {
-            setSelected(attributeDependencyMatrix[newAttributeId-1][oneAttributeNameObj.id-1])
+            setSelected(attributeDependencyMatrix[newAttributeId - 1][oneAttributeNameObj.id - 1])
         },
         [attributeDependencyMatrix]
     )
@@ -50,7 +50,7 @@ export const AttributeValueSelectionRadioButton = ({ newAttributeId, newAttribut
                 // see which attribute in characterAttributes copy has an attributeId that matches the Id of the attribute that was just selected.
                 if (charAtt.attributeId === parseInt(changeEvent.target.value)) {
                     // if ids match, change the value of the attribute in the character attributes copy, add this to changedCopy
-                    charAtt.value=newAttributeValue
+                    charAtt.value = newAttributeValue
                     return charAtt
                 } else {
                     // if ids don't match, just att the current attribute as it is to changed copy
@@ -60,31 +60,31 @@ export const AttributeValueSelectionRadioButton = ({ newAttributeId, newAttribut
         )
     }
 
-        const deleteAttributeValue = (lastAttSelectionId) => {
-            const copy = [...characterAttributes]
-            // map through the copy of character attributes.
-            const changedCopy = copy.map(
-                charAtt => {
-                    // see which attribute in characterAttributes copy has an attributeId that matches the Id of the attribute that was just selected.
-                    if (charAtt.attributeId === lastAttSelectionId+1) {
-                        // if ids match, change the value of the attribute in the character attributes copy, add this to changedCopy
-                        charAtt.value=0
-                        return charAtt
-                    } else {
-                        // if ids don't match, just att the current attribute as it is to changed copy
-                        return charAtt
-                    }
+    const deleteAttributeValue = (lastAttSelectionId) => {
+        const copy = [...characterAttributes]
+        // map through the copy of character attributes.
+        const changedCopy = copy.map(
+            charAtt => {
+                // see which attribute in characterAttributes copy has an attributeId that matches the Id of the attribute that was just selected.
+                if (charAtt.attributeId === lastAttSelectionId + 1) {
+                    // if ids match, change the value of the attribute in the character attributes copy, add this to changedCopy
+                    charAtt.value = 0
+                    return charAtt
+                } else {
+                    // if ids don't match, just att the current attribute as it is to changed copy
+                    return charAtt
                 }
-            )
+            }
+        )
         //update characterAttributes state to match changed copy.
-        
+
         setCharacterAttributes(changedCopy)
     }
 
     const otherAttributeSelected = (changeEvent, dependencyMatrixCopy) => {
         for (let i = 0; i < 6; i++) {
-            if (dependencyMatrixCopy[newAttributeId-1][i] === true && i !== changeEvent.target.value-1) {
-                dependencyMatrixCopy[newAttributeId-1][i] = false
+            if (dependencyMatrixCopy[newAttributeId - 1][i] === true && i !== changeEvent.target.value - 1) {
+                dependencyMatrixCopy[newAttributeId - 1][i] = false
                 deleteAttributeValue(i)
             }
         }
@@ -95,29 +95,23 @@ export const AttributeValueSelectionRadioButton = ({ newAttributeId, newAttribut
         let dependencyMatrixCopy = [...attributeDependencyMatrix]
 
         otherAttributeSelected(changeEvent, dependencyMatrixCopy)
-        
+
         for (const attributeDependencyArray of dependencyMatrixCopy) {
-            if (attributeDependencyArray[changeEvent.target.value-1] = true) {
-                attributeDependencyArray[changeEvent.target.value-1] = false
-                dependencyMatrixCopy[newAttributeId-1][oneAttributeNameObj.id-1] = true
+            if (attributeDependencyArray[changeEvent.target.value - 1] = true) {
+                attributeDependencyArray[changeEvent.target.value - 1] = false
+                dependencyMatrixCopy[newAttributeId - 1][oneAttributeNameObj.id - 1] = true
                 assignAttributeValue(changeEvent)
             } else {
-                dependencyMatrixCopy[newAttributeId-1][oneAttributeNameObj.id-1] = true
+                dependencyMatrixCopy[newAttributeId - 1][oneAttributeNameObj.id - 1] = true
                 assignAttributeValue(changeEvent)
             }
-            }
-            setAttributeDependencyMatrix(dependencyMatrixCopy)
         }
+        setAttributeDependencyMatrix(dependencyMatrixCopy)
+    }
 
 
 
 
-        
-    
-
-    
-
-    // console.log(attributeDependencyMatrix[newAttributeId][parseInt(oneAttributeNameObj.id)])
     //create radio button for each attribute
 
     return <>

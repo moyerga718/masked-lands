@@ -26,7 +26,7 @@ export const BackgroundSelection = ({ characterObj, setCharacter, allAttributes 
             <fieldset>
                 <label htmlFor="backgrounds">Backgrounds:</label>
                 {
-                    backgrounds.map(backgroundObj => <BackgroundRadioButton key={`backgroundd--${backgroundObj.id}`}
+                    backgrounds.map(backgroundObj => <BackgroundRadioButton key={`background--${backgroundObj.id}`}
                         backgroundObj={backgroundObj}
                         characterObj={characterObj}
                         setCharacter={setCharacter}

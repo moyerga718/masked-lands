@@ -30,10 +30,6 @@ export const CharacterSheet = () => {
                 .then(characterArray => {
                     setCharacterInfo(characterArray[0])
                 })
-            getAllAttributesFetch().then(setAttributes)
-            getAllSpeciesFetch().then(setSpecies)
-            getAllWeaponsFetch().then(setWeapons)
-            getAllArmorFetch().then(setArmor)
         },
         []
     )
@@ -57,6 +53,10 @@ export const CharacterSheet = () => {
     useEffect(
         () => {
             if (characterInfo.backgroundId) {
+                getAllAttributesFetch().then(setAttributes)
+                getAllSpeciesFetch().then(setSpecies)
+                getAllWeaponsFetch().then(setWeapons)
+                getAllArmorFetch().then(setArmor)
                 setCharacterAttributes(characterInfo.characterAttributes)
                 getCharacterBackgroundFetch(characterInfo?.backgroundId).then(setCharBackground)
             }
@@ -88,30 +88,35 @@ export const CharacterSheet = () => {
         [species]
     )
 
-    //Once we have all character attributes, make a new array with effective character attributes that take species/class bonuses into account
+    //once we have character attributes and att bonuses from background, make a copy of character attributes that will be considered "effective" attributes.
+    //these will be base attributes with att bonuses added in. For each attribute, check to see if there is an associated attribute bonus from characters
+    //background. If there is, add value of bonus. 
+
     useEffect(
         () => {
-            const classAttBonusId = characterInfo?.class?.bonusAttributeId
-            if (characterAttributes) {
-                const attCopy = [...characterAttributes]
+            if (characterAttributes && charBackground.backgroundAttributeBonuses) {
+                const attCopy = characterAttributes.map(att =>{return {...att}})
                 const attCopyWithBonuses = attCopy.map(
                     (att) => {
-                        if (att.attributeId === classAttBonusId) {
-                            att.value = att.value + 2
-                            att.bonus = true
-                            return att
-                        } else {
-                            att.bonus = false
-                            return att
+                        for (const attBonus of charBackground.backgroundAttributeBonuses) {
+                            if (att.attributeId === attBonus.attributeId) {
+                                att.value = att.value + attBonus.bonus
+                                att.bonus = true
+                                return att
+                            } else {
+                                att.bonus = false
+                            }
                         }
+                        return att
                     }
                 )
                 setEffectiveAttributes(attCopyWithBonuses)
             }
         },
-        [characterAttributes]
+        [characterAttributes, charBackground]
     )
 
+    //sort effective attributes so they appear on the screen in the right order.
     useEffect(
         () => {
             const sorted = effectiveAttributes.sort((a, b) => {
@@ -122,7 +127,7 @@ export const CharacterSheet = () => {
         [effectiveAttributes]
     )
 
-    //Once we have effective attributes, calculate effective modifiers for that attribute. save to state.
+    //Once we have sorted effective attributes, calculate effective modifiers for that attribute. save to state.
     useEffect(
         () => {
             if (sortedEffective) {
@@ -193,7 +198,6 @@ export const CharacterSheet = () => {
                     : <></>
             }
         </div>
-
 
         <div>
             <h3>Equipment</h3>
