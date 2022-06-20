@@ -1,0 +1,8 @@
+.subclass-att-bonus-list-container {
+    display: flex;
+}
+
+.subclass-selection-container {
+    display: flex;
+    align-items: center;
+}

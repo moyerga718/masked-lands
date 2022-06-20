@@ -75,6 +75,16 @@ export const getSpeciesByIdFetch = (speciesId) => {
         .then(response => response.json())
 }
 
+export const getClassByIdFetch = (classId) => {
+    return fetch(`http://localhost:8088/classes/${classId}`)
+        .then(response => response.json())
+}
+
+export const getSubclassesByClassIdFetch = (classId) => {
+    return fetch(`http://localhost:8088/subclasses/?classId=${classId}`)
+        .then(response => response.json())
+}
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~PUT FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
