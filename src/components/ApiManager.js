@@ -20,8 +20,23 @@ export const getAllCharactersForCurrentUserFetch = (userId) => {
         .then(response => response.json())
 }
 
-export const getCharacterById = (characterId) => {
+export const getDetailedCharacterById = (characterId) => {
     return fetch(`http://localhost:8088/characters?_expand=class&_expand=weapon&_embed=characterAttributes&id=${characterId}`)
+        .then(response => response.json())
+}
+
+export const getBasicCharacterById = (characterId) => {
+    return fetch(`http://localhost:8088/characters/${characterId}`)
+        .then(response => response.json())
+}
+
+export const getCharacterAttributes = (characterId) => {
+    return fetch(`http://localhost:8088/characterAttributes?characterId=${characterId}`)
+    .then(response => response.json())
+}
+
+export const getCharacterClass = (classId) => {
+    return fetch(`http://localhost:8088/classes/${classId}`)
         .then(response => response.json())
 }
 
@@ -56,7 +71,7 @@ export const getAllWeaponsFetch = () => {
 }
 
 export const getAllArmorFetch = () => {
-    return fetch(`http://localhost:8088/armor`)
+    return fetch(`http://localhost:8088/armors`)
         .then(response => response.json())
 }
 
@@ -82,6 +97,11 @@ export const getClassByIdFetch = (classId) => {
 
 export const getSubclassesByClassIdFetch = (classId) => {
     return fetch(`http://localhost:8088/subclasses/?classId=${classId}`)
+        .then(response => response.json())
+}
+
+export const getCharacterSubclassByIdFetch = (subclassId) => {
+    return fetch(`http://localhost:8088/subclasses/${subclassId}`)
         .then(response => response.json())
 }
 

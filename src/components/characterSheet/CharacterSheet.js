@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { deleteCharacterFetch, getCharacterById, getAllAttributesFetch, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch, getCharacterBackgroundFetch } from "../ApiManager"
+import { deleteCharacterFetch, getDetailedCharacterById, getBasicCharacterById, getCharacterAttributes, getAllAttributesFetch, getCharacterClass, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch, getCharacterBackgroundFetch, getCharacterSubclassByIdFetch } from "../ApiManager"
 import { AttributeList } from "./AttributeList"
 
 export const CharacterSheet = () => {
@@ -17,6 +17,8 @@ export const CharacterSheet = () => {
     const [species, setSpecies] = useState([])
     const [charBackground, setCharBackground] = useState({})
     const [charSpecies, setCharSpecies] = useState({})
+    const [charClass, setCharClass] = useState({})
+    const [charSubclass, setCharSubclass] = useState({})
     const [charWeapon, setCharWeapon] = useState({})
     const [charArmor, setCharArmor] = useState({})
 
@@ -24,12 +26,19 @@ export const CharacterSheet = () => {
     const mlUserObject = JSON.parse(localMlUser)
 
     //Upon initializing, get character object and all attribute names
+    // useEffect(
+    //     () => {
+    //         getCharacterById(characterId)
+    //             .then(characterArray => {
+    //                 setCharacterInfo(characterArray[0])
+    //             })
+    //     },
+    //     []
+    // )
+
     useEffect(
         () => {
-            getCharacterById(characterId)
-                .then(characterArray => {
-                    setCharacterInfo(characterArray[0])
-                })
+            getBasicCharacterById(characterId).then(setCharacterInfo)
         },
         []
     )
@@ -52,13 +61,15 @@ export const CharacterSheet = () => {
     // once we have character object, get matching character attributes, save to state
     useEffect(
         () => {
-            if (characterInfo.backgroundId) {
+            if (characterInfo.id && characterInfo.backgroundId && characterInfo.subclassId) {
                 getAllAttributesFetch().then(setAttributes)
                 getAllSpeciesFetch().then(setSpecies)
                 getAllWeaponsFetch().then(setWeapons)
                 getAllArmorFetch().then(setArmor)
-                setCharacterAttributes(characterInfo.characterAttributes)
+                getCharacterAttributes(characterInfo?.id).then(setCharacterAttributes)
+                getCharacterClass(characterInfo?.classId).then(setCharClass)
                 getCharacterBackgroundFetch(characterInfo?.backgroundId).then(setCharBackground)
+                getCharacterSubclassByIdFetch(characterInfo?.subclassId).then(setCharSubclass)
             }
         },
         [characterInfo]
@@ -171,14 +182,16 @@ export const CharacterSheet = () => {
             } */}
             <p>Species: {charSpecies?.name}</p>
             <p>Background: {charBackground?.name}</p>
-            <p>Class: {characterInfo?.class?.name}</p>
+            <p>Class: {charClass?.name}</p>
+            <p>Subclass: {charSubclass?.name}</p>
         </div>
 
         <div>
             <h3>Status</h3>
-            <p>Life: {characterInfo?.class?.maxLife}</p>
-            <p>Will: {characterInfo?.class?.will}</p>
-            <p>Stamina: {characterInfo?.class?.stamina}</p>
+            <p>Life: {charSubclass?.life} </p>
+            <p>Will: {charSubclass?.will} ({charSubclass?.willPerLevel} per level)</p>
+            <p>Stamina: {charSubclass?.stamina}, ({charSubclass?.staminaPerLevel} per level)</p>
+            <p>Hit Die: D{charSubclass?.hitDie} </p>
             <p>Speed: {charSpecies?.speed} ft</p>
         </div>
 
