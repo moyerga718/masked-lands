@@ -7,5 +7,4 @@ export const AttributeList = ( {charAtt, charMods, attributeNames}) => {
     } else {
         return <p>{foundAttribute?.name}: {charAtt.value} ({foundModifier?.val} mod)</p>
     }
-    
 }
