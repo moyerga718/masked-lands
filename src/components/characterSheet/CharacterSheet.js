@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { deleteCharacterFetch, getDetailedCharacterById, getBasicCharacterById, getCharacterAttributes, getAllAttributesFetch, getCharacterClass, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch, getCharacterBackgroundFetch, getCharacterSubclassByIdFetch } from "../ApiManager"
+import { deleteCharacterFetch, getBasicCharacterById, getCharacterAttributes, getAllAttributesFetch, getCharacterClass, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch, getCharacterBackgroundFetch, getCharacterSubclassByIdFetch, getSubclassWeaponProficienciesFetch } from "../ApiManager"
 import { AttributeList } from "./AttributeList"
+import { WeaponProficiencyList } from "./WeaponProficiencyList"
 
 export const CharacterSheet = () => {
     const navigate = useNavigate()
@@ -19,22 +20,12 @@ export const CharacterSheet = () => {
     const [charSpecies, setCharSpecies] = useState({})
     const [charClass, setCharClass] = useState({})
     const [charSubclass, setCharSubclass] = useState({})
+    const [charWeaponProfs, setCharWeaponProfs] = useState([])
     const [charWeapon, setCharWeapon] = useState({})
     const [charArmor, setCharArmor] = useState({})
 
     const localMlUser = localStorage.getItem("ml_user")
     const mlUserObject = JSON.parse(localMlUser)
-
-    //Upon initializing, get character object and all attribute names
-    // useEffect(
-    //     () => {
-    //         getCharacterById(characterId)
-    //             .then(characterArray => {
-    //                 setCharacterInfo(characterArray[0])
-    //             })
-    //     },
-    //     []
-    // )
 
     useEffect(
         () => {
@@ -73,6 +64,13 @@ export const CharacterSheet = () => {
             }
         },
         [characterInfo]
+    )
+
+    useEffect(
+        () => {
+            getSubclassWeaponProficienciesFetch(charSubclass.id).then(setCharWeaponProfs)
+        },
+        [charSubclass]
     )
 
     //Once we have weapons data, get matching character weapon, save to state.
@@ -175,16 +173,12 @@ export const CharacterSheet = () => {
 
         <div>
             <h2>{characterInfo.name}</h2>
-            {/* {
-                (charSpecies)
-                ? <p>Species: {charSpecies}</p>
-                : <></>
-            } */}
             <p>Species: {charSpecies?.name}</p>
             <p>Background: {charBackground?.name}</p>
             <p>Class: {charClass?.name}</p>
             <p>Subclass: {charSubclass?.name}</p>
         </div>
+
 
         <div>
             <h3>Status</h3>
@@ -220,6 +214,24 @@ export const CharacterSheet = () => {
             <h4>Armor: {charArmor?.name}</h4>
             <p>AC: {charArmor?.defenseRating}</p>
             <p>Strength Requirement: {charArmor?.strengthRequirement}</p>
+        </div>
+
+        <div>
+            <h3>Proficiencies</h3>
+            <h4>Weapon Proficiencies</h4>
+            {
+                (charWeaponProfs)
+                ? <>
+                <ul className="weapon-prof-list">
+                {
+                    charWeaponProfs.map(weaponProf => <WeaponProficiencyList 
+                        key ={`weaponProficiency--${weaponProf.weaponTypeId}`}
+                        weaponProfObj={weaponProf}/>)
+                }
+                </ul>
+                </>
+                : <></>
+            }
         </div>
 
         <div>

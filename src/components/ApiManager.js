@@ -105,6 +105,10 @@ export const getCharacterSubclassByIdFetch = (subclassId) => {
         .then(response => response.json())
 }
 
+export const getSubclassWeaponProficienciesFetch = (subclassId) => {
+    return fetch(`http://localhost:8088/subclassWeaponProficiencies?subclassId=${subclassId}&&_expand=weaponType`)
+        .then(response => response.json())
+}
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~PUT FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
