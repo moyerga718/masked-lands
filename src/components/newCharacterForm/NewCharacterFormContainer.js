@@ -21,6 +21,7 @@ export const NewCharacterFormContainer = () => {
   const [newCharacter, setNewCharacter] = useState({
     id: 0,
     userId: 0,
+    level: 0,
     name: "",
     bio: "",
     imageUrl: "",
