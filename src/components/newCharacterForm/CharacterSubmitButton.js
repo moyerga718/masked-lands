@@ -1,9 +1,9 @@
-import { createCharacterAttributeFetch, createCharacterFetch } from "../ApiManager"
+import { createCharacterAttributeFetch, createCharacterFetch, createCharacterDevotionFetch } from "../ApiManager"
 import { useNavigate } from "react-router-dom"
 
 //This component submits newly selected data to api when submit button is clicked.
 
-export const CharacterSubmitButton = ( {characterObj, characterAttributes} ) => {
+export const CharacterSubmitButton = ( {characterObj, characterAttributes, characterDevotion} ) => {
     const navigate = useNavigate()
 
     //when button is clicked, run saveCharacter()
@@ -28,7 +28,7 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes} ) => 
                         const fetchPromiseArray = []
                         //for each character attribute....
                         for (const charAtt of characterAttributes) {
-                            //create an object to send to API that has new characterId
+                            //create an attribute object to send to API that has new characterId
                             const charAttToSendToAPI = {
                                 attributeId: charAtt.attributeId,
                                 characterId: newCharacter.id,
@@ -36,10 +36,19 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes} ) => 
                             }
                             //Add fetch call to promise array
                             fetchPromiseArray.push(createCharacterAttributeFetch(charAttToSendToAPI))
-                            // createCharacterAttributeFetch(charAttToSendToAPI).then(
-                            //     (myPromise) => {fetchPromiseArray.push(myPromise)}
-                            // )
                         }
+                        //for each character devotion object....
+                        for (const charDevotion of characterDevotion) {
+                            //create a devotion object to send to API that has new characterId
+                            const devotionObjToSendToAPI = {
+                                characterId: newCharacter.id,
+                                godId: charDevotion.godId,
+                                devPoints: charDevotion.devPoints
+                            }
+                            //Add fetch call to promise array
+                            fetchPromiseArray.push(createCharacterDevotionFetch(devotionObjToSendToAPI))
+                        }
+
                         //trigger all fetch calls
                         console.log(fetchPromiseArray)
                         Promise.all(fetchPromiseArray)

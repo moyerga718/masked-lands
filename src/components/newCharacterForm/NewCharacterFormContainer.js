@@ -5,6 +5,7 @@ import { ClassSelection } from "./class/ClassSelection"
 import { SubclassSelection } from "./subclass/SubclassSelection"
 import { AttributeSelection } from "./attributes/AttributeSelection"
 import { EquipmentSelection } from "./equipment/EquipmentSelection"
+import { DevotionSelection } from "./devotion/DevotionSelection"
 import { CharacterInfoSelection } from "./information/CharacterInfoSelection"
 import { CharacterSubmitButton } from "./CharacterSubmitButton"
 import { getAllAttributesFetch } from "../ApiManager"
@@ -65,8 +66,43 @@ export const NewCharacterFormContainer = () => {
     },
   ])
 
+  //create array of empty devotion objects to be populated in DevotionSelection component.
+  const [charDevotion, setCharDevotion] = useState([
+    {
+      characterId: 0,
+      godId: 1,
+      devPoints: 0
+    },
+    {
+      characterId: 0,
+      godId: 2,
+      devPoints: 0
+    },
+    {
+      characterId: 0,
+      godId: 3,
+      devPoints: 0
+    },
+    {
+      characterId: 0,
+      godId: 4,
+      devPoints: 0
+    },
+    {
+      characterId: 0,
+      godId: 5,
+      devPoints: 0
+    },
+    {
+      characterId: 0,
+      godId: 6,
+      devPoints: 0
+    }
+  ])
+
 
   //~~~~~~~~~~~~~~~~~TBH Im not sure what this does but I think this'll help set up a multipage form??~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
   const prevStep = (step) => {
     setStep(step - 1)
   }
@@ -141,12 +177,19 @@ export const NewCharacterFormContainer = () => {
           <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
         </>
       )
-    case 7:
+      case 7:
+      return (
+        <>
+          <DevotionSelection charDevotion={charDevotion} setCharDevotion={setCharDevotion} characterObj={newCharacter} />
+          <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+        </>
+      )
+    case 8:
       return (
         <>
           <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
           <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
-          <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} />
+          <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} characterDevotion={charDevotion} />
         </>
       )
     default:

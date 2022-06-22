@@ -115,6 +115,11 @@ export const getSubclassArmorProficienciesFetch = (subclassId) => {
         .then(response => response.json())
 }
 
+export const getAllGodsFetch = () => {
+    return fetch(`http://localhost:8088/gods`)
+        .then(response => response.json())
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~PUT FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 export const saveUserProfileFetch = (profile) => {
@@ -151,6 +156,19 @@ export const createCharacterAttributeFetch = (charAttToSendToAPI) => {
     })
         // .then(response => response.json())
 }
+
+export const createCharacterDevotionFetch = (devotionObjToSendToAPI) => {
+    return fetch(`http://localhost:8088/characterDevotion`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(devotionObjToSendToAPI)
+    })
+        // .then(response => response.json())
+}
+
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~DELETE FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
