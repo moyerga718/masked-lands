@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { deleteCharacterFetch, getBasicCharacterById, getCharacterAttributes, getAllAttributesFetch, getCharacterClass, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch, getCharacterBackgroundFetch, getCharacterSubclassByIdFetch, getSubclassWeaponProficienciesFetch } from "../ApiManager"
+import { deleteCharacterFetch, getBasicCharacterById, getCharacterAttributes, getAllAttributesFetch, getCharacterClass, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch, getCharacterBackgroundFetch, getCharacterSubclassByIdFetch, getSubclassWeaponProficienciesFetch, getCharDevotionFetch, getAllGodsFetch } from "../ApiManager"
 import { AttributeList } from "./AttributeList"
 import { WeaponProficiencyList } from "./WeaponProficiencyList"
+import { DevotionList } from "./DevotionList"
 import { ArmorClassCalculation } from "./ArmorClassCalculation"
 
 export const CharacterSheet = () => {
@@ -25,6 +26,10 @@ export const CharacterSheet = () => {
     const [charWeapon, setCharWeapon] = useState({})
     const [charArmor, setCharArmor] = useState({})
     const [charAC, setCharAC] = useState(0)
+    const [charDevotion, setCharDevotion] = useState([])
+    const [sortedDevotion, setSortedDevotion] = useState([])
+    const [gods, setGods] = useState([])
+
 
 
     const localMlUser = localStorage.getItem("ml_user")
@@ -60,10 +65,12 @@ export const CharacterSheet = () => {
                 getAllSpeciesFetch().then(setSpecies)
                 getAllWeaponsFetch().then(setWeapons)
                 getAllArmorFetch().then(setArmor)
+                getAllGodsFetch().then(setGods)
                 getCharacterAttributes(characterInfo?.id).then(setCharacterAttributes)
                 getCharacterClass(characterInfo?.classId).then(setCharClass)
                 getCharacterBackgroundFetch(characterInfo?.backgroundId).then(setCharBackground)
                 getCharacterSubclassByIdFetch(characterInfo?.subclassId).then(setCharSubclass)
+                getCharDevotionFetch(characterInfo?.id).then(setCharDevotion)
             }
         },
         [characterInfo]
@@ -198,6 +205,16 @@ export const CharacterSheet = () => {
         [charArmor, effectiveModifiers]
     )
 
+    useEffect(
+        () => {
+            const sorted = charDevotion.sort((a, b) => {
+                return a.godId - b.godId
+            })
+            setSortedDevotion(sorted)
+        },
+        [charDevotion]
+    )
+
 
     // Function to that calls delete fetch if delete button is clicked.
     const deleteCharacter = () => {
@@ -268,6 +285,23 @@ export const CharacterSheet = () => {
                 : <></>
             }
             <p>Strength Requirement: {charArmor?.strengthRequirement}</p>
+        </div>
+
+        <div>
+            <h3>Devotion</h3>
+            {
+                (sortedDevotion)
+                ? <>
+                    {
+                        sortedDevotion.map(devotionObj => <DevotionList 
+                            key={`devotion--${devotionObj.godId}`}
+                            devotionObj={devotionObj}
+                            gods={gods}
+                        />)
+                    }
+                </>
+                : <></>
+            }
         </div>
 
         <div>
