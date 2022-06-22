@@ -29,6 +29,7 @@ export const CharacterSheet = () => {
     const [charDevotion, setCharDevotion] = useState([])
     const [sortedDevotion, setSortedDevotion] = useState([])
     const [gods, setGods] = useState([])
+    
 
 
 
@@ -229,6 +230,7 @@ export const CharacterSheet = () => {
 
         <div>
             <h2>{characterInfo.name}</h2>
+
             <p>Species: {charSpecies?.name}</p>
             <p>Background: {charBackground?.name}</p>
             <p>Class: {charClass?.name}</p>
@@ -296,6 +298,7 @@ export const CharacterSheet = () => {
                         sortedDevotion.map(devotionObj => <DevotionList 
                             key={`devotion--${devotionObj.godId}`}
                             devotionObj={devotionObj}
+                            charObj={characterInfo}
                             gods={gods}
                         />)
                     }

@@ -11,7 +11,6 @@ export const GodDevotionInput = ({ godObj, charDevotion, setCharDevotion, availa
     const handleIncrement = () => {
         setPoints(points + 1)
         setAvailableDevPoints(availableDevPoints - 1)
-
     }
 
     //function that decreases number of points for this god when decrement button is clicked.

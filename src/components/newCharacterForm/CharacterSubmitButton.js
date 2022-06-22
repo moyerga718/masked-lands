@@ -43,7 +43,8 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes, chara
                             const devotionObjToSendToAPI = {
                                 characterId: newCharacter.id,
                                 godId: charDevotion.godId,
-                                devPoints: charDevotion.devPoints
+                                devPoints: charDevotion.devPoints,
+                                devLevel: findDevotionLevel(charDevotion)
                             }
                             //Add fetch call to promise array
                             fetchPromiseArray.push(createCharacterDevotionFetch(devotionObjToSendToAPI))
@@ -73,6 +74,31 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes, chara
             }
         }
         return true
+    }
+
+    //this function finds devotion level based on # of devotion points the character has in a god
+    const findDevotionLevel = (charDevotionObj) => {
+
+        let devLevel = 0
+        if (charDevotionObj.devPoints >= 21 ) {
+            devLevel = 5
+            return devLevel
+        } else if (charDevotionObj.devPoints >= 15) {
+            devLevel = 4
+            return devLevel
+        } else if (charDevotionObj.devPoints >= 9) {
+            devLevel = 3
+            return devLevel
+        } else if (charDevotionObj.devPoints >= 5) {
+            devLevel = 2
+            return devLevel
+        } else if (charDevotionObj.devPoints >= 2) {
+            devLevel = 1
+            return devLevel
+        } else {
+            devLevel = 0
+            return devLevel
+        }
     }
 
     return <button
