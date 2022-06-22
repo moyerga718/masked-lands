@@ -189,7 +189,7 @@ export const NewCharacterFormContainer = () => {
         <>
           <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
           <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
-          <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} />
+          <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} characterDevotion={charDevotion} />
         </>
       )
     default:

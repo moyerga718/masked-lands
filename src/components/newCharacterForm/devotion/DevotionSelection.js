@@ -32,6 +32,9 @@ export const DevotionSelection = ( {charDevotion, setCharDevotion, characterObj}
             gods.map( god => <GodDevotionInput 
                 key={`god--${god.id}`}
                 godObj={god}
+                charSubclass={charSubclass}
+                charDevotion={charDevotion}
+                setCharDevotion={setCharDevotion}
                 availableDevPoints={availableDevPoints}
                 setAvailableDevPoints={setAvailableDevPoints}
             />)
