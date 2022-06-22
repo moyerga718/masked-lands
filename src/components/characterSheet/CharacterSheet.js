@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { deleteCharacterFetch, getBasicCharacterById, getCharacterAttributes, getAllAttributesFetch, getCharacterClass, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch, getCharacterBackgroundFetch, getCharacterSubclassByIdFetch, getSubclassWeaponProficienciesFetch } from "../ApiManager"
 import { AttributeList } from "./AttributeList"
 import { WeaponProficiencyList } from "./WeaponProficiencyList"
+import { ArmorClassCalculation } from "./ArmorClassCalculation"
 
 export const CharacterSheet = () => {
     const navigate = useNavigate()
@@ -23,6 +24,8 @@ export const CharacterSheet = () => {
     const [charWeaponProfs, setCharWeaponProfs] = useState([])
     const [charWeapon, setCharWeapon] = useState({})
     const [charArmor, setCharArmor] = useState({})
+    const [charAC, setCharAC] = useState(0)
+
 
     const localMlUser = localStorage.getItem("ml_user")
     const mlUserObject = JSON.parse(localMlUser)
@@ -104,7 +107,7 @@ export const CharacterSheet = () => {
     useEffect(
         () => {
             if (characterAttributes && charBackground.backgroundAttributeBonuses) {
-                const attCopy = characterAttributes.map(att =>{return {...att}})
+                const attCopy = characterAttributes.map(att => { return { ...att } })
                 const attCopyWithBonuses = attCopy.map(
                     (att) => {
                         for (const attBonus of charBackground.backgroundAttributeBonuses) {
@@ -159,6 +162,42 @@ export const CharacterSheet = () => {
         [sortedEffective]
     )
 
+    //Once we have effective modifiers, we can calculate characters Armor Class (AC). This is done with the ArmorClassCalculation component
+    useEffect(
+        () => {
+            if (charArmor && effectiveModifiers) {
+                let acValue = 0
+
+                // grab dex modifier value from effective modifiers
+                const dexMod = effectiveModifiers.find(mod => mod.attributeId === 2)
+
+                //This checks to see if they get a dex bonus from their armor. If not (most heavy armor), just return AC
+                if (!charArmor.dexBonus) {
+                    acValue = charArmor.baseAC
+                    //Then, check to see if they get a dex bonus from their armor AND if that bonus has a cap. Lots of armor will give you a dex bonus of only two. 
+                    //So, check to see if they get a dex bonus and if armor bonus cap is greater than 0
+                } else if (charArmor.dexBonus && charArmor.bonusCap) {
+                    //Then, check to see if the bonus cap is greater than their dex mod (IE, they haven't hit the cap yet.)
+                    if (charArmor.bonusCap > dexMod?.val) {
+                        //If so, add their dex mod to armor base AC, return that value.
+                        acValue = charArmor.baseAC + dexMod?.val
+                        //If their dex mod is greater than or equal to the armor bonus cap...
+                    } else {
+                        //Only add the armors bonus cap to the base aC
+                        acValue = charArmor.baseAC + charArmor.bonusCap
+                    }
+                    //Last scenario is when armor gives a dex boost and there is no AC cap (most light armor). Just add dex mod to AC.
+                } else {
+                    acValue = charArmor.baseAC + dexMod?.val
+                }
+
+                //set AC state variable
+                setCharAC(acValue)
+            }
+        },
+        [charArmor, effectiveModifiers]
+    )
+
 
     // Function to that calls delete fetch if delete button is clicked.
     const deleteCharacter = () => {
@@ -187,6 +226,7 @@ export const CharacterSheet = () => {
             <p>Stamina: {charSubclass?.stamina}, ({charSubclass?.staminaPerLevel} per level)</p>
             <p>Hit Die: D{charSubclass?.hitDie} </p>
             <p>Speed: {charSpecies?.speed} ft</p>
+            <p>AC: {charAC}</p>
         </div>
 
         <div>
@@ -212,7 +252,21 @@ export const CharacterSheet = () => {
             <p>{charWeapon?.attribute?.name} Scaling</p>
             <p>Damage: 1d{charWeapon?.damageDie}</p>
             <h4>Armor: {charArmor?.name}</h4>
-            <p>AC: {charArmor?.defenseRating}</p>
+            {
+                (charArmor?.dexBonus && charArmor?.bonusCap === 2) 
+                ? <p>AC: {charArmor?.baseAC} + Dexterity (Max 2)</p>
+                : <></>
+            }
+            {
+                (charArmor?.dexBonus && !charArmor.bonusCap) 
+                ? <p>AC: {charArmor?.baseAC} + Dex</p>
+                : <></>
+            }
+            {
+                (!charArmor?.dexBonus)
+                ? <p>AC: {charArmor?.baseAC}</p>
+                : <></>
+            }
             <p>Strength Requirement: {charArmor?.strengthRequirement}</p>
         </div>
 
@@ -221,16 +275,16 @@ export const CharacterSheet = () => {
             <h4>Weapon Proficiencies</h4>
             {
                 (charWeaponProfs)
-                ? <>
-                <ul className="weapon-prof-list">
-                {
-                    charWeaponProfs.map(weaponProf => <WeaponProficiencyList 
-                        key ={`weaponProficiency--${weaponProf.weaponTypeId}`}
-                        weaponProfObj={weaponProf}/>)
-                }
-                </ul>
-                </>
-                : <></>
+                    ? <>
+                        <ul className="weapon-prof-list">
+                            {
+                                charWeaponProfs.map(weaponProf => <WeaponProficiencyList
+                                    key={`weaponProficiency--${weaponProf.weaponTypeId}`}
+                                    weaponProfObj={weaponProf} />)
+                            }
+                        </ul>
+                    </>
+                    : <></>
             }
         </div>
 
