@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
-import { getAllArmorFetch, getAllWeaponsFetch, getSubclassWeaponProficienciesFetch } from "../../ApiManager"
+import { getAllArmorFetch, getAllWeaponsFetch, getSubclassWeaponProficienciesFetch, getSubclassArmorProficienciesFetch } from "../../ApiManager"
 import { WeaponSelectionDropdown } from "./WeaponSelectionDropdown"
 import { ArmorSelectionDropdown } from "./ArmorSelectionDropdown"
 import { WeaponTypeRadioButton } from "./WeaponTypeRadioButton"
+import { ArmorTypeRadioButton } from "./ArmorTypeRadioButton"
 import "../newCharacterForm.css"
 
 //This component renders drop down boxes for weapon and armor selection
@@ -12,8 +13,11 @@ export const EquipmentSelection = ({ characterObj, setCharacter }) => {
     const [weapons, setWeapons] = useState([])
     const [armor, setArmor] = useState([])
     const [charWeaponProfs, setCharWeaponProfs] = useState([])
+    const [charArmorProfs, setCharArmorProfs] = useState([])
     const [selectedWeaponType, setSelectedWeaponType] = useState(0)
+    const [selectedArmorType, setSelectedArmorType] = useState(0)
     const [filteredWeapons, setFilteredWeapons] = useState([])
+    const [filteredArmor, setFilteredArmor] = useState([])
 
     //get weapons and armor data when state is initialized 
     useEffect(
@@ -21,6 +25,7 @@ export const EquipmentSelection = ({ characterObj, setCharacter }) => {
             getAllWeaponsFetch().then(setWeapons)
             getAllArmorFetch().then(setArmor)
             getSubclassWeaponProficienciesFetch(characterObj?.subclassId).then(setCharWeaponProfs)
+            getSubclassArmorProficienciesFetch(characterObj?.subclassId).then(setCharArmorProfs)
         },
         []
     )
@@ -28,11 +33,21 @@ export const EquipmentSelection = ({ characterObj, setCharacter }) => {
     useEffect(
         () => {
             if (selectedWeaponType) {
-                const filteredWeapons = weapons.filter( weapon => weapon.weaponTypeId === parseInt(selectedWeaponType))
+                const filteredWeapons = weapons.filter(weapon => weapon.weaponTypeId === parseInt(selectedWeaponType))
                 setFilteredWeapons(filteredWeapons)
             }
         },
         [selectedWeaponType]
+    )
+
+    useEffect(
+        () => {
+            if (selectedArmorType) {
+                const filteredArmor = armor.filter(armor => armor.armorTypeId === parseInt(selectedArmorType))
+                setFilteredArmor(filteredArmor)
+            }
+        },
+        [selectedArmorType]
     )
 
     //render jsx for weapon/armor dropdowns. WeaponSelectionDropdown and ArmorSelectionDropdown components render an option for each weapon/armor obj.
@@ -73,19 +88,37 @@ export const EquipmentSelection = ({ characterObj, setCharacter }) => {
                 }
             </section>
             <section>
-                <h3>Armor</h3>
-                <select onChange={(changeEvent) => {
-                    const copy = { ...characterObj };
-                    copy.armorId = parseInt(changeEvent.target.value);
-                    setCharacter(copy);
-                }}>
-                    <option value="0">Choose your Armor</option>
+                <h3>Available Armor Types</h3>
+                <fieldset>
+                    <label htmlFor="Armor Type Selection">Armor Types:</label>
                     {
-                        armor.map(armor => <ArmorSelectionDropdown
-                            key={`armor--${armor.id}`}
-                            armorObj={armor} />)
+                        charArmorProfs.map(armorTypeProfObj => <ArmorTypeRadioButton key={`class--${armorTypeProfObj.armorTypeId}`}
+                            armorTypeProfObj={armorTypeProfObj}
+                            setSelectedArmorType={setSelectedArmorType}
+                        />)
                     }
-                </select>
+                </fieldset>
+            </section>
+            <section>
+                {
+                    (selectedArmorType)
+                        ? <>
+                            <h3>Armor</h3>
+                            <select onChange={(changeEvent) => {
+                                const copy = { ...characterObj };
+                                copy.armorId = parseInt(changeEvent.target.value);
+                                setCharacter(copy);
+                            }}>
+                                <option value="0">Choose your Armor</option>
+                                {
+                                    filteredArmor.map(armor => <ArmorSelectionDropdown
+                                        key={`armor--${armor.id}`}
+                                        armorObj={armor} />)
+                                }
+                            </select>
+                        </>
+                        : <></>
+                }
             </section>
         </div>
     </div>
