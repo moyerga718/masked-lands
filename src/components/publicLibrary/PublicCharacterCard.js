@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom"
+import "./PublicCharacterCard.css"
 
 //This component renders a card for a single character object. The name on the card is a link that will take you to detailed character sheet.
 
-export const PublicCharacterCard = ( {characterObj, currentUser, allUsers, allSpecies} ) => {
+export const PublicCharacterCard = ( {characterObj, currentUser, allUsers, allSpecies, allClasses, allBackgrounds, allSubclasses} ) => {
     let username = ""
     if (currentUser) {
         username = currentUser.username
@@ -16,17 +17,41 @@ export const PublicCharacterCard = ( {characterObj, currentUser, allUsers, allSp
         return foundSpecies
     }
 
+    const findCharBackground = () => {
+        const foundBackground = allBackgrounds.find( background => background.id === characterObj.backgroundId)
+        return foundBackground
+    }
+
+    const findCharClass = () => {
+        const foundClass = allClasses.find( myClass => myClass.id === characterObj.classId)
+        return foundClass
+    }
+
+    const findCharSubclass = () => {
+        const foundSubclass = allSubclasses.find( subclass => subclass.id === characterObj.subclassId)
+        return foundSubclass
+    }
+
     const foundSpecies = findCharSpecies()
+    const foundBackground = findCharBackground()
+    const foundClass = findCharClass()
+    const foundSubclass = findCharSubclass()
 
-
-    return <section className="publicCharacterCard">
-        <header className="character-card-header">
-            <h3><Link to={`/character/${characterObj.id}`}>{characterObj.name}</Link></h3>
-            <p>Created by {username}</p>
-        </header>
-        <h4>Species: {foundSpecies?.name}</h4>
-        <h4>Class: {characterObj.class.name}</h4>
-        <p>Bio: {characterObj.bio}</p>
-        <p>Primary Weapon: {characterObj.weapon.name}</p>
+    return <Link to={`/character/${characterObj.id}`} style={{ textDecoration: 'none' }} className="character-card-link">
+    <section className="publicCharacterCard">
+        <div>
+            <img src={characterObj.imageUrl} className="character-card-image" />
+        </div>
+        <div className="character-card-text">
+            <header className="character-card-header">
+                <h3 className="character-card-title">{characterObj.name}</h3>
+                <p className="card-username">Created by {username}</p>
+            </header>
+            <div className="character-card-information">
+                <h4>{foundSpecies?.name} | {foundBackground?.name}</h4>
+                <h4 className="character-card-class">{foundClass?.name} | {foundSubclass?.name}</h4>
+            </div>
+        </div>
     </section>
+    </Link>
 }

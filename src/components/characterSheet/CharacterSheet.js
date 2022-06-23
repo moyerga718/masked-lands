@@ -5,6 +5,7 @@ import { AttributeList } from "./AttributeList"
 import { WeaponProficiencyList } from "./WeaponProficiencyList"
 import { DevotionList } from "./DevotionList"
 import { ArmorClassCalculation } from "./ArmorClassCalculation"
+import "./CharacterSheet.css"
 
 export const CharacterSheet = () => {
     const navigate = useNavigate()
@@ -227,10 +228,11 @@ export const CharacterSheet = () => {
 
     // Jsx to render on page.
     return <>
-
+    <div className="character-sheet-container">
+        <section className="character-sheet">
         <div>
             <h2>{characterInfo.name}</h2>
-            <img src={characterInfo?.imageUrl}/>
+            <img src={characterInfo?.imageUrl} className="character-image"/>
             <p>Level: {characterInfo.level}</p>
             <p>Species: {charSpecies?.name}</p>
             <p>Background: {charBackground?.name}</p>
@@ -335,5 +337,8 @@ export const CharacterSheet = () => {
                     : <></>
             }
         </div>
+        </section>
+
+    </div>
     </>
 }

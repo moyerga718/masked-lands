@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import { getAllCharactersDetailedFetch, getAllSpeciesFetch, getAllUserInformationFetch } from "../ApiManager"
+import { getAllCharactersDetailedFetch, getAllClassesFetch, getAllSpeciesFetch, getAllSubclassesFetch, getAllBackgroundsFetch, getAllUserInformationFetch } from "../ApiManager"
 import { PublicCharacterCard } from "./PublicCharacterCard"
 import "./PublicLibrary.css"
 
@@ -12,6 +12,9 @@ export const PublicLibrary = () => {
     const [filteredCharacters, setFilteredCharacters] = useState([])
     const [users, setUsers] = useState([])
     const [species,setSpecies] = useState([])
+    const [backgrounds, setBackgrounds] = useState([])
+    const [classes, setClasses] = useState([])
+    const [subclasses, setSubclasses] = useState([])
 
     //Get all detailed characters
     useEffect(
@@ -19,6 +22,9 @@ export const PublicLibrary = () => {
             getAllCharactersDetailedFetch().then(setCharacters)
             getAllUserInformationFetch().then(setUsers)
             getAllSpeciesFetch().then(setSpecies)
+            getAllClassesFetch().then(setClasses)
+            getAllBackgroundsFetch().then(setBackgrounds)
+            getAllSubclassesFetch().then(setSubclasses)
         },
         []
     )
@@ -44,6 +50,9 @@ export const PublicLibrary = () => {
             filteredCharacters.map( character => <PublicCharacterCard 
                 key={`character--${character.id}`}
                 allSpecies={species}
+                allClasses={classes}
+                allBackgrounds={backgrounds}
+                allSubclasses={subclasses}
                 allUsers={users}
                 characterObj={character}/>)
         }

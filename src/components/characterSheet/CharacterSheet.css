@@ -1,0 +1,14 @@
+.character-sheet-container {
+    display: flex;
+    justify-content: center;
+}
+
+.character-sheet {
+    width: 60%;
+    border: solid black 1px;
+    padding: 1rem;
+}
+
+.character-image {
+    width: 50%;
+}
