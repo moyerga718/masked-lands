@@ -60,6 +60,16 @@ export const getAllSpeciesFetch = () => {
         .then(response => response.json())
 }
 
+export const getAllBackgroundsFetch = () => {
+    return fetch(`http://localhost:8088/backgrounds`)
+        .then(response => response.json())
+}
+
+export const getAllSubclassesFetch = () => {
+    return fetch(`http://localhost:8088/subclasses`)
+        .then(response => response.json())
+}
+
 export const getAllAttributesFetch = () => {
     return fetch(`http://localhost:8088/attributes`)
         .then(response => response.json())

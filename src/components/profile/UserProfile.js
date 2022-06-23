@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import { getAllCharactersForCurrentUserFetch, getAllSpeciesFetch, getCurrentUserInformationFetch } from "../ApiManager"
+import { getAllCharactersForCurrentUserFetch, getAllSpeciesFetch, getCurrentUserInformationFetch, getAllClassesFetch, getAllBackgroundsFetch, getAllSubclassesFetch } from "../ApiManager"
 import { PublicCharacterCard } from "../publicLibrary/PublicCharacterCard"
 import "./Profile.css"
 
 export const UserProfile = () => {
     const navigate = useNavigate()
     const [species, setSpecies] = useState([])
+    const [backgrounds, setBackgrounds] = useState([])
+    const [classes, setClasses] = useState([])
+    const [subclasses, setSubclasses] = useState([])
     const [currentUser, setCurrentUser] = useState({})
     const [currentUserCharacters, setCurrentUserCharacters] = useState([])
 
@@ -23,6 +26,9 @@ export const UserProfile = () => {
             //Get all characters for current user
             getAllCharactersForCurrentUserFetch(mlUserObject.id).then(setCurrentUserCharacters)
             getAllSpeciesFetch().then(setSpecies)
+            getAllClassesFetch().then(setClasses)
+            getAllBackgroundsFetch().then(setBackgrounds)
+            getAllSubclassesFetch().then(setSubclasses)
         },
         []
     )
@@ -62,6 +68,9 @@ export const UserProfile = () => {
             currentUserCharacters.map(character => <PublicCharacterCard
                 key={`character--${character.id}`}
                 allSpecies={species}
+                allClasses={classes}
+                allBackgrounds={backgrounds}
+                allSubclasses={subclasses}
                 characterObj={character}
                 currentUser={currentUser}
                 userObj={mlUserObject} />)
