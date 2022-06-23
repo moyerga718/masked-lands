@@ -101,6 +101,8 @@ export const NewCharacterFormContainer = () => {
     }
   ])
 
+  const [charImageFile, setCharImageFile] = useState(null)
+
 
   //~~~~~~~~~~~~~~~~~TBH Im not sure what this does but I think this'll help set up a multipage form??~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
@@ -133,6 +135,12 @@ export const NewCharacterFormContainer = () => {
     },
     []
   )
+
+  // return <>
+  //         <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} charImageFile={charImageFile} setCharImageFile={setCharImageFile} />
+  //         <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+  //         <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} characterDevotion={charDevotion} charImageFile={charImageFile}/>
+  // </>
 
   //Render necessary components depending on which step we are on, breaking form into multiple "pages"
   switch (step) {
@@ -188,9 +196,9 @@ export const NewCharacterFormContainer = () => {
     case 8:
       return (
         <>
-          <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
+          <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} charImageFile={charImageFile} setCharImageFile={setCharImageFile} />
           <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
-          <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} characterDevotion={charDevotion} />
+          <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} setCharacter={setNewCharacter} characterDevotion={charDevotion} charImageFile={charImageFile} />
         </>
       )
     default:

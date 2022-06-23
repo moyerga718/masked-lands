@@ -1,9 +1,10 @@
-import { createCharacterAttributeFetch, createCharacterFetch, createCharacterDevotionFetch } from "../ApiManager"
+import { createCharacterAttributeFetch, createCharacterFetch, createCharacterDevotionFetch, createCharacterImage } from "../ApiManager"
 import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
 
 //This component submits newly selected data to api when submit button is clicked.
 
-export const CharacterSubmitButton = ( {characterObj, characterAttributes, characterDevotion} ) => {
+export const CharacterSubmitButton = ({ characterObj, characterAttributes, setCharacter, characterDevotion, charImageFile }) => {
     const navigate = useNavigate()
 
     //when button is clicked, run saveCharacter()
@@ -11,16 +12,11 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes, chara
         event.preventDefault()
         saveCharacter()
     }
-  
-    //This function checks to see if the whole form has been filled out. If so, post all data to API
-    const saveCharacter = () => {
-        //Check to see if all character fields have been filled
-        if (characterObj.name && characterObj.bio && characterObj.imageUrl && characterObj.classId && characterObj.weaponId && characterObj.armorId) {
-            //if all character fields are filled, check to see if all attributes are selected by calling checkAttributes. This returns a boolean
-            const allAttributesSelectedBoolean = checkAttributes()
-            // if allAttributesSelectedBoolean is true, all attributes have been selected
-            if (allAttributesSelectedBoolean) {
-                //Post new character obj to API
+
+    //Use effect looks out for when image url is added to character 
+    useEffect(
+        () => {
+            if (characterObj.imageUrl !== "") {
                 createCharacterFetch(characterObj)
                     //Get that response, call it newCharacter, use that ID to set characterId for each character Attribute
                     .then((newCharacter) => {
@@ -53,9 +49,40 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes, chara
                         //trigger all fetch calls
                         console.log(fetchPromiseArray)
                         Promise.all(fetchPromiseArray)
-                        })
-                        // once everything has been posted, navigate to home page
-                        .then(()=> navigate("/"))
+                    }).then(() => navigate("/"))
+            }
+        },
+        [characterObj]
+    )
+
+    //This function checks to see if the whole form has been filled out. If so, post all data to API
+    const saveCharacter = () => {
+        //Check to see if all character fields have been filled
+        if (characterObj.name && characterObj.bio && characterObj.classId && characterObj.weaponId && characterObj.armorId) {
+            //if all character fields are filled, check to see if all attributes are selected by calling checkAttributes. This returns a boolean
+            const allAttributesSelectedBoolean = checkAttributes()
+            // if allAttributesSelectedBoolean is true, all attributes have been selected
+            if (allAttributesSelectedBoolean) {
+                //create variable w/ upload preset from Cloudinary
+                const uploadPreset = 'wci8ewi5'
+
+                //create form data to send to Cloudinary
+                const formData = new FormData()
+                formData.append("file", charImageFile)
+                formData.append("upload_preset", uploadPreset)
+
+                //Run fetch call to post image to Cloudinary
+                createCharacterImage(formData)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.secure_url !== '') {
+                            //make a copy of characterObj, give it new image URL we get back from fetch call
+                            const copy = { ...characterObj }
+                            copy.imageUrl = data.secure_url
+                            setCharacter(copy)
+                        }
+                    })
+                //Post new character obj to API
             } else {
                 // if all attributes have not been selected, return window w/ error message
                 window.alert("Please fill out all fields")
@@ -65,7 +92,7 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes, chara
             window.alert("Please fill out all fields")
         }
     }
-    
+
     //If all attributes have been filled, return true.If all attributes have not been filled, return false.
     const checkAttributes = () => {
         for (const charAtt of characterAttributes) {
@@ -80,7 +107,7 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes, chara
     const findDevotionLevel = (charDevotionObj) => {
 
         let devLevel = 0
-        if (charDevotionObj.devPoints >= 21 ) {
+        if (charDevotionObj.devPoints >= 21) {
             devLevel = 5
             return devLevel
         } else if (charDevotionObj.devPoints >= 15) {
@@ -105,5 +132,5 @@ export const CharacterSubmitButton = ( {characterObj, characterAttributes, chara
         onClick={(event) => handleSaveButtonClick(event)}
         className="btn btn-primary">
         Create Character
-</button>
+    </button>
 }

@@ -173,7 +173,13 @@ export const createCharacterDevotionFetch = (devotionObjToSendToAPI) => {
         // .then(response => response.json())
 }
 
-
+export const createCharacterImage = (formData) => {
+    return fetch(`https://api.cloudinary.com/v1_1/dfhvmg01x/image/upload`, {
+        method: "POST",
+        body: formData
+    })
+        // .then(response => response.json())
+}
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~DELETE FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
