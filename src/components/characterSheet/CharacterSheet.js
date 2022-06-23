@@ -230,7 +230,8 @@ export const CharacterSheet = () => {
 
         <div>
             <h2>{characterInfo.name}</h2>
-
+            <img src={characterInfo?.imageUrl}/>
+            <p>Level: {characterInfo.level}</p>
             <p>Species: {charSpecies?.name}</p>
             <p>Background: {charBackground?.name}</p>
             <p>Class: {charClass?.name}</p>
