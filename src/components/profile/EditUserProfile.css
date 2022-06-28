@@ -1,20 +1,28 @@
-.profile-character-card-container {
+.form-field {
+    border: none;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0;
 }
 
-.user--information {
+.profile__title {
+    font-family: CinzelRegular;
+}
+
+.edit-user-form {
     font-family: Bona Nova;
-    flex-basis: 15rem;
-    border-right: solid #031926 2px;
-    padding-right: 1em;
-}
-
-.profile--container {
     display: flex;
+    flex-direction: column;
+    width: 24rem;
 }
 
-.user--info--edit--button {
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.submitButton {
     background: #fff;
     backface-visibility: hidden;
     border-radius: .1rem;
@@ -37,19 +45,19 @@
     touch-action: manipulation;
   }
   
-  .user--info--edit--button:not(:disabled):hover {
+  .submitButton:not(:disabled):hover {
     transform: scale(1.05);
   }
   
-  .user--info--edit--button:not(:disabled):hover:active {
+  .submitButton:not(:disabled):hover:active {
     transform: scale(1.05) translateY(.125rem);
   }
   
-  .user--info--edit--button:focus {
+  .submitButton:focus {
     outline: 0 solid transparent;
   }
   
-  .user--info--edit--button:focus:before {
+  .submitButton:focus:before {
     content: "";
     left: calc(-1*.375rem);
     pointer-events: none;
@@ -59,46 +67,28 @@
     user-select: none;
   }
   
-  .user--info--edit--button:focus:not(:focus-visible) {
+  .submitButton:focus:not(:focus-visible) {
     outline: 0 solid transparent;
   }
   
-  .user--info--edit--button:focus:not(:focus-visible):before {
+  .submitButton:focus:not(:focus-visible):before {
     border-width: 0;
   }
   
-  .user--info--edit--button:not(:disabled):active {
+  .submitButton:not(:disabled):active {
     transform: translateY(.125rem);
   }
 
-  .button--container {
+  .buttonContainer {
     display: flex;
-    justify-content: right;
+    justify-content: left;
+    padding-top: 1rem;
+    width: 100%;
   }
 
-  .user--info--field--container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-
-  .user--library--title {
-    font-family: CinzelRegular;
-  }
-
-  .user--information--title {
-    font-family: CinzelRegular;
-  }
-
-  .user--library {
+  .input--container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .user--library--container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    align-items:left ;
+    width: 16.5rem;
   }

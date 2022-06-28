@@ -20,7 +20,7 @@ export const UserProfile = () => {
     //Upon state initializing...
     useEffect(
         () => {
-            
+
             //Get user information based on ID found in local storage
             getCurrentUserInformationFetch(mlUserObject.id).then(setCurrentUser)
             //Get all characters for current user
@@ -35,46 +35,60 @@ export const UserProfile = () => {
 
 
     return <>
+        <div className="profile--container">
+            {/* Display current user information */}
+            <section className="user--information">
+                <h2 className="user--information--title">Profile Information</h2>
+                <div className="user--info--field--container">
+                    <p><b>Full Name: </b></p>
+                    <p>{currentUser.firstName} {currentUser.lastName}</p>
+                </div>
+                <div className="user--info--field--container">
+                    <p><b>Username: </b></p>
+                    <p>{currentUser.username}</p>
 
-        {/* Display current user information */}
+                </div>
+                <div className="user--info--field--container">
+                    <p><b>Email: </b></p>
+                    <p>{currentUser.email}</p>
+                </div>
+                {/* Button links to editing user information */}
+                <div className="button--container">
+                    <button className="user--info--edit--button" onClick={
+                        () => {
+                            navigate(`/profile/${currentUser.id}/edit`)
+                        }
+                    }>Edit</button>
 
-        <h2>{currentUser.firstName}'s Profile</h2>
-        <p>Full Name: {currentUser.firstName} {currentUser.lastName}</p>
-        <p>Username: {currentUser.username}</p>
-        <p>Email: {currentUser.email}</p>
+                </div>
+            </section>
 
-        {/* Button links to editing user information */}
 
-        <button onClick={
-            () => {
-                navigate(`/profile/${currentUser.id}/edit`)
-            }
-        }>Update User Information</button>
 
-        {/* Button links to character creation form */}
+            {/* Button links to character creation form */}
+            <div className="user--library--container">
+                <section className="user--library">
+                    <h2 className="user--library--title">Personal Library</h2>
 
-        <h2>{currentUser.firstName}'s Characters</h2>
-        
-        <button onClick={
-            () => {
-                navigate(`/create`)
-            }
-        }> + Create</button>
+                    {/* Render character cards for all of this users characters */}
 
-        {/* Render character cards for all of this users characters */}
+                    <div className="profile-character-card-container">
+                        {
+                            currentUserCharacters.map(character => <PublicCharacterCard
+                                key={`character--${character.id}`}
+                                allSpecies={species}
+                                allClasses={classes}
+                                allBackgrounds={backgrounds}
+                                allSubclasses={subclasses}
+                                characterObj={character}
+                                currentUser={currentUser}
+                                userObj={mlUserObject} />)
+                        }
+                    </div>
+                </section>
 
-        <div className="profile-character-card-container">
-        {
-            currentUserCharacters.map(character => <PublicCharacterCard
-                key={`character--${character.id}`}
-                allSpecies={species}
-                allClasses={classes}
-                allBackgrounds={backgrounds}
-                allSubclasses={subclasses}
-                characterObj={character}
-                currentUser={currentUser}
-                userObj={mlUserObject} />)
-        }
+            </div>
+
         </div>
 
     </>

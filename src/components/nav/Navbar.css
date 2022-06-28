@@ -5,7 +5,7 @@
     align-items: top;
     
     font-family: CinzelRegular;
-    border-bottom: solid black 2px;
+    border-bottom: solid #031926 2px;
     padding-bottom:0.5rem;
     
 }
@@ -30,7 +30,7 @@
 }
 
 .navbar__link{
-    color: black;
+    color: #031926;
     text-decoration: none;
     -webkit-transition: color .3s linear;
     -moz-transition: color .3s linear;

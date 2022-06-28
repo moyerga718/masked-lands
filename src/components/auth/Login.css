@@ -7,8 +7,8 @@
 .login-container {
     padding: 1rem;
     padding-bottom: 1.5rem;
-    margin-top: 8rem;
-    border: solid black 1.5px;
+    margin-top: 4rem;
+    border: solid #031926 1.5px;
     width: 24rem;
     display: flex;
     flex-direction: column;
@@ -55,9 +55,9 @@
   background: #fff;
   backface-visibility: hidden;
   border-radius: .1rem;
-  border: solid black 1.5px;
+  border: solid #031926 1.5px;
   box-sizing: border-box;
-  color: #212121;
+  color: #031926;
   cursor: pointer;
   display: inline-block;
   font-family: Bona Nova;
@@ -109,7 +109,7 @@
 }
 
 .login--link{
-    color: black;
+    color: #031926;
     -webkit-transition: color .3s linear;
     -moz-transition: color .3s linear;
     -ms-transition: color .3s linear;
@@ -120,3 +120,4 @@
 .login--link:hover {
     color: #E84855
 }
+
