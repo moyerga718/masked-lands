@@ -28,30 +28,33 @@ export const Login = () => {
     }
 
     return (
-        <main className="container--login">
-            <section>
-                <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Welcome to the Masked Lands</h1>
-                    <h2>Log in here...</h2>
-                    <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
-                        <input type="email"
-                            value={email}
-                            onChange={evt => set(evt.target.value)}
-                            className="form-control"
-                            placeholder="Email address"
-                            required autoFocus />
-                    </fieldset>
-                    <fieldset>
-                        <button type="submit">
-                            Sign in
-                        </button>
-                    </fieldset>
-                </form>
-            </section>
-            <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
-            </section>
+        <main className="login--page">
+            <div className="login-container">
+                <section className="form-container">
+
+                    <h1 className="login--welcome">The Masked Lands</h1>
+                    <h2 className="login--signin-text">Sign in</h2>
+                    <form className="form--login" onSubmit={handleLogin}>
+                        <fieldset className="form-field">
+
+                            <input type="email"
+                                value={email}
+                                onChange={evt => set(evt.target.value)}
+                                className="form-control"
+                                placeholder="Email address"
+                                required autoFocus />
+                        </fieldset>
+                        <fieldset className="form-field">
+                            <div className="link--register">
+                                <Link className="login--link" to="/register">Not a member yet?</Link>
+                            </div>
+                            <button className="submitButton" type="submit">
+                                Sign in
+                            </button>
+                        </fieldset>
+                    </form>
+                </section>
+            </div>
         </main>
     )
 }

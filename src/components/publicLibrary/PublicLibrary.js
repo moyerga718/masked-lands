@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { getAllCharactersDetailedFetch, getAllClassesFetch, getAllSpeciesFetch, getAllSubclassesFetch, getAllBackgroundsFetch, getAllUserInformationFetch } from "../ApiManager"
 import { PublicCharacterCard } from "./PublicCharacterCard"
+import { Loading } from "../Loading"
 import "./PublicLibrary.css"
 
 // Component that renders all character cards on home page
@@ -15,6 +16,7 @@ export const PublicLibrary = () => {
     const [backgrounds, setBackgrounds] = useState([])
     const [classes, setClasses] = useState([])
     const [subclasses, setSubclasses] = useState([])
+    const [loaded, setLoaded] = useState(false)
 
     //Get all detailed characters
     useEffect(
@@ -37,17 +39,23 @@ export const PublicLibrary = () => {
         [characters]
     )
 
+    useEffect(
+        () => {
+            if (filteredCharacters) {
+                setLoaded(true)
+            }
+        },
+        [filteredCharacters]
+    )
+
     // return JSX to make characters. For each character, invoke PublicCharacterCard component to generate card.
      return <section className="Public-Library-section">
-        <h3>All Characters</h3>
-        <button onClick={
-            () => {
-                navigate(`/create`)
-            }
-        }> + Create</button>
+        <h2 className="library-section-title">Library</h2>
         <div className="Character-Card-Container">
         {
-            filteredCharacters.map( character => <PublicCharacterCard 
+            (!loaded)
+            ? <Loading />
+            : filteredCharacters.map( character => <PublicCharacterCard 
                 key={`character--${character.id}`}
                 allSpecies={species}
                 allClasses={classes}

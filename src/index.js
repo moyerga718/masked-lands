@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { MaskedLands } from './components/MaskedLands';
+import './fonts/earthorbiter.ttf'
+import './fonts/ANGARSRUNES_PERSONAL.TTF'
+import './fonts/CINZELDECORATIVE-REGULAR.TTF'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

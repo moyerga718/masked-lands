@@ -3,4 +3,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 30px;
+}
+
+.header-title {
+    margin-bottom: 0px;
 }

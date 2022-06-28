@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import "./Login.css"
 
 export const Register = (props) => {
@@ -48,44 +48,54 @@ export const Register = (props) => {
     }
 
     const updateUser = (evt) => {
-        const copy = {...user}
+        const copy = { ...user }
         copy[evt.target.id] = evt.target.value
         setUser(copy)
     }
 
     return (
-        <main style={{ textAlign: "center" }}>
-            <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Enter the Masked Lands</h1>
-                <fieldset>
-                    <label htmlFor="firstName"> First Name </label>
-                    <input onChange={updateUser}
-                           type="text" id="firstName" className="form-control"
-                           placeholder="Enter your first name" required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="lastName"> Last Name </label>
-                    <input onChange={updateUser}
-                           type="text" id="lastName" className="form-control"
-                           placeholder="Enter your last name" required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="username"> Username </label>
-                    <input onChange={updateUser}
-                           type="text" id="username" className="form-control"
-                           placeholder="Create a username! Do something fun" required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="email"> Email address </label>
-                    <input onChange={updateUser}
-                        type="email" id="email" className="form-control"
-                        placeholder="Email address" required />
-                </fieldset>
-                
-                <fieldset>
-                    <button type="submit"> Register </button>
-                </fieldset>
-            </form>
+        <main style={{ textAlign: "center" }} className="login--page">
+            <div className="login-container">
+                <section className="form-container">
+                    <h1 className="login--welcome">The Masked Lands</h1>
+                    <h2 className="login--signin-text">Register</h2>
+                    <form className="form--login" onSubmit={handleRegister}>
+                        <fieldset className="form-field">
+                            
+                            <input onChange={updateUser}
+                                type="text" id="firstName" className="form-control"
+                                placeholder="First name" required autoFocus />
+                        </fieldset>
+                        <fieldset className="form-field">
+                            
+                            <input onChange={updateUser}
+                                type="text" id="lastName" className="form-control"
+                                placeholder="Last name" required autoFocus />
+                        </fieldset>
+                        <fieldset className="form-field">
+                            
+                            <input onChange={updateUser}
+                                type="text" id="username" className="form-control"
+                                placeholder="Username" required autoFocus />
+                        </fieldset >
+                        <fieldset className="form-field">
+                           
+                            <input onChange={updateUser}
+                                type="email" id="email" className="form-control"
+                                placeholder="Email address" required />
+                        </fieldset>
+
+                        <fieldset className="form-field">
+                            <div className="link--signin">
+                                <Link  className="login--link" to="/login">Use another account</Link>
+                            </div>
+                            <button className ="submitButton" type="submit"> Register </button>
+                        </fieldset>
+                    </form>
+
+                </section>
+
+            </div>
         </main>
     )
 }

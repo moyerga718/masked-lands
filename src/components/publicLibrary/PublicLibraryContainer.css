@@ -1,0 +1,14 @@
+.public-library-container {
+    display: flex;
+}
+
+.library-filters-div {
+    flex-basis: 17rem;
+    border-right: solid black 2px;
+}
+
+.library-div {
+    width: 100%;
+    
+}
+

@@ -5,6 +5,7 @@ import { AttributeList } from "./AttributeList"
 import { WeaponProficiencyList } from "./WeaponProficiencyList"
 import { DevotionList } from "./DevotionList"
 import { ArmorClassCalculation } from "./ArmorClassCalculation"
+import '../../fonts/QUATTROCENTOSANS-REGULAR.TTF'
 import "./CharacterSheet.css"
 
 export const CharacterSheet = () => {
@@ -30,9 +31,6 @@ export const CharacterSheet = () => {
     const [charDevotion, setCharDevotion] = useState([])
     const [sortedDevotion, setSortedDevotion] = useState([])
     const [gods, setGods] = useState([])
-    
-
-
 
     const localMlUser = localStorage.getItem("ml_user")
     const mlUserObject = JSON.parse(localMlUser)
@@ -228,117 +226,194 @@ export const CharacterSheet = () => {
 
     // Jsx to render on page.
     return <>
-    <div className="character-sheet-container">
-        <section className="character-sheet">
-        <div>
-            <h2>{characterInfo.name}</h2>
-            <img src={characterInfo?.imageUrl} className="character-image"/>
-            <p>Level: {characterInfo.level}</p>
-            <p>Species: {charSpecies?.name}</p>
-            <p>Background: {charBackground?.name}</p>
-            <p>Class: {charClass?.name}</p>
-            <p>Subclass: {charSubclass?.name}</p>
-        </div>
+        <div className="character-sheet-container">
+            <section className="character-sheet">
+
+                <div className="character-sheet-head">
+
+                    <div className="character-image-border">
+                        <img src={characterInfo?.imageUrl} className="character-image" />
+                    </div>
+
+                    <div className="basic-character-information">
+                        <h1>{characterInfo.name}</h1>
+                        <h3>Level: {characterInfo.level} | Rank: Adventurer</h3>
+                        <h3>Species: {charSpecies?.name} | Background: {charBackground?.name}</h3>
+                        <h3>Class: {charClass?.name} | Subclass: {charSubclass?.name}</h3>
+                    </div>
+
+                    <div className="character-status">
+                        <div className="character-stat">
+                            <div className="character-current-HP-border">
+                                <div className="character-current-stat">
+                                    <p>{charSubclass?.life}</p>
+                                    <p>HP</p>
+                                </div>
+                            </div>
+                            <div className="character-max-stat">
+                                <p>{charSubclass?.life}</p>
+                            </div>
+                        </div>
+                        <div className="character-stat">
+                            <div className="character-current-will-border">
+                                <div className="character-current-stat">
+                                    <p>{charSubclass?.will}</p>
+                                    <p>Will</p>
+                                </div>
+                            </div>
+                            <div className="character-max-stat">
+                                <p>{charSubclass?.will}</p>
+                            </div>
+                        </div>
+                        <div className="character-stat">
+                            <div className="character-current-stamina-border">
+                            <div className="character-current-stat">
+                                <p>{charSubclass?.stamina}</p>
+                                <p>Stamina</p>
+                            </div>
+                            </div>
+                            <div className="character-max-stat">
+                                <p>{charSubclass?.stamina}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="character-status">
+                        <div className="character-AC-container">
+                            <div className="character-AC-shield-border">
+                                <div className="character-AC-shield">
+                                    <p>{charAC}</p>
+                                    <p>AC</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="character-stat">
+                            <div className="character-current-will-border">
+                                <div className="character-current-will">
+                                    <p>{charSubclass?.will}</p>
+                                    <p>Will</p>
+                                </div>
+                            </div>
+                            <div className="character-max-will">
+                                <p>{charSubclass?.will}</p>
+                            </div>
+                        </div>
+                        <div className="character-stamina">
+                            <div className="character-current-stamina-border">
+                            <div className="character-current-stamina">
+                                <p>{charSubclass?.stamina}</p>
+                                <p>Stamina</p>
+                            </div>
+                            </div>
+                            <div className="character-max-stamina">
+                                <p>{charSubclass?.stamina}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
 
 
-        <div>
-            <h3>Status</h3>
-            <p>Life: {charSubclass?.life} </p>
-            <p>Will: {charSubclass?.will} ({charSubclass?.willPerLevel} per level)</p>
-            <p>Stamina: {charSubclass?.stamina}, ({charSubclass?.staminaPerLevel} per level)</p>
-            <p>Hit Die: D{charSubclass?.hitDie} </p>
-            <p>Speed: {charSpecies?.speed} ft</p>
-            <p>AC: {charAC}</p>
-        </div>
+                <div>
+                    <h3>Status</h3>
+                    <p>Life: {charSubclass?.life} </p>
+                    <p>Will: {charSubclass?.will} ({charSubclass?.willPerLevel} per level)</p>
+                    <p>Stamina: {charSubclass?.stamina}, ({charSubclass?.staminaPerLevel} per level)</p>
+                    <p>Hit Die: D{charSubclass?.hitDie} </p>
+                    <p>Speed: {charSpecies?.speed} ft</p>
+                    <p>AC: {charAC}</p>
+                </div>
 
-        <div>
-            <h3>Attributes</h3>
-            {
-                (sortedEffective && effectiveModifiers)
-                    ? <>
-                        {
-                            sortedEffective.map(charAtt => <AttributeList
-                                key={`characterAttribute--${charAtt.attributeId}`}
-                                charAtt={charAtt}
-                                charMods={effectiveModifiers}
-                                attributeNames={attributes} />)
-                        }
-                    </>
-                    : <></>
-            }
-        </div>
-
-        <div>
-            <h3>Equipment</h3>
-            <h4>Weapon: {charWeapon?.name}</h4>
-            <p>{charWeapon?.attribute?.name} Scaling</p>
-            <p>Damage: 1d{charWeapon?.damageDie}</p>
-            <h4>Armor: {charArmor?.name}</h4>
-            {
-                (charArmor?.dexBonus && charArmor?.bonusCap === 2) 
-                ? <p>AC: {charArmor?.baseAC} + Dexterity (Max 2)</p>
-                : <></>
-            }
-            {
-                (charArmor?.dexBonus && !charArmor.bonusCap) 
-                ? <p>AC: {charArmor?.baseAC} + Dex</p>
-                : <></>
-            }
-            {
-                (!charArmor?.dexBonus)
-                ? <p>AC: {charArmor?.baseAC}</p>
-                : <></>
-            }
-            <p>Strength Requirement: {charArmor?.strengthRequirement}</p>
-        </div>
-
-        <div>
-            <h3>Devotion</h3>
-            {
-                (sortedDevotion)
-                ? <>
+                <div>
+                    <h3>Attributes</h3>
                     {
-                        sortedDevotion.map(devotionObj => <DevotionList 
-                            key={`devotion--${devotionObj.godId}`}
-                            devotionObj={devotionObj}
-                            charObj={characterInfo}
-                            gods={gods}
-                        />)
+                        (sortedEffective && effectiveModifiers)
+                            ? <>
+                                {
+                                    sortedEffective.map(charAtt => <AttributeList
+                                        key={`characterAttribute--${charAtt.attributeId}`}
+                                        charAtt={charAtt}
+                                        charMods={effectiveModifiers}
+                                        attributeNames={attributes} />)
+                                }
+                            </>
+                            : <></>
                     }
-                </>
-                : <></>
-            }
-        </div>
+                </div>
 
-        <div>
-            <h3>Proficiencies</h3>
-            <h4>Weapon Proficiencies</h4>
-            {
-                (charWeaponProfs)
-                    ? <>
-                        <ul className="weapon-prof-list">
-                            {
-                                charWeaponProfs.map(weaponProf => <WeaponProficiencyList
-                                    key={`weaponProficiency--${weaponProf.weaponTypeId}`}
-                                    weaponProfObj={weaponProf} />)
-                            }
-                        </ul>
-                    </>
-                    : <></>
-            }
-        </div>
+                <div>
+                    <h3>Equipment</h3>
+                    <h4>Weapon: {charWeapon?.name}</h4>
+                    <p>{charWeapon?.attribute?.name} Scaling</p>
+                    <p>Damage: 1d{charWeapon?.damageDie}</p>
+                    <h4>Armor: {charArmor?.name}</h4>
+                    {
+                        (charArmor?.dexBonus && charArmor?.bonusCap === 2)
+                            ? <p>AC: {charArmor?.baseAC} + Dexterity (Max 2)</p>
+                            : <></>
+                    }
+                    {
+                        (charArmor?.dexBonus && !charArmor.bonusCap)
+                            ? <p>AC: {charArmor?.baseAC} + Dex</p>
+                            : <></>
+                    }
+                    {
+                        (!charArmor?.dexBonus)
+                            ? <p>AC: {charArmor?.baseAC}</p>
+                            : <></>
+                    }
+                    <p>Strength Requirement: {charArmor?.strengthRequirement}</p>
+                </div>
 
-        <div>
-            {
-                (characterInfo.userId === mlUserObject.id)
-                    ? <>
-                        <button onClick={() => deleteCharacter()}>Delete</button>
-                    </>
-                    : <></>
-            }
-        </div>
-        </section>
+                <div>
+                    <h3>Devotion</h3>
+                    {
+                        (sortedDevotion)
+                            ? <>
+                                {
+                                    sortedDevotion.map(devotionObj => <DevotionList
+                                        key={`devotion--${devotionObj.godId}`}
+                                        devotionObj={devotionObj}
+                                        charObj={characterInfo}
+                                        gods={gods}
+                                    />)
+                                }
+                            </>
+                            : <></>
+                    }
+                </div>
 
-    </div>
+                <div>
+                    <h3>Proficiencies</h3>
+                    <h4>Weapon Proficiencies</h4>
+                    {
+                        (charWeaponProfs)
+                            ? <>
+                                <ul className="weapon-prof-list">
+                                    {
+                                        charWeaponProfs.map(weaponProf => <WeaponProficiencyList
+                                            key={`weaponProficiency--${weaponProf.weaponTypeId}`}
+                                            weaponProfObj={weaponProf} />)
+                                    }
+                                </ul>
+                            </>
+                            : <></>
+                    }
+                </div>
+
+                <div>
+                    {
+                        (characterInfo.userId === mlUserObject.id)
+                            ? <>
+                                <button onClick={() => deleteCharacter()}>Delete</button>
+                            </>
+                            : <></>
+                    }
+                </div>
+            </section>
+
+        </div>
     </>
 }

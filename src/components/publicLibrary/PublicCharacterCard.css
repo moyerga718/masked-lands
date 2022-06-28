@@ -5,6 +5,8 @@
     margin: 1rem;
     width: 15rem;
     transition: all 0.3s ease-in-out;
+    background: white;
+    font-family: Bona Nova;
 }
 
 .publicCharacterCard::after {
