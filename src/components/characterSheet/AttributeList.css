@@ -1,0 +1,52 @@
+.att-box-boosted {
+    border: solid blue 2px;
+    width: 6rem;
+    height: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 255, 0.25);
+}
+
+.att-box {
+    border: solid black 2px;
+    width: 6rem;
+    height: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+}
+
+.att-mod-box {
+    border: solid black 2px;
+    background: #fdfffc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: -1rem;
+    margin-left: -1rem;
+    box-shadow: 6px 6px 11px rgba(0,0,0,0.2);
+}
+
+.att-mod-box-boosted {
+    border: solid blue 2px;
+    background: #fdfffc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: -1rem;
+    margin-left: -1rem;
+    box-shadow: 6px 6px 11px rgba(0,0,255,0.2);
+}
+
+.att-and-mod-container {
+    display: flex;
+    align-items: flex-end;
+    
+}
