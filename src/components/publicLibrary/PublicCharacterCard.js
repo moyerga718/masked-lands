@@ -44,7 +44,7 @@ export const PublicCharacterCard = ( {characterObj, currentUser, allUsers, allSp
         </div>
         <div className="character-card-text">
             <header className="character-card-header">
-                <h2 className="character-card-title">{characterObj.name}</h2>
+                <h3 className="character-card-title">{characterObj.name}</h3>
                 <p className="card-username"><i>By {username}</i></p>
             </header>
             <div className="character-card-information">

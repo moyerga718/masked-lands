@@ -250,22 +250,22 @@ export const CharacterSheet = () => {
                     </div>
 
                     <div className="basic-character-information">
-                        <div>
-                            <h2>{characterInfo.name}</h2>
-                            <p><i>"{characterInfo.bio}" </i></p>
+                        <div className="char-name-and-bio">
+                            <h1 className="char-name-and-bio-item">{characterInfo.name}</h1>
+                            <h4 className="char-name-and-bio-item"><i>"{characterInfo.bio}" </i></h4>
                         </div>
                         <div>
                             <div className="level-information">
-                                <h3>Level: {characterInfo.level}</h3>
-                                <h3>XP: 0</h3>
+                                <h4 className="char-history-info-item">Level: {characterInfo.level}</h4>
+                                <h4 className="char-history-info-item">XP: 0</h4>
                             </div>
                             <div className="species-information">
-                                <h3>Species: {charSpecies?.name}</h3>
-                                <h3>Background: {charBackground?.name}</h3>
+                                <h4 className="char-history-info-item">Species: {charSpecies?.name}</h4>
+                                <h4 className="char-history-info-item">Background: {charBackground?.name}</h4>
                             </div>
                             <div className="class-information">
-                                <h3>Class: {charClass?.name}</h3>
-                                <h3>Subclass: {charSubclass?.name}</h3>
+                                <h4 className="char-history-info-item">Class: {charClass?.name}</h4>
+                                <h4 className="char-history-info-item">Subclass: {charSubclass?.name}</h4>
                             </div>
                         </div>
                     </div>
@@ -275,35 +275,35 @@ export const CharacterSheet = () => {
                         <div className="stat-column-LWS">
 
                             <div className="LWS-column-section">
-                                <div className="LWS-column-section-current">
-                                    <p className="LWS-current-stat-value">{charSubclass?.life}</p>
+                                <div className="LWS-column-section-current-hp">
+                                    <h3 className="LWS-current-stat-value">{charSubclass?.life}</h3>
                                     <p className="LWS-current-stat-label">HP</p>
                                 </div>
                                 <div className="LWS-column-section-max">
-                                    <p className="LWS-max-stat-value">{charSubclass?.life}</p>
-                                    <p className="LWS-max-stat-label">Max</p>
+                                    <h6 className="LWS-max-stat-value">{charSubclass?.life}</h6>
+                                    <h6 className="LWS-max-stat-label">Max</h6>
                                 </div>
                             </div>
 
                             <div className="LWS-column-section">
-                                <div className="LWS-column-section-current">
-                                    <p className="LWS-current-stat-value">{charSubclass?.will}</p>
+                                <div className="LWS-column-section-current-will">
+                                    <h3 className="LWS-current-stat-value">{charSubclass?.will}</h3>
                                     <p className="LWS-current-stat-label">Will</p>
                                 </div>
                                 <div className="LWS-column-section-max">
-                                    <p className="LWS-max-stat-value">{charSubclass?.will}</p>
-                                    <p className="LWS-max-stat-label">Max</p>
+                                    <h6 className="LWS-max-stat-value">{charSubclass?.will}</h6>
+                                    <h6 className="LWS-max-stat-label">Max</h6>
                                 </div>
                             </div>
 
                             <div className="LWS-column-section">
-                                <div className="LWS-column-section-current">
-                                    <p className="LWS-current-stat-value">{charSubclass?.stamina}</p>
+                                <div className="LWS-column-section-current-stamina">
+                                    <h3 className="LWS-current-stat-value">{charSubclass?.stamina}</h3>
                                     <p className="LWS-current-stat-label">stamina</p>
                                 </div>
                                 <div className="LWS-column-section-max">
-                                    <p className="LWS-max-stat-value">{charSubclass?.stamina}</p>
-                                    <p className="LWS-max-stat-label">Max</p>
+                                    <h6 className="LWS-max-stat-value">{charSubclass?.stamina}</h6>
+                                    <h6 className="LWS-max-stat-label">Max</h6>
                                 </div>
                             </div>
                         </div>
@@ -311,15 +311,15 @@ export const CharacterSheet = () => {
                         <div className="stat-column-physical-abilities">
 
                             <div className="LWS-column-section">
-                                <div className="LWS-column-section-current">
-                                    <p className="LWS-current-stat-value">{charAC}</p>
+                                <div className="physical-features-column-item">
+                                    <h3 className="LWS-current-stat-value">{charAC}</h3>
                                     <p className="LWS-current-stat-label">AC</p>
                                 </div>
                             </div>
 
                             <div className="LWS-column-section">
-                                <div className="LWS-column-section-current">
-                                    <p className="LWS-current-stat-value">D{charSubclass?.hitDie}</p>
+                                <div className="physical-features-column-item">
+                                    <h3 className="LWS-current-stat-value">D{charSubclass?.hitDie}</h3>
                                     <p className="LWS-current-stat-label">Hit die</p>
                                 </div>
                                 {/* This is for showing how many hit die you have, not necessary for right now / not working.
@@ -336,8 +336,8 @@ export const CharacterSheet = () => {
                             </div>
 
                             <div className="LWS-column-section">
-                                <div className="LWS-column-section-current">
-                                    <p className="LWS-current-stat-value">{charSpecies?.speed} ft</p>
+                                <div className="physical-features-column-item">
+                                    <h3 className="LWS-current-stat-value">{charSpecies?.speed} ft</h3>
                                     <p className="LWS-current-stat-label">Speed</p>
                                 </div>
                             </div>
