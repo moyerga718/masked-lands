@@ -20,7 +20,7 @@ export const ClassRadioButton = ( {classObj, characterObj, setCharacter, allAttr
                 <div className="selection-image-div">
                     <img className="selection-image" src={classObj?.imageUrl} />
                 </div>
-                <div classname="selection-text-div">
+                <div className="selection-information-div">
                     <h3 className="selection-text">{`${classObj.name}`}</h3>
                     <p className="selection-text"><i>{`${classObj.description}`}</i></p>
                     <h5 className="selection-text"></h5>

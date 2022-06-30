@@ -23,7 +23,7 @@ export const SpeciesRadioButton = ({ speciesObj, characterObj, setCharacter, all
                 <div className="selection-image-div">
                     <img className="selection-image" src={speciesObj?.imageUrl} />
                 </div>
-                <div classname="selection-text-div">
+                <div className="selection-information-div">
                     <h3 className="selection-text">{`${speciesObj.name}`}</h3>
                     <p className="selection-text"><i>{`${speciesObj.description}`}</i></p>
                     <h5 className="selection-text">Primary Attribute: {speciesAttribute?.name}</h5>

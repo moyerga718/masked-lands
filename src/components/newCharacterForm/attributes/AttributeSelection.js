@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import "../newCharacterForm.css"
+import { getCharacterBackgroundFetch } from "../../ApiManager"
+import "./AttributeSelection.css"
 import { AttributeValueSelection } from "./AttributeValueSelection"
 
 //This component uses two other components to do the following things:
@@ -10,9 +11,10 @@ import { AttributeValueSelection } from "./AttributeValueSelection"
 // 3. User can select which attribute they want for each value. 
 
 
-export const AttributeSelection = ({ characterAttributes, setCharacterAttributes, allAttributes }) => {
+export const AttributeSelection = ({ characterAttributes, setCharacterAttributes, allAttributes, characterObj }) => {
     const [areAttributesGenerated, setAreAttributesGenerated] = useState(false)
     const [newAttributeValues, setNewAttributeValues] = useState([])
+    const [charBackground, setCharBackground] = useState({})
     const [attributeDependencyMatrix, setAttributeDependencyMatrix] = useState([
         [false, false, false, false, false, false],
         [false, false, false, false, false, false],
@@ -22,7 +24,7 @@ export const AttributeSelection = ({ characterAttributes, setCharacterAttributes
         [false, false, false, false, false, false]
     ]
     )
-    
+
     //~~~~~~~~~~~~~~~~~~~~FUNCTIONS FOR GENERATING ATTRIBUTE VALUES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
     //This function rolls 4d6
@@ -78,11 +80,12 @@ export const AttributeSelection = ({ characterAttributes, setCharacterAttributes
     //~~~~~~~~~~~~~~~~~~~~END FUNCTIONS FOR GENERATING ATTRIBUTE VALUES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 
-    
+
     //~~~~~~~~~~~~~~~~~OKAY this is all stuff I was trying to get attributes to stay when I go back to the page. Not working yet really. ~~~~~~~~~~~~~~~~//
     useEffect(
         () => {
             setAreAttributesGenerated(checkIfAttributesHaveBeenGenerated())
+            getCharacterBackgroundFetch(characterObj?.backgroundId).then(setCharBackground)
         },
         []
     )
@@ -97,7 +100,7 @@ export const AttributeSelection = ({ characterAttributes, setCharacterAttributes
     const checkIfAttributesHaveBeenSelected = () => {
         let counter = 0
         for (const charAtt of characterAttributes) {
-            if (charAtt.value > 0 ) {
+            if (charAtt.value > 0) {
                 counter++
             }
         }
@@ -111,7 +114,7 @@ export const AttributeSelection = ({ characterAttributes, setCharacterAttributes
     const checkIfAttributesHaveBeenGenerated = () => {
         if (newAttributeValues.length) {
             return true
-        } else if (checkIfAttributesHaveBeenSelected()){
+        } else if (checkIfAttributesHaveBeenSelected()) {
             return true
         } else {
             return false
@@ -124,30 +127,32 @@ export const AttributeSelection = ({ characterAttributes, setCharacterAttributes
 
     if (areAttributesGenerated === false) {
         return <>
-            <h2>ATTRIBUTE SELECTION</h2>
-            <button onClick={() => generateAllAttributeValues()} >Click to roll your stats... exciting!!</button>
+            <h2>Attribute Selection</h2>
+            <section className="attribute-button-container">
+                <button className="attribute-roll-button" onClick={() => generateAllAttributeValues()} ><h3>Click to roll your attributes</h3></button>
+            </section>
         </>
     } else {
         return <>
-            <h2>ATTRIBUTE SELECTION</h2>
-            <div className="attributes-container">
-                {
-                    newAttributeValues.map(attribute => <AttributeValueSelection key={`newAttribute--${attribute.id}`}
-                        newAttributeId={attribute.id}
-                        newAttributeValue={attribute.value}
-                        // setNewAttributes={setNewAttributeValues}
-                        attributeDependencyMatrix={attributeDependencyMatrix}
-                        setAttributeDependencyMatrix={setAttributeDependencyMatrix}
-                        characterAttributes={characterAttributes}
-                        setCharacterAttributes={setCharacterAttributes}
-                        allAttributeNames={allAttributes}
-                    />)
-                }
-    
-            </div>
-    
+            <h2>Attribute Selection</h2>
+                <section className="attributes-container">
+                    {
+                        newAttributeValues.map(attribute => <AttributeValueSelection key={`newAttribute--${attribute.id}`}
+                            newAttributeId={attribute.id}
+                            newAttributeValue={attribute.value}
+                            attributeDependencyMatrix={attributeDependencyMatrix}
+                            setAttributeDependencyMatrix={setAttributeDependencyMatrix}
+                            characterAttributes={characterAttributes}
+                            setCharacterAttributes={setCharacterAttributes}
+                            allAttributeNames={allAttributes}
+                            charBackgroundObj={charBackground}
+                        />)
+                    }
+                </section>
+            
+
         </>
     }
 
-    
+
 }

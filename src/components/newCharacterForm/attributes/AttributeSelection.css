@@ -1,0 +1,142 @@
+.attribute-button-container {
+    width: 98%;
+    display: flex;
+    justify-content: center;
+}
+
+.attributes-container {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.attribute-value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:10%;
+    height: 100%;
+}
+
+.single-attribute-container {
+    border: solid 2px black;
+    box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.15);
+    padding: 0rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.attribute-value-radio-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    padding: 1rem;
+}
+
+.att-label {
+    display : block;
+    
+}
+
+.att-label > input{ /* HIDE RADIO */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+}
+.att-label > input + div{ /* DIV STYLES */
+    cursor:pointer;
+    border:2px solid black;
+    background: #fdfffc;
+    box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    width: 8rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    
+}
+
+.att-label:hover > input + div {
+    transform: translateY(-1px);
+    box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.2); 
+}
+
+.att-label > input:checked + div{ /* (RADIO CHECKED) DIV STYLES */
+    background: #fdfffc;
+    border: 2px solid #E84855;
+    box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.15);
+}
+
+
+.att-label > input:checked:hover + div {
+    transform: translateY(-1px);
+    box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.2);
+}
+
+.bonus-att-name {
+  color: blue;
+}
+
+.not-bonus-att-name {
+  color: #031926
+}
+
+.attribute-roll-button {
+    margin-top: 3rem;
+    background: #fff;
+    backface-visibility: hidden;
+    border: solid #031926 2px;
+    box-sizing: border-box;
+    color: #031926;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Bona Nova;
+    font-size: 1.125rem;
+    line-height: 1.3;
+    padding: .5rem 1rem;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transform: translateZ(0) scale(1);
+    transition: transform .2s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .attribute-roll-button:not(:disabled):hover {
+    transform: scale(1.05);
+  }
+  
+  .attribute-roll-button:not(:disabled):hover:active {
+    transform: scale(1.05) translateY(.125rem);
+  }
+  
+  .attribute-roll-button:focus {
+    outline: 0 solid transparent;
+  }
+  
+  .attribute-roll-button:focus:before {
+    content: "";
+    left: calc(-1*.375rem);
+    pointer-events: none;
+    position: absolute;
+    top: calc(-1*.375rem);
+    transition: border-radius;
+    user-select: none;
+  }
+  
+  .attribute-roll-button:focus:not(:focus-visible) {
+    outline: 0 solid transparent;
+  }
+  
+  .attribute-roll-button:focus:not(:focus-visible):before {
+    border-width: 0;
+  }
+  
+  .attribute-roll-button:not(:disabled):active {
+    transform: translateY(.125rem);
+  }

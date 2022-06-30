@@ -20,19 +20,23 @@ export const BackgroundRadioButton = ({ backgroundObj, characterObj, setCharacte
                 <div>
                     <img className="selection-image" src={backgroundObj?.imageUrl} />
                 </div>
-                <div>
+                <div className="selection-information-div">
                     <h3 className="selection-text">{backgroundObj?.name}</h3>
-                    <div className="background-att-bonus-list-container">
+                    <p className="selection-text"><i>{backgroundObj?.description}</i></p>
+                    <div className="att-bonus-section">
                         <h5 className="selection-text">Attribute Bonuses:</h5>
+                        <div className="att-bonus-container">
                         {
                             attBonuses.map(
                                 attBonus => {
                                     const foundAtt = allAttributes.find(attribute => attribute.id === attBonus.attributeId)
-                                    return <h5 className="selection-text">+{attBonus?.bonus} {foundAtt.name}</h5>
+                                    return <h5 className="att-bonus-text">+{attBonus?.bonus} {foundAtt.name}</h5>
                                 }
                             )
                         }
+                        </div>
                     </div>
+                    
 
                 </div>
 

@@ -19,8 +19,26 @@ export const SubclassRadioButton = ({ subclassObj, characterObj, setCharacter, a
                 <div className="selection-image-div">
                     <img className="selection-image" src={subclassObj?.imageUrl} />
                 </div>
-                <div classname="selection-text-div">
+                <div className="selection-information-div">
                     <h3 className="selection-text">{`${subclassObj.name}`}</h3>
+                    <div className="subclass-stats-div">
+                        <div className="stat-column">
+                            <h5>HP: {subclassObj?.life} + Con</h5>
+                            <h5>Will: {subclassObj?.will} + Att</h5>
+                            <h5>Stamina: {subclassObj?.stamina} + Con</h5>
+                        </div>
+                        <div className="stat-column-spacer">
+                            <h5>    |   </h5>
+                            <h5>    |   </h5>
+                            <h5>    |   </h5>
+                        </div>
+                        <div className="stat-column">
+                            <h5>Hit Die: D{subclassObj?.hitDie}</h5>
+                            <h5>Per Level: {subclassObj?.willPerLevel}</h5>
+                            <h5>Per Level: {subclassObj?.staminaPerLevel}</h5>
+                        </div>
+                    </div>
+                    <h5>Devotion Points: {subclassObj?.devotionPoints}</h5>
                 </div>
             </div>
         </label>

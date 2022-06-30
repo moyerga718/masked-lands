@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { getSpeciesBackgroundsWithAttBonusesFetch, getSpeciesByIdFetch } from "../../ApiManager"
 import { BackgroundRadioButton } from "./BackgroundRadioButton"
 import "../newCharacterForm.css"
+import "./Background.css"
 
 //This component renders a section where user can choose a background
 

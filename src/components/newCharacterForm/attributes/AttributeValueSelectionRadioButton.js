@@ -22,13 +22,17 @@ Okay I'm trying to figure out how the FRICK to make these radio buttons to work 
                 * 
 */
 
-export const AttributeValueSelectionRadioButton = ({ newAttributeId, newAttributeValue, attributeDependencyMatrix, setAttributeDependencyMatrix, setNewAttributes, characterAttributes, setCharacterAttributes, oneAttributeNameObj }) => {
+export const AttributeValueSelectionRadioButton = ({ newAttributeId, newAttributeValue, attributeDependencyMatrix, setAttributeDependencyMatrix, setNewAttributes, characterAttributes, setCharacterAttributes, oneAttributeNameObj, charBackgroundObj }) => {
 
     const [selected, setSelected] = useState(false)
+    const [attBonusBool, setAttBonusBool] = useState(false)
 
     useEffect(
         () => {
             setSelected(attributeDependencyMatrix[newAttributeId - 1][oneAttributeNameObj.id - 1])
+            if (charBackgroundObj) {
+                setAttBonusBool(checkForBackgroundBonus())
+            }
         },
         []
     )
@@ -40,6 +44,14 @@ export const AttributeValueSelectionRadioButton = ({ newAttributeId, newAttribut
         [attributeDependencyMatrix]
     )
 
+    const checkForBackgroundBonus = () => {
+        for (const bonusAtt of charBackgroundObj.backgroundAttributeBonuses) {
+            if (oneAttributeNameObj.id === bonusAtt.attributeId) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     const assignAttributeValue = (changeEvent) => {
@@ -113,9 +125,9 @@ export const AttributeValueSelectionRadioButton = ({ newAttributeId, newAttribut
 
 
     //create radio button for each attribute
-
+    
     return <>
-        <div >
+        <label className="att-label">
             <input
                 onChange={(changeEvent) => handleAttributeSelection(changeEvent)}
                 type="radio"
@@ -123,6 +135,13 @@ export const AttributeValueSelectionRadioButton = ({ newAttributeId, newAttribut
                 checked={selected}
                 value={oneAttributeNameObj.id}
             />{" "}
-            {`${oneAttributeNameObj.name}`}
-        </div></>
+            {
+                (attBonusBool)
+                ? <div><h4 className="bonus-att-name">{`${oneAttributeNameObj.name}`}</h4></div>
+                : <div><h4 className="not-bonus-att-name">{`${oneAttributeNameObj.name}`}</h4></div>
+            }
+            
+        </label>
+            
+        </>
 }

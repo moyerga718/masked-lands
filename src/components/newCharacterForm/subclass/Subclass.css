@@ -1,8 +1,7 @@
-.subclass-att-bonus-list-container {
+.subclass-stats-div {
     display: flex;
 }
 
-.subclass-selection-container {
-    display: flex;
-    align-items: center;
+.stat-column-spacer {
+    padding: 0 1rem 0 1rem;
 }

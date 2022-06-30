@@ -10,6 +10,7 @@ import { CharacterInfoSelection } from "./information/CharacterInfoSelection"
 import { CharacterSubmitButton } from "./CharacterSubmitButton"
 import { getAllAttributesFetch } from "../ApiManager"
 import { StepButtons } from "./StepButtons"
+import { CharacterFormProgressBar } from"./CharacterFormProgressBar"
 
 // This component is a parent component for all of the different sections of the character creation form. Temp objects for character and character attributes
 // are initialized in state here.
@@ -149,6 +150,7 @@ export const NewCharacterFormContainer = () => {
         <>
           <div className="formContainer">
             <div className="formBackground">
+              <CharacterFormProgressBar step={step} />
               <SpeciesSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
               <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
             </div>
@@ -158,78 +160,85 @@ export const NewCharacterFormContainer = () => {
     case 2:
       return (
         <>
-         <div className="formContainer">
+          <div className="formContainer">
             <div className="formBackground">
-          <BackgroundSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
-          <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
-          </div>
+              <CharacterFormProgressBar step={step} />
+              <BackgroundSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
+              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+            </div>
           </div>
         </>
       )
     case 3:
       return (
         <>
-        <div className="formContainer">
+          <div className="formContainer">
             <div className="formBackground">
-          <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
-          <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
-          </div>
+              <CharacterFormProgressBar step={step} />
+              <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
+              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+            </div>
           </div>
         </>
       )
     case 4:
       return (
         <>
-        <div className="formContainer">
+          <div className="formContainer">
             <div className="formBackground">
-          <SubclassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
-          <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
-          </div>
+              <CharacterFormProgressBar step={step} />
+              <SubclassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
+              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+            </div>
           </div>
         </>
       )
     case 5:
       return (
         <>
-        <div className="formContainer">
+          <div className="formContainer">
             <div className="formBackground">
-          <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} />
-          <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
-          </div>
+              <CharacterFormProgressBar step={step} />
+              <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} characterObj={newCharacter}/>
+              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+            </div>
           </div>
         </>
       )
     case 6:
       return (
         <>
-        <div className="formContainer">
+          <div className="formContainer">
             <div className="formBackground">
-          <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
-          <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
-          </div>
+              <CharacterFormProgressBar step={step} />
+              <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
+              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+            </div>
           </div>
         </>
       )
     case 7:
       return (
         <>
-        <div className="formContainer">
+          <div className="formContainer">
             <div className="formBackground">
-          <DevotionSelection charDevotion={charDevotion} setCharDevotion={setCharDevotion} characterObj={newCharacter} />
-          <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
-          </div>
+              <CharacterFormProgressBar step={step} />
+              <DevotionSelection charDevotion={charDevotion} setCharDevotion={setCharDevotion} characterObj={newCharacter} />
+              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+            </div>
           </div>
         </>
       )
     case 8:
       return (
         <>
-        <div className="formContainer">
+          <div className="formContainer">
             <div className="formBackground">
-          <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} charImageFile={charImageFile} setCharImageFile={setCharImageFile} />
-          <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
-          <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} setCharacter={setNewCharacter} characterDevotion={charDevotion} charImageFile={charImageFile} />
-          </div>
+              <CharacterFormProgressBar step={step} />
+              <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} charImageFile={charImageFile} setCharImageFile={setCharImageFile} />
+              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} setCharacter={setNewCharacter} characterDevotion={charDevotion} charImageFile={charImageFile} />
+            </div>
           </div>
         </>
       )
