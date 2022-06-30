@@ -365,43 +365,58 @@ export const CharacterSheet = () => {
                     </div>
                 </div>
 
-                <div className="equipment-section">
+                <div className="all-char-equipment-section">
 
-                    <div className="weapon-section">
-                        <h3>Weapon</h3>
-                        <h4>{charWeapon?.name}</h4>
-                        <p>{charWeapon?.attribute?.name} Scaling</p>
-                        <p>Damage: 1d{charWeapon?.damageDie}</p>
+                    <div className="char-equipment-section">
+                        <div className="char-equipment-details-flex-container">
+                            <h3 className="char-equipment-section-title">Weapon</h3>
+                            <div className="char-equipment-information">
+                                <h4 className="char-equipment-name">{charWeapon?.name}</h4>
+                                <p>{charWeapon?.attribute?.name} Scaling</p>
+                                <p>Damage: 1d{charWeapon?.damageDie}</p>
+                            </div>
+                        </div>
+                        <div className="char-equipment-image-container">
+                            <img className="char-equipment-image" src={charWeapon?.imageUrl}></img>
+                        </div>
                     </div>
-                    <div className="armor-section">
-                        <h3>Armor</h3>
-                        <h4>{charArmor?.name}</h4>
-                        {
-                            (charArmor?.dexBonus && charArmor?.bonusCap === 2)
-                                ? <p>AC: {charArmor?.baseAC} + Dexterity (Max 2)</p>
-                                : <></>
-                        }
-                        {
-                            (charArmor?.dexBonus && !charArmor.bonusCap)
-                                ? <p>AC: {charArmor?.baseAC} + Dex</p>
-                                : <></>
-                        }
-                        {
-                            (!charArmor?.dexBonus)
-                                ? <p>AC: {charArmor?.baseAC}</p>
-                                : <></>
-                        }
-                        <p>Strength Requirement: {charArmor?.strengthRequirement}</p>
+
+                    <div className="char-equipment-section-armor">
+                        <div className="char-equipment-details-flex-container">
+                            <h3 className="char-equipment-section-title">Armor</h3>
+                            <div className="char-equipment-information">
+                                <h4 className="char-equipment-name">{charArmor?.name}</h4>
+                                {
+                                    (charArmor?.dexBonus && charArmor?.bonusCap === 2)
+                                        ? <p>AC: {charArmor?.baseAC} + Dexterity (Max 2)</p>
+                                        : <></>
+                                }
+                                {
+                                    (charArmor?.dexBonus && !charArmor.bonusCap)
+                                        ? <p>AC: {charArmor?.baseAC} + Dex</p>
+                                        : <></>
+                                }
+                                {
+                                    (!charArmor?.dexBonus)
+                                        ? <p>AC: {charArmor?.baseAC}</p>
+                                        : <></>
+                                }
+                                <p>Strength Requirement: {charArmor?.strengthRequirement}</p>
+                            </div>,
+                        </div>
+                        <div className="char-equipment-image-container">
+                            <img className="char-equipment-image" src={charArmor?.imageUrl}></img>
+                        </div>
 
                     </div>
                 </div>
 
-                
-                    <div className="devotion-section">
-                        <h3>Devotion</h3>
-                        {
-                            (sortedDevotion)
-                                ? <>
+
+                <div className="devotion-section">
+                    <h3>Devotion</h3>
+                    {
+                        (sortedDevotion)
+                            ? <>
                                 <div className="devotion-card-container">
                                     {
                                         sortedDevotion.map(devotionObj => <DevotionList
@@ -412,30 +427,30 @@ export const CharacterSheet = () => {
                                         />)
                                     }
                                 </div>
-                                </>
-                                : <></>
-                        }
-                    </div>
+                            </>
+                            : <></>
+                    }
+                </div>
 
-                
 
-                    <div className="proficiencies-section">
-                        <h3>Proficiencies</h3>
-                        <h4>Weapon Proficiencies</h4>
-                        {
-                            (charWeaponProfs)
-                                ? <>
-                                    <ul className="weapon-prof-list">
-                                        {
-                                            charWeaponProfs.map(weaponProf => <WeaponProficiencyList
-                                                key={`weaponProficiency--${weaponProf.weaponTypeId}`}
-                                                weaponProfObj={weaponProf} />)
-                                        }
-                                    </ul>
-                                </>
-                                : <></>
-                        }
-                    </div>
+
+                <div className="proficiencies-section">
+                    <h3>Proficiencies</h3>
+                    <h4>Weapon Proficiencies</h4>
+                    {
+                        (charWeaponProfs)
+                            ? <>
+                                <ul className="weapon-prof-list">
+                                    {
+                                        charWeaponProfs.map(weaponProf => <WeaponProficiencyList
+                                            key={`weaponProficiency--${weaponProf.weaponTypeId}`}
+                                            weaponProfObj={weaponProf} />)
+                                    }
+                                </ul>
+                            </>
+                            : <></>
+                    }
+                </div>
 
                 <div>
                     {

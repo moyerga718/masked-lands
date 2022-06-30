@@ -15,9 +15,9 @@ export const ArmorSelectionRadioButton = ({ armorObj, characterObj, setCharacter
                     value={armorObj.id}
                 />{" "}
                 <div className="equipment-div">
-                    {/* <div className="equipment-image-div">
-                        <img className="selection-image" src={subclassObj?.imageUrl} />
-                    </div> */}
+                    <div className="equipment-image-div">
+                        <img className="equipment-image" src={armorObj?.imageUrl} />
+                    </div>
                     <div className="equipment-information-div">
                         <h4 className="equipment-text">{`${armorObj.name}`}</h4>
                         <h5 className="equipment-text">AC {armorObj.baseAC} + Dexterity (Max 2)</h5>
@@ -40,9 +40,9 @@ export const ArmorSelectionRadioButton = ({ armorObj, characterObj, setCharacter
                     value={armorObj.id}
                 />{" "}
                 <div className="equipment-div">
-                    {/* <div className="equipment-image-div">
-                        <img className="selection-image" src={subclassObj?.imageUrl} />
-                    </div> */}
+                    <div className="equipment-image-div">
+                        <img className="equipment-image" src={armorObj?.imageUrl} />
+                    </div>
                     <div className="equipment-information-div">
                         <h4 className="equipment-text">{`${armorObj.name}`}</h4>
                         <h5 className="equipment-text">AC {armorObj.baseAC} + Dexterity </h5>
@@ -65,9 +65,9 @@ export const ArmorSelectionRadioButton = ({ armorObj, characterObj, setCharacter
                     value={armorObj.id}
                 />{" "}
                 <div className="equipment-div">
-                    {/* <div className="equipment-image-div">
-                        <img className="selection-image" src={subclassObj?.imageUrl} />
-                    </div> */}
+                    <div className="equipment-image-div">
+                        <img className="equipment-image" src={armorObj?.imageUrl} />
+                    </div>
                     <div className="equipment-information-div">
                         <h4 className="equipment-text">{`${armorObj.name}`}</h4>
                         <h5 className="equipment-text">AC {armorObj.baseAC}</h5>
