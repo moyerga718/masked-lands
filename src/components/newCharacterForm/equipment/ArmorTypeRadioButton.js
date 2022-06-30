@@ -1,6 +1,6 @@
 export const ArmorTypeRadioButton = ({ armorTypeProfObj, setSelectedArmorType }) => {
     return <>
-        <div >
+        <label className="prof-label">
             <input
                 onChange={(changeEvent) => {
                     setSelectedArmorType(changeEvent.target.value);
@@ -9,7 +9,10 @@ export const ArmorTypeRadioButton = ({ armorTypeProfObj, setSelectedArmorType })
                 name="ArmorTypeProfObj"
                 value={armorTypeProfObj?.armorTypeId}
             />{" "}
-            {`${armorTypeProfObj?.armorType?.name}`}
-        </div>
+            <div className="prof-div">
+                <h5 className="prof-name">{`${armorTypeProfObj?.armorType?.name}`}</h5>
+            </div>
+        </label>
+
     </>
 }

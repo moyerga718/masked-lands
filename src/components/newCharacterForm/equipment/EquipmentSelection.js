@@ -5,6 +5,8 @@ import { ArmorSelectionDropdown } from "./ArmorSelectionDropdown"
 import { WeaponTypeRadioButton } from "./WeaponTypeRadioButton"
 import { ArmorTypeRadioButton } from "./ArmorTypeRadioButton"
 import "../newCharacterForm.css"
+import "./EquipmentSelection.css"
+
 
 //This component renders drop down boxes for weapon and armor selection
 
@@ -52,73 +54,74 @@ export const EquipmentSelection = ({ characterObj, setCharacter }) => {
 
     //render jsx for weapon/armor dropdowns. WeaponSelectionDropdown and ArmorSelectionDropdown components render an option for each weapon/armor obj.
     return <div>
-        <h2>EQUIPMENT SELECTION</h2>
+        <h2>Equipment</h2>
         <div className="equipment-container">
-            <section>
+
+            <section className="weapon-selection-column">
                 <h3>Available Weapon Types</h3>
-                <fieldset>
-                    <label htmlFor="Weapon Type Selection">Weapon Types:</label>
+                <section className="prof-selection-container">
+
                     {
                         charWeaponProfs.map(weaponTypeProfObj => <WeaponTypeRadioButton key={`class--${weaponTypeProfObj.weaponTypeId}`}
                             weaponTypeProfObj={weaponTypeProfObj}
                             setSelectedWeaponType={setSelectedWeaponType}
                         />)
                     }
-                </fieldset>
+
+                </section>
+                <section>
+                    {
+                        (selectedWeaponType)
+                            ? <>
+                                <h3>Weapon</h3>
+                                <select onChange={(changeEvent) => {
+                                    const copy = { ...characterObj };
+                                    copy.weaponId = parseInt(changeEvent.target.value);
+                                    setCharacter(copy);
+                                }}>
+                                    <option value="0">Choose a Weapon</option>
+                                    {
+                                        filteredWeapons.map(weapon => <WeaponSelectionDropdown
+                                            key={`weapon--${weapon.id}`}
+                                            weaponObj={weapon} />)
+                                    }
+                                </select>
+                            </>
+                            : <></>
+                    }
+                </section>
             </section>
-            <section>
-                {
-                    (selectedWeaponType)
-                        ? <>
-                            <h3>Weapon</h3>
-                            <select onChange={(changeEvent) => {
-                                const copy = { ...characterObj };
-                                copy.weaponId = parseInt(changeEvent.target.value);
-                                setCharacter(copy);
-                            }}>
-                                <option value="0">Choose a Weapon</option>
-                                {
-                                    filteredWeapons.map(weapon => <WeaponSelectionDropdown
-                                        key={`weapon--${weapon.id}`}
-                                        weaponObj={weapon} />)
-                                }
-                            </select>
-                        </>
-                        : <></>
-                }
-            </section>
-            <section>
+            <section className="armor-selection-column">
                 <h3>Available Armor Types</h3>
-                <fieldset>
-                    <label htmlFor="Armor Type Selection">Armor Types:</label>
+                <section className="prof-selection-container">
                     {
                         charArmorProfs.map(armorTypeProfObj => <ArmorTypeRadioButton key={`class--${armorTypeProfObj.armorTypeId}`}
                             armorTypeProfObj={armorTypeProfObj}
                             setSelectedArmorType={setSelectedArmorType}
                         />)
                     }
-                </fieldset>
-            </section>
-            <section>
-                {
-                    (selectedArmorType)
-                        ? <>
-                            <h3>Armor</h3>
-                            <select onChange={(changeEvent) => {
-                                const copy = { ...characterObj };
-                                copy.armorId = parseInt(changeEvent.target.value);
-                                setCharacter(copy);
-                            }}>
-                                <option value="0">Choose your Armor</option>
-                                {
-                                    filteredArmor.map(armor => <ArmorSelectionDropdown
-                                        key={`armor--${armor.id}`}
-                                        armorObj={armor} />)
-                                }
-                            </select>
-                        </>
-                        : <></>
-                }
+                </section>
+                <section>
+                    {
+                        (selectedArmorType)
+                            ? <>
+                                <h3>Armor</h3>
+                                <select onChange={(changeEvent) => {
+                                    const copy = { ...characterObj };
+                                    copy.armorId = parseInt(changeEvent.target.value);
+                                    setCharacter(copy);
+                                }}>
+                                    <option value="0">Choose your Armor</option>
+                                    {
+                                        filteredArmor.map(armor => <ArmorSelectionDropdown
+                                            key={`armor--${armor.id}`}
+                                            armorObj={armor} />)
+                                    }
+                                </select>
+                            </>
+                            : <></>
+                    }
+                </section>
             </section>
         </div>
     </div>

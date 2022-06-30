@@ -13,6 +13,7 @@
 
 .attribute-value {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width:10%;
@@ -21,6 +22,7 @@
 
 .attribute-value-selected-bonus {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width:10%;

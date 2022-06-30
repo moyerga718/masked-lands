@@ -16,6 +16,7 @@ export const AttributeValueSelection = ({ newAttributeId, newAttributeValue, att
     // if NONE of this is true, just return everything as normal.
     const [selectedAttId, setSelectedAttId] = useState(0)
     const [attBonusObj, setAttBonusObj] = useState()
+    const [selectedAttNameObj, setSelectedAttNameObj] = useState()
 
     useEffect(
         () => {
@@ -30,12 +31,19 @@ export const AttributeValueSelection = ({ newAttributeId, newAttributeValue, att
         () => {
             if (selectedAttId) {
                 setAttBonusObj(checkIfSelectedAttGetsBonus())
+                setSelectedAttNameObj(findSelectedAttName(selectedAttId))
             } else {
                 setAttBonusObj()
+                setSelectedAttNameObj()
             }
         },
         [selectedAttId]
     )
+
+    const findSelectedAttName = (selectedAttId) => {
+        const foundNameObj = allAttributeNames.find( attName => attName.id === selectedAttId)
+        return foundNameObj
+    }
 
     const checkIfSelectedAttGetsBonus = () => {
         const foundAttBonus = charBackgroundObj.backgroundAttributeBonuses.find(attBonus => attBonus.attributeId === selectedAttId)
@@ -54,7 +62,10 @@ export const AttributeValueSelection = ({ newAttributeId, newAttributeValue, att
     if (attBonusObj && selectedAttId) {
         return <>
             <div className="single-attribute-container-selected">
-                <div className="attribute-value-selected-bonus"><h2>{newAttributeValue + attBonusObj?.bonus}</h2></div>
+                <div className="attribute-value-selected-bonus">
+                    <h2>{newAttributeValue + attBonusObj?.bonus}</h2>
+                    {/* <h4>{selectedAttNameObj?.name}</h4> */}
+                </div>
                 <div className="attribute-value-radio-container">
                     {
                         allAttributeNames.map(
@@ -76,7 +87,10 @@ export const AttributeValueSelection = ({ newAttributeId, newAttributeValue, att
     } else if (!attBonusObj && selectedAttId) {
         return <>
             <div className="single-attribute-container-selected">
-                <div className="attribute-value"><h2>{newAttributeValue}</h2></div>
+                <div className="attribute-value">
+                    <h2>{newAttributeValue}</h2>
+                    {/* <h4>{selectedAttNameObj?.name}</h4> */}
+                </div>
                 <div className="attribute-value-radio-container">
                     {
                         allAttributeNames.map(

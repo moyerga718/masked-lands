@@ -1,14 +1,17 @@
-export const WeaponTypeRadioButton = ( {weaponTypeProfObj, setSelectedWeaponType} ) => {
+export const WeaponTypeRadioButton = ({ weaponTypeProfObj, setSelectedWeaponType }) => {
     return <>
-    <div >
-            <input
-                onChange={(changeEvent) => {
-                    setSelectedWeaponType(changeEvent.target.value);
-                }}
-                type="radio"
-                name="weaponTypeProfObj"
-                value={weaponTypeProfObj.weaponTypeId}
-            />{" "}
-            {`${weaponTypeProfObj.weaponType.name}`}
-        </div></>
+    <label className="prof-label">
+        <input
+            onChange={(changeEvent) => {
+                setSelectedWeaponType(changeEvent.target.value);
+            }}
+            type="radio"
+            name="weaponTypeProfObj"
+            value={weaponTypeProfObj.weaponTypeId}
+        />{" "}
+        <div className="prof-div">
+            <h5 className="prof-name">{`${weaponTypeProfObj.weaponType.name}`}</h5>
+        </div>
+    </label>
+    </>
 }
