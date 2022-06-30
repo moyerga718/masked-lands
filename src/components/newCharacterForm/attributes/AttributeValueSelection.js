@@ -15,7 +15,7 @@ export const AttributeValueSelection = ({ newAttributeId, newAttributeValue, att
     //if selected but no bonus, just change the color of the border to salmon.
     // if NONE of this is true, just return everything as normal.
     const [selectedAttId, setSelectedAttId] = useState(0)
-    const [attBonusObj, setAttBonusObj] = useState({})
+    const [attBonusObj, setAttBonusObj] = useState()
 
     useEffect(
         () => {
@@ -31,7 +31,7 @@ export const AttributeValueSelection = ({ newAttributeId, newAttributeValue, att
             if (selectedAttId) {
                 setAttBonusObj(checkIfSelectedAttGetsBonus())
             } else {
-                setAttBonusObj({})
+                setAttBonusObj()
             }
         },
         [selectedAttId]
@@ -51,51 +51,51 @@ export const AttributeValueSelection = ({ newAttributeId, newAttributeValue, att
         return 0
     }
 
-    // if (attBonusObj && newAttributeValue) {
-    //     return <>
-    //         <div className="single-attribute-container-selected-bonus">
-    //             <div className="attribute-value-selected-bonus"><h2>{newAttributeValue + attBonusObj.bonus}</h2></div>
-    //             <div className="attribute-value-radio-container">
-    //                 {
-    //                     allAttributeNames.map(
-    //                         oneAttributeNameObj => <AttributeValueSelectionRadioButton key={`newAttributeSelection--${newAttributeId}--${oneAttributeNameObj.id}`}
-    //                             newAttributeId={newAttributeId}
-    //                             newAttributeValue={newAttributeValue}
-    //                             attributeDependencyMatrix={attributeDependencyMatrix}
-    //                             setAttributeDependencyMatrix={setAttributeDependencyMatrix}
-    //                             // setNewAttributes = {setNewAttributes}
-    //                             characterAttributes={characterAttributes}
-    //                             setCharacterAttributes={setCharacterAttributes}
-    //                             oneAttributeNameObj={oneAttributeNameObj}
-    //                             charBackgroundObj={charBackgroundObj} />
-    //                     )
-    //                 }
-    //             </div>
-    //         </div>
-    //     </>
-    // } else if (!attBonusObj && selectedAttId) {
-    //     return <>
-    //         <div className="single-attribute-container">
-    //             <div className="attribute-value"><h2>{newAttributeValue}</h2></div>
-    //             <div className="attribute-value-radio-container">
-    //                 {
-    //                     allAttributeNames.map(
-    //                         oneAttributeNameObj => <AttributeValueSelectionRadioButton key={`newAttributeSelection--${newAttributeId}--${oneAttributeNameObj.id}`}
-    //                             newAttributeId={newAttributeId}
-    //                             newAttributeValue={newAttributeValue}
-    //                             attributeDependencyMatrix={attributeDependencyMatrix}
-    //                             setAttributeDependencyMatrix={setAttributeDependencyMatrix}
-    //                             // setNewAttributes = {setNewAttributes}
-    //                             characterAttributes={characterAttributes}
-    //                             setCharacterAttributes={setCharacterAttributes}
-    //                             oneAttributeNameObj={oneAttributeNameObj}
-    //                             charBackgroundObj={charBackgroundObj} />
-    //                     )
-    //                 }
-    //             </div>
-    //         </div>
-    //     </>
-    // } else if (!attBonusObj && !selectedAttId) {
+    if (attBonusObj && selectedAttId) {
+        return <>
+            <div className="single-attribute-container-selected">
+                <div className="attribute-value-selected-bonus"><h2>{newAttributeValue + attBonusObj?.bonus}</h2></div>
+                <div className="attribute-value-radio-container">
+                    {
+                        allAttributeNames.map(
+                            oneAttributeNameObj => <AttributeValueSelectionRadioButton key={`newAttributeSelection--${newAttributeId}--${oneAttributeNameObj.id}`}
+                                newAttributeId={newAttributeId}
+                                newAttributeValue={newAttributeValue}
+                                attributeDependencyMatrix={attributeDependencyMatrix}
+                                setAttributeDependencyMatrix={setAttributeDependencyMatrix}
+                                // setNewAttributes = {setNewAttributes}
+                                characterAttributes={characterAttributes}
+                                setCharacterAttributes={setCharacterAttributes}
+                                oneAttributeNameObj={oneAttributeNameObj}
+                                charBackgroundObj={charBackgroundObj} />
+                        )
+                    }
+                </div>
+            </div>
+        </>
+    } else if (!attBonusObj && selectedAttId) {
+        return <>
+            <div className="single-attribute-container-selected">
+                <div className="attribute-value"><h2>{newAttributeValue}</h2></div>
+                <div className="attribute-value-radio-container">
+                    {
+                        allAttributeNames.map(
+                            oneAttributeNameObj => <AttributeValueSelectionRadioButton key={`newAttributeSelection--${newAttributeId}--${oneAttributeNameObj.id}`}
+                                newAttributeId={newAttributeId}
+                                newAttributeValue={newAttributeValue}
+                                attributeDependencyMatrix={attributeDependencyMatrix}
+                                setAttributeDependencyMatrix={setAttributeDependencyMatrix}
+                                // setNewAttributes = {setNewAttributes}
+                                characterAttributes={characterAttributes}
+                                setCharacterAttributes={setCharacterAttributes}
+                                oneAttributeNameObj={oneAttributeNameObj}
+                                charBackgroundObj={charBackgroundObj} />
+                        )
+                    }
+                </div>
+            </div>
+        </>
+    } else {
         return <>
             <div className="single-attribute-container">
                 <div className="attribute-value"><h2>{newAttributeValue}</h2></div>
@@ -118,6 +118,6 @@ export const AttributeValueSelection = ({ newAttributeId, newAttributeValue, att
             </div>
         </>
 
-    // }
+    }
 
 }
