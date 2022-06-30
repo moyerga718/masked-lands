@@ -6,6 +6,8 @@ import { WeaponTypeRadioButton } from "./WeaponTypeRadioButton"
 import { ArmorTypeRadioButton } from "./ArmorTypeRadioButton"
 import "../newCharacterForm.css"
 import "./EquipmentSelection.css"
+import { WeaponSelectionRadioButton } from "./WeaponSelectionRadioButton"
+import { ArmorSelectionRadioButton } from "./ArmorSelectionRadioButton"
 
 
 //This component renders drop down boxes for weapon and armor selection
@@ -73,19 +75,18 @@ export const EquipmentSelection = ({ characterObj, setCharacter }) => {
                     {
                         (selectedWeaponType)
                             ? <>
-                                <h3>Weapon</h3>
-                                <select onChange={(changeEvent) => {
-                                    const copy = { ...characterObj };
-                                    copy.weaponId = parseInt(changeEvent.target.value);
-                                    setCharacter(copy);
-                                }}>
-                                    <option value="0">Choose a Weapon</option>
+                                <h3>Weapons</h3>
+                                <section className="equip-selection-container">
                                     {
-                                        filteredWeapons.map(weapon => <WeaponSelectionDropdown
+                                        filteredWeapons.map(weapon => <WeaponSelectionRadioButton
                                             key={`weapon--${weapon.id}`}
-                                            weaponObj={weapon} />)
+                                            weaponObj={weapon}
+                                            characterObj={characterObj}
+                                            setCharacter={setCharacter}
+                                        />)
                                     }
-                                </select>
+                                </section>
+
                             </>
                             : <></>
                     }
@@ -101,23 +102,23 @@ export const EquipmentSelection = ({ characterObj, setCharacter }) => {
                         />)
                     }
                 </section>
+
                 <section>
                     {
                         (selectedArmorType)
                             ? <>
                                 <h3>Armor</h3>
-                                <select onChange={(changeEvent) => {
-                                    const copy = { ...characterObj };
-                                    copy.armorId = parseInt(changeEvent.target.value);
-                                    setCharacter(copy);
-                                }}>
-                                    <option value="0">Choose your Armor</option>
+                                <section className="equip-selection-container">
                                     {
-                                        filteredArmor.map(armor => <ArmorSelectionDropdown
+                                        filteredArmor.map(armor => <ArmorSelectionRadioButton
                                             key={`armor--${armor.id}`}
-                                            armorObj={armor} />)
+                                            armorObj={armor}
+                                            characterObj={characterObj}
+                                            setCharacter={setCharacter}
+                                        />)
                                     }
-                                </select>
+                                </section>
+
                             </>
                             : <></>
                     }
