@@ -147,58 +147,90 @@ export const NewCharacterFormContainer = () => {
     case 1:
       return (
         <>
-          <SpeciesSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
-          <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+          <div className="formContainer">
+            <div className="formBackground">
+              <SpeciesSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
+              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+            </div>
+          </div>
         </>
       )
     case 2:
       return (
         <>
+         <div className="formContainer">
+            <div className="formBackground">
           <BackgroundSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
           <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+          </div>
+          </div>
         </>
       )
     case 3:
       return (
         <>
+        <div className="formContainer">
+            <div className="formBackground">
           <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
           <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+          </div>
+          </div>
         </>
       )
     case 4:
       return (
         <>
+        <div className="formContainer">
+            <div className="formBackground">
           <SubclassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
           <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+          </div>
+          </div>
         </>
       )
     case 5:
       return (
         <>
+        <div className="formContainer">
+            <div className="formBackground">
           <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} />
           <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+          </div>
+          </div>
         </>
       )
     case 6:
       return (
         <>
+        <div className="formContainer">
+            <div className="formBackground">
           <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
           <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+          </div>
+          </div>
         </>
       )
-      case 7:
+    case 7:
       return (
         <>
+        <div className="formContainer">
+            <div className="formBackground">
           <DevotionSelection charDevotion={charDevotion} setCharDevotion={setCharDevotion} characterObj={newCharacter} />
           <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+          </div>
+          </div>
         </>
       )
     case 8:
       return (
         <>
+        <div className="formContainer">
+            <div className="formBackground">
           <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} charImageFile={charImageFile} setCharImageFile={setCharImageFile} />
           <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
           <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} setCharacter={setNewCharacter} characterDevotion={charDevotion} charImageFile={charImageFile} />
+          </div>
+          </div>
         </>
       )
     default:

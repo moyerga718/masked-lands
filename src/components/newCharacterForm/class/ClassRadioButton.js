@@ -5,7 +5,7 @@ export const ClassRadioButton = ( {classObj, characterObj, setCharacter, allAttr
 
     //Create a radio button that displays the class name and associated attribute bonus. When selected, update the main character object
     return <>
-        <div >
+        <label className="labl">
             <input
                 onChange={(changeEvent) => {
                     const copy = { ...characterObj };
@@ -16,7 +16,18 @@ export const ClassRadioButton = ( {classObj, characterObj, setCharacter, allAttr
                 name="classObj"
                 value={classObj.id}
             />{" "}
-            {`${classObj.name}: +2 ${classAttribute?.name}`}
-        </div>
+            <div className="selection-div">
+                <div className="selection-image-div">
+                    <img className="selection-image" src={classObj?.imageUrl} />
+                </div>
+                <div classname="selection-text-div">
+                    <h3 className="selection-text">{`${classObj.name}`}</h3>
+                    <p className="selection-text"><i>{`${classObj.description}`}</i></p>
+                    <h5 className="selection-text"></h5>
+                    <h5 className="selection-text"></h5>
+                </div>
+            </div>
+        
+        </label>
         </>
 }

@@ -1,13 +1,11 @@
-import "./Background.css"
-
-export const BackgroundRadioButton = ( {backgroundObj, characterObj, setCharacter, allAttributes} ) => {
+export const BackgroundRadioButton = ({ backgroundObj, characterObj, setCharacter, allAttributes }) => {
 
     //OKAY so background object now contains an array of all the attribute bonuses for that background. How do we display this shit
     const attBonuses = backgroundObj?.backgroundAttributeBonuses
 
     //Create a radio button that displays the species name and associated attribute bonus. When selected, update the main character object
     return <>
-        <div className="background-selection-container">
+        <label className="labl">
             <input
                 onChange={(changeEvent) => {
                     const copy = { ...characterObj };
@@ -18,17 +16,29 @@ export const BackgroundRadioButton = ( {backgroundObj, characterObj, setCharacte
                 name="backgroundObj"
                 value={backgroundObj.id}
             />{" "}
-            <b>{`${backgroundObj.name}  |`}</b>
-            <div className="background-att-bonus-list-container">
-            {
-                attBonuses.map(
-                    attBonus => {
-                        const foundAtt = allAttributes.find(attribute => attribute.id === attBonus.attributeId)
-                        return <p>| +{attBonus?.bonus} {foundAtt.name} |</p>
-                    }
-                )
-            }
+            <div className="selection-div">
+                <div>
+                    <img className="selection-image" src={backgroundObj?.imageUrl} />
+                </div>
+                <div>
+                    <h3 className="selection-text">{backgroundObj?.name}</h3>
+                    <div className="background-att-bonus-list-container">
+                        <h5 className="selection-text">Attribute Bonuses:</h5>
+                        {
+                            attBonuses.map(
+                                attBonus => {
+                                    const foundAtt = allAttributes.find(attribute => attribute.id === attBonus.attributeId)
+                                    return <h5 className="selection-text">+{attBonus?.bonus} {foundAtt.name}</h5>
+                                }
+                            )
+                        }
+                    </div>
+
+                </div>
+
             </div>
-        </div>
-        </>
+
+        </label>
+
+    </>
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { getSubclassesByClassIdFetch, getClassByIdFetch } from "../../ApiManager"
 import { SubclassRadioButton } from "./SubclassRadioButton"
-
+import "../newCharacterForm.css"
 //This component renders a section where user can choose a subclass
 
 export const SubclassSelection = ({ characterObj, setCharacter, allAttributes }) => {
@@ -22,9 +22,8 @@ export const SubclassSelection = ({ characterObj, setCharacter, allAttributes })
     // For every subclass, invoke the subclassRadioButton component to create all radio buttons.
 
     return <>
-        <h2>Subclass: {charClass.name} </h2>
-        <fieldset>
-            <label htmlFor="subclasses">Subclasses:</label>
+        <h2 className="form-section-title">Subclass</h2>
+        <div className="character-feature-selection-div-container">
             {
                 subclasses.map(subclassObj => <SubclassRadioButton key={`subclass--${subclassObj.id}`}
                     subclassObj={subclassObj}
@@ -33,7 +32,7 @@ export const SubclassSelection = ({ characterObj, setCharacter, allAttributes })
                     allAttributes={allAttributes}
                 />)
             }
-        </fieldset>
+        </div>
     </>
 
 }
