@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { getAllSpeciesFetch } from "../../ApiManager"
 import { SpeciesRadioButton } from "./SpeciesRadioButton"
+import "../newCharacterForm.css"
 
 //This component renders a section where user can choose a species
 
@@ -17,17 +18,18 @@ export const SpeciesSelection = ({ characterObj, setCharacter, allAttributes }) 
 
     // For every species, invoke the speciesRadioButton component to create all radio buttons.
     return <>
-        <h2>Species</h2>
-        <fieldset>
-            <label htmlFor="species">Species:</label>
+        <h2 className="form-section-title">Species</h2>
+        <div className="character-feature-selection-div-container">
+            
             {
                 species.map(speciesObj => <SpeciesRadioButton key={`species--${speciesObj.id}`}
-                speciesObj={speciesObj}
-                characterObj={characterObj}
-                setCharacter={setCharacter}
-                allAttributes={allAttributes}
+                    speciesObj={speciesObj}
+                    characterObj={characterObj}
+                    setCharacter={setCharacter}
+                    allAttributes={allAttributes}
                 />)
             }
-        </fieldset>
-        </>
+            
+        </div>
+    </>
 }

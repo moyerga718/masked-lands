@@ -1,46 +1,23 @@
 .publicCharacterCard {
     padding: 0em;
-    box-shadow: 0 3px 3px rgba(0,0,0,0.15);
+    box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.15);
     border: solid #031926 2px;
     margin: 1rem;
     width: 15rem;
     /* transition: all 0.3s ease-in-out; */
-    transition: border-color 0.3s ease-in-out;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
     background: #fdfffc;
     font-family: Bona Nova;
     
 }
 
-.publicCharacterCard::after {
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    transition: opacity 0.2s ease-in-out;
-  }
-
-  .make-it-fast {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  }
-
-  .make-it-fast::after {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-  }
-
-  .make-it-fast:hover::after {
-    opacity: 1;
-  }
-
-  .publicCharacterCard:hover {
+.publicCharacterCard:hover {
     /* transform: scale(1.05, 1.05); */
-    border-color: #E84855
-  }
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
+}
 
-  .publicCharacterCard:hover::after {
-    opacity: 1;
-  }
+
 
 .character-card-text {
     padding: 0.5rem;

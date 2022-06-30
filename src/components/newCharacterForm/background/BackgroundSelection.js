@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { getSpeciesBackgroundsWithAttBonusesFetch, getSpeciesByIdFetch } from "../../ApiManager"
 import { BackgroundRadioButton } from "./BackgroundRadioButton"
+import "../newCharacterForm.css"
 
 //This component renders a section where user can choose a background
 
@@ -22,9 +23,8 @@ export const BackgroundSelection = ({ characterObj, setCharacter, allAttributes 
     // For every background, invoke the speciesRadioButton component to create all radio buttons.
     
         return <>
-            <h2>Background: {charSpecies.name} </h2>
-            <fieldset>
-                <label htmlFor="backgrounds">Backgrounds:</label>
+            <h2 className="form-section-title">Background: {charSpecies.name} </h2>
+            <div className="character-feature-selection-div-container">
                 {
                     backgrounds.map(backgroundObj => <BackgroundRadioButton key={`background--${backgroundObj.id}`}
                         backgroundObj={backgroundObj}
@@ -33,7 +33,7 @@ export const BackgroundSelection = ({ characterObj, setCharacter, allAttributes 
                         allAttributes={allAttributes}
                     />)
                 }
-            </fieldset>
+            </div>
         </>
     
 }

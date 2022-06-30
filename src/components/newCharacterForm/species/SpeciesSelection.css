@@ -1,0 +1,30 @@
+.labl {
+    display : block;
+    width: 50%;
+}
+
+.labl > input{ /* HIDE RADIO */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+}
+.labl > input + div{ /* DIV STYLES */
+    cursor:pointer;
+    border:2px solid black;
+    background: #fdfffc;
+}
+.labl > input:checked + div{ /* (RADIO CHECKED) DIV STYLES */
+    background: #fdfffc;
+    border: 2px solid #00fffb;
+}
+
+.species-selection-div-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.species-div {
+    display: flex;
+    margin-left: 0rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+}
