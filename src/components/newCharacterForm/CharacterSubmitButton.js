@@ -1,6 +1,7 @@
 import { createCharacterAttributeFetch, createCharacterFetch, createCharacterDevotionFetch, createCharacterImage } from "../ApiManager"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+import "./CharacterSubmitButton.css"
 
 //This component submits newly selected data to api when submit button is clicked.
 
@@ -130,7 +131,7 @@ export const CharacterSubmitButton = ({ characterObj, characterAttributes, setCh
 
     return <button
         onClick={(event) => handleSaveButtonClick(event)}
-        className="btn btn-primary">
+        className="character-submit-button">
         Create Character
     </button>
 }

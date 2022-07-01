@@ -10,7 +10,7 @@ import { CharacterInfoSelection } from "./information/CharacterInfoSelection"
 import { CharacterSubmitButton } from "./CharacterSubmitButton"
 import { getAllAttributesFetch } from "../ApiManager"
 import { StepButtons } from "./StepButtons"
-import { CharacterFormProgressBar } from"./CharacterFormProgressBar"
+import { CharacterFormProgressBar } from "./CharacterFormProgressBar"
 
 // This component is a parent component for all of the different sections of the character creation form. Temp objects for character and character attributes
 // are initialized in state here.
@@ -152,7 +152,9 @@ export const NewCharacterFormContainer = () => {
             <div className="formBackground">
               <CharacterFormProgressBar step={step} />
               <SpeciesSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
-              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              <div className="step-button-container">
+                <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              </div>
             </div>
           </div>
         </>
@@ -164,7 +166,9 @@ export const NewCharacterFormContainer = () => {
             <div className="formBackground">
               <CharacterFormProgressBar step={step} />
               <BackgroundSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
-              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              <div className="step-button-container">
+                <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              </div>
             </div>
           </div>
         </>
@@ -176,7 +180,9 @@ export const NewCharacterFormContainer = () => {
             <div className="formBackground">
               <CharacterFormProgressBar step={step} />
               <ClassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
-              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              <div className="step-button-container">
+                <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              </div>
             </div>
           </div>
         </>
@@ -188,7 +194,9 @@ export const NewCharacterFormContainer = () => {
             <div className="formBackground">
               <CharacterFormProgressBar step={step} />
               <SubclassSelection characterObj={newCharacter} setCharacter={setNewCharacter} allAttributes={allAttributes} />
-              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              <div className="step-button-container">
+                <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              </div>
             </div>
           </div>
         </>
@@ -199,8 +207,10 @@ export const NewCharacterFormContainer = () => {
           <div className="formContainer">
             <div className="formBackground">
               <CharacterFormProgressBar step={step} />
-              <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} characterObj={newCharacter}/>
-              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              <AttributeSelection characterAttributes={newCharacterAttributes} setCharacterAttributes={setNewCharacterAttributes} allAttributes={allAttributes} characterObj={newCharacter} />
+              <div className="step-button-container">
+                <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              </div>
             </div>
           </div>
         </>
@@ -212,7 +222,9 @@ export const NewCharacterFormContainer = () => {
             <div className="formBackground">
               <CharacterFormProgressBar step={step} />
               <EquipmentSelection characterObj={newCharacter} setCharacter={setNewCharacter} />
-              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              <div className="step-button-container">
+                <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              </div>
             </div>
           </div>
         </>
@@ -224,7 +236,9 @@ export const NewCharacterFormContainer = () => {
             <div className="formBackground">
               <CharacterFormProgressBar step={step} />
               <DevotionSelection charDevotion={charDevotion} setCharDevotion={setCharDevotion} characterObj={newCharacter} />
-              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              <div className="step-button-container">
+                <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              </div>
             </div>
           </div>
         </>
@@ -236,7 +250,9 @@ export const NewCharacterFormContainer = () => {
             <div className="formBackground">
               <CharacterFormProgressBar step={step} />
               <CharacterInfoSelection characterObj={newCharacter} setCharacter={setNewCharacter} charImageFile={charImageFile} setCharImageFile={setCharImageFile} />
-              <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              <div className="step-button-container">
+                <StepButtons step={step} nextStep={nextStep} prevStep={prevStep} />
+              </div>
               <CharacterSubmitButton characterObj={newCharacter} characterAttributes={newCharacterAttributes} setCharacter={setNewCharacter} characterDevotion={charDevotion} charImageFile={charImageFile} />
             </div>
           </div>

@@ -39,7 +39,7 @@ export const PublicCharacterCard = ( {characterObj, currentUser, allUsers, allSp
 
     return <Link to={`/character/${characterObj.id}`} style={{ textDecoration: 'none' }} className="character-card-link">
     <section className="publicCharacterCard">
-        <div>
+        <div className="character-card-image-div">
             <img src={characterObj.imageUrl} className="character-card-image" />
         </div>
         <div className="character-card-text">

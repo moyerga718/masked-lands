@@ -5,10 +5,11 @@ export const StepButtons = ({step, nextStep, prevStep}) => {
     if (step === 1) {
         return <button className="step-button" onClick={()=>nextStep(step)}>Next</button>
     } else if (step === 8) {
-        return <button className="step-button" onClick={()=>prevStep(step)}>Previous</button>
+        // return <button className="step-button" onClick={()=>prevStep(step)}>Previous</button>
+        return <></>
     } else {
         return <div>
-            <button className="step-button" onClick={()=>prevStep(step)}>Previous</button>
+            {/* <button className="step-button" onClick={()=>prevStep(step)}>Previous</button> */}
             <button className="step-button" onClick={()=>nextStep(step)}>Next</button>
         </div>
     }

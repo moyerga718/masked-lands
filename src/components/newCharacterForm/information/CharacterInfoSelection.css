@@ -1,0 +1,52 @@
+.details-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+}
+
+.form-text-div {
+    width: 40%;
+}
+
+.form-group {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.input-title {
+    margin: 0;
+}
+
+.form-field {
+    border: none;
+    
+}
+
+.form-control-bio {
+    
+    padding: 0.5rem 0.2rem;
+    font-family: Bona Nova;
+    font-size: 16px;
+}
+
+.char-image-upload {
+    font-family: Bona Nova;
+}
+
+.image-preview {
+    height: 13rem;
+    width: 13rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: black solid 2px;
+    margin-bottom: 1rem;
+    box-shadow: 5px 0 5px -2px rgba(0, 0, 0, 0.15);
+}
+
+.char-image {
+    height: 100%;
+    width: 13rem;
+    object-fit: cover;
+}
+
