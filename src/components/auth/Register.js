@@ -60,26 +60,26 @@ export const Register = (props) => {
                     <h1 className="login--welcome">The Masked Lands</h1>
                     <h3 className="login--signin-text">Register</h3>
                     <form className="form--login" onSubmit={handleRegister}>
+                        
                         <fieldset className="form-field">
-                            
                             <input onChange={updateUser}
                                 type="text" id="firstName" className="form-control"
                                 placeholder="First name" required autoFocus />
                         </fieldset>
+
                         <fieldset className="form-field">
-                            
                             <input onChange={updateUser}
                                 type="text" id="lastName" className="form-control"
                                 placeholder="Last name" required autoFocus />
                         </fieldset>
+
                         <fieldset className="form-field">
-                            
                             <input onChange={updateUser}
                                 type="text" id="username" className="form-control"
                                 placeholder="Username" required autoFocus />
                         </fieldset >
+
                         <fieldset className="form-field">
-                           
                             <input onChange={updateUser}
                                 type="email" id="email" className="form-control"
                                 placeholder="Email address" required />

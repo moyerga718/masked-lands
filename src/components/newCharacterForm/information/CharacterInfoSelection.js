@@ -1,8 +1,9 @@
 //Render text inputs for character name, bio, and imageURL. 
 import { useState } from "react"
 import { createCharacterImage } from "../../ApiManager"
+import "./CharacterInfoSelection.css"
 
-export const CharacterInfoSelection = ({characterObj, setCharacter, charImageFile, setCharImageFile}) => {
+export const CharacterInfoSelection = ({ characterObj, setCharacter, charImageFile, setCharImageFile }) => {
 
     const [previewSource, setPreviewSource] = useState('')
 
@@ -30,7 +31,7 @@ export const CharacterInfoSelection = ({characterObj, setCharacter, charImageFil
 
             const uploadPreset = 'wci8ewi5'
             const uploadURL = `https://api.cloudinary.com/v1_1/dfhvmg01x/image/upload`
-            
+
             const formData = new FormData()
             formData.append("file", charImageFile)
             formData.append("upload_preset", uploadPreset)
@@ -39,7 +40,7 @@ export const CharacterInfoSelection = ({characterObj, setCharacter, charImageFil
                 .then(data => {
                     if (data.secure_url !== '') {
                         console.log(data.secure_url)
-                        const copy = {...characterObj}
+                        const copy = { ...characterObj }
                         copy.imageUrl = data.secure_url
                         setCharacter(copy)
                     }
@@ -48,16 +49,41 @@ export const CharacterInfoSelection = ({characterObj, setCharacter, charImageFil
         }
     }
 
-    return <div>
-        <h2>CHARACTER INFO SELECTION</h2>
-        <fieldset>
+    return <>
+            <h2>Character Details</h2>
+        <div className="details-container">
+            {/* <fieldset className="form-field"> */}
+            <div className="form-image-div">
+                {/* </fieldset> */}
+
+                {
+                    (previewSource)
+                        ? <>
+                            <div className="image-preview">
+                                <img className="char-image" src={previewSource} alt="uploaded character image"  />
+                            </div>
+                        </>
+                        : <div className="image-preview">
+                            Image preview
+                        </div>
+                }
+
+                <div className="char-image-upload">
+                    <input
+                        type="file"
+                        name="image"
+                        onChange={(event) => handleOnChange(event)} />
+                </div>
+            </div>
+            <div className="form-text-div">
+
                 <div className="form-group">
-                    <label htmlFor="name">Character Name:</label>
+                    <label htmlFor="name"><h4 className="input-title">Character Name: </h4></label>
                     <input
                         required autoFocus
                         type="text"
                         className="form-control"
-                        placeholder="Go crazy with it"
+                        placeholder="Gimme a name, any name"
                         value={characterObj.name}
                         onChange={
                             (changeEvent) => {
@@ -67,45 +93,39 @@ export const CharacterInfoSelection = ({characterObj, setCharacter, charImageFil
                             }
                         } />
                 </div>
-            </fieldset>
-            <fieldset>
+                {/* </fieldset>
+            <fieldset className="form-field"> */}
                 <div className="form-group">
-                    <label htmlFor="name">Character Bio:</label>
-                    <input
-                        required autoFocus
-                        type="textarea"
-                        className="form-control"
-                        placeholder="Tell me about this goof"
-                        rows={5}
-                        cols={5}
+                    <label htmlFor="bio"><h4 className="input-title">Character Bio:</h4></label>
+                    <textarea
+                        name="bio"
+                        className="form-control-bio"
+                        placeholder="Keep it short n' sweet"
                         value={characterObj.bio}
                         onChange={
                             (changeEvent) => {
                                 const copy = { ...characterObj }
                                 copy.bio = changeEvent.target.value
                                 setCharacter(copy)
-                            }
-                        } />
+                            }} />
                 </div>
-            </fieldset>
-            <fieldset>
-                <div className="char-image-upload">
-                    <input 
-                        type="file" 
-                        name="image"
-                        onChange={(event)=>handleOnChange(event)} />
-                </div>
-            </fieldset>
-            
-            {
-                (previewSource)
-                ? <>
-                <div>
-                    <img src={previewSource} alt="uploaded character image" style={{height: '100px'}}/>
-                </div>
-                </>
-                : <></>
-            }
-           
+                {/* // <input
+                    //     required autoFocus
+                    //     type="textarea"
+                    //     className="form-control"
+                    //     placeholder="Tell me about this goof"
+                    //     value={characterObj.bio}
+                    //     onChange={
+                    //         (changeEvent) => {
+                    //             const copy = {...characterObj}
+                    //             copy.bio = changeEvent.target.value
+                    //             setCharacter(copy)
+                    //         }
+                    //     } /> */}
+                {/* </fieldset>
+            <fieldset className="form-field"> */}
+            </div>
+
         </div>
+    </>
 }

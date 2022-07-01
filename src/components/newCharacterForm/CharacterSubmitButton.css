@@ -1,41 +1,39 @@
-.step-button {
+.character-submit-button {
     background: #fff;
     backface-visibility: hidden;
+    border-radius: .1rem;
     border: solid #031926 2px;
     box-sizing: border-box;
     color: #031926;
     cursor: pointer;
     display: inline-block;
     font-family: Bona Nova;
-    font-size: 1.5rem;
+    font-size: 1rem;
     line-height: 1.3;
     padding: .25rem .5rem;
     position: relative;
     text-align: left;
     text-decoration: none;
     transform: translateZ(0) scale(1);
-    transition: transform .2s, box-shadow 0.3s ease-in-out;
+    transition: transform .2s;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.15);
   }
   
-  .step-button:not(:disabled):hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 8px 12px 1px rgba(0, 0, 0, 0.2);
+  .character-submit-button:not(:disabled):hover {
+    transform: scale(1.05);
   }
   
-  .step-button:not(:disabled):hover:active {
-    transform: translateY(-2px);
-    box-shadow: 0px 8px 12px 1px rgba(0, 0, 0, 0.2);
+  .character-submit-button:not(:disabled):hover:active {
+    transform: scale(1.05) translateY(.125rem);
   }
   
-  .step-button:focus {
+  .character-submit-button:focus {
     outline: 0 solid transparent;
   }
   
-  .step-button:focus:before {
+  .character-submit-button:focus:before {
     content: "";
     left: calc(-1*.375rem);
     pointer-events: none;
@@ -45,14 +43,14 @@
     user-select: none;
   }
   
-  .step-button:focus:not(:focus-visible) {
+  .character-submit-button:focus:not(:focus-visible) {
     outline: 0 solid transparent;
   }
   
-  .step-button:focus:not(:focus-visible):before {
+  .character-submit-button:focus:not(:focus-visible):before {
     border-width: 0;
   }
   
-  .step-button:not(:disabled):active {
+  .character-submit-button:not(:disabled):active {
     transform: translateY(.125rem);
   }
