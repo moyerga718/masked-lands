@@ -135,6 +135,11 @@ export const getCharDevotionFetch = (characterId) => {
         .then(response => response.json())
 }
 
+export const getAllSpellsFetch = () => {
+    return fetch(`http://localhost:8088/spells`)
+        .then(response => response.json())
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~PUT FETCH CALLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 export const saveUserProfileFetch = (profile) => {
