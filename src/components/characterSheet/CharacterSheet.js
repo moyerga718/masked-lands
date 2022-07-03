@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { deleteCharacterFetch, getBasicCharacterById, getCharacterAttributes, getAllAttributesFetch, getCharacterClass, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch, getCharacterBackgroundFetch, getCharacterSubclassByIdFetch, getSubclassWeaponProficienciesFetch, getCharDevotionFetch, getAllGodsFetch } from "../ApiManager"
+import { deleteCharacterFetch, getBasicCharacterById, getCharacterAttributes, getAllAttributesFetch, getCharacterClass, getAllWeaponsFetch, getAllArmorFetch, getAllSpeciesFetch, getCharacterBackgroundFetch, getCharacterSubclassByIdFetch, getSubclassWeaponProficienciesFetch, getCharDevotionFetch, getAllGodsFetch, getAllSpellsFetch } from "../ApiManager"
 import { AttributeList } from "./AttributeList"
 import { WeaponProficiencyList } from "./WeaponProficiencyList"
 import { DevotionList } from "./DevotionList"
+import { SpellList } from "./SpellList"
 import { ArmorClassCalculation } from "./ArmorClassCalculation"
 import '../../fonts/QUATTROCENTOSANS-REGULAR.TTF'
 import "./CharacterSheet.css"
@@ -31,6 +32,8 @@ export const CharacterSheet = () => {
     const [charDevotion, setCharDevotion] = useState([])
     const [sortedDevotion, setSortedDevotion] = useState([])
     const [gods, setGods] = useState([])
+
+
     const [maxHitDice, setMaxHitDice] = useState(0)
 
     const localMlUser = localStorage.getItem("ml_user")
@@ -432,9 +435,16 @@ export const CharacterSheet = () => {
                     }
                 </div>
 
+                {
+                    (sortedDevotion)
+                        ? <div className="spell-section">
+                            <h3>Spells</h3>
+                            <SpellList sortedDevotion={sortedDevotion} gods={gods} />
+                        </div>
+                        : <></>
+                }
 
-
-                <div className="proficiencies-section">
+                {/* <div className="proficiencies-section">
                     <h3>Proficiencies</h3>
                     <h4>Weapon Proficiencies</h4>
                     {
@@ -450,7 +460,7 @@ export const CharacterSheet = () => {
                             </>
                             : <></>
                     }
-                </div>
+                </div> */}
 
                 <div>
                     {

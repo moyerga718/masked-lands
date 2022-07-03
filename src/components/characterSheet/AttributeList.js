@@ -12,7 +12,12 @@ export const AttributeList = ({ charAtt, charMods, attributeNames }) => {
                     <p className="att-name">{foundAttribute?.name}</p>
                 </div>
                 <div className="att-mod-box-boosted">
-                    <h4>+{foundModifier?.val}</h4>
+                    {
+                        (foundModifier?.val >= 0)
+                        ? <h4>+{foundModifier?.val}</h4>
+                        : <h4>{foundModifier?.val}</h4>
+                    }
+                    
                 </div>
             </div>
         </>
@@ -24,7 +29,11 @@ export const AttributeList = ({ charAtt, charMods, attributeNames }) => {
                     <p className="att-name">{foundAttribute?.name}</p>
                 </div>
                 <div className="att-mod-box">
-                    <h4>+{foundModifier?.val}</h4>
+                {
+                        (foundModifier?.val >= 0)
+                        ? <h4>+{foundModifier?.val}</h4>
+                        : <h4>{foundModifier?.val}</h4>
+                    }
                 </div>
             </div>
         </>

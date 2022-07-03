@@ -1,0 +1,21 @@
+.spell-text-div {
+    border: solid black 2px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+}
+
+.spell-text {
+    margin: 0;
+}
+
+.spell-text-div-head {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.spell-short-description {
+    margin: 0.5rem 0rem;
+}

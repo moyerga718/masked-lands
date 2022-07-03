@@ -1,3 +1,41 @@
+.devotion-text {
+    margin: 0;
+}
+
 .devotion-div {
-    border: solid black 1px;
+    width: 10rem;
+    border: solid black 2px;
+    box-shadow: 6px 6px 11px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+}
+
+.devotion-icon {
+    width: 3rem;
+    height: 3rem;
+    color: black;
+}
+
+.devotion-level-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.devotion-points-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.devotion-div-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0;
 }

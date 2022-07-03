@@ -41,7 +41,7 @@
 }
 
 .single-attribute-container-selected {
-    border: solid 2px #E84855;
+    border: solid 2px black;
     box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.15);
     padding: 0rem;
     display: flex;
