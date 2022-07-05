@@ -8,7 +8,7 @@ export const GodDevotionInput = ({ godObj, charDevotion, setCharDevotion, availa
     const [incrementDisabled, setIncrementDisabled] = useState(false)
     const [decrementDisabled, setDecrementDisabled] = useState(true)
     const [divStyle, setDivStyle] = useState({
-        borderColor: 'black',
+        borderColor: '#031926',
         boxShadow: '0px 5px 10px 1px rgba(0, 0, 0, 0.15)'
     })
     const [boxShadowSpreadVal, setBoxShadowSpreadVal] = useState(1)
@@ -47,7 +47,7 @@ export const GodDevotionInput = ({ godObj, charDevotion, setCharDevotion, availa
                 })
             } else {
                 setDivStyle({
-                    borderColor: 'black',
+                    borderColor: '#031926',
                     boxShadow: '0px 5px 10px 1px rgba(0, 0, 0, 0.15)'
                 })
 
@@ -126,7 +126,10 @@ export const GodDevotionInput = ({ godObj, charDevotion, setCharDevotion, availa
             <img className="god-image" src={godObj?.imageUrl} />
         </div>
         <div className="god-info-div">
+            <div className="god-header">
             <h3 className="god-text">{godObj?.name}</h3>
+            {/* <img className="god-icon" src={godObj?.iconUrl} /> */}
+            </div>
             <p className="god-text"><i>{godObj?.description}</i></p>
             <div className="god-devotion-container">
                 <h4 className="god-text">Devotion Points</h4>

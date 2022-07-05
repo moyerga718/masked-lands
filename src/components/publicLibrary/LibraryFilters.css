@@ -22,9 +22,9 @@
     font-size: 1rem;
     font-family: Bona Nova;
     padding: 0.2rem;
-    background: white;
+    background: #fdfffc;
     outline: none;
-    border: solid black 2px;
+    border: solid #031926 2px;
 }
 
 select {
@@ -44,11 +44,11 @@ option {
     border-bottom: solid gray 2px;
     text-align: center;
     padding-left: none;
-    color: black;
+    color: #031926;
 }
 
 .filter-btn {
-    background: #fff;
+    background: #fdfffc;
     backface-visibility: hidden;
     border: solid #031926 2px;
     box-sizing: border-box;

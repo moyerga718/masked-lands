@@ -118,7 +118,7 @@
 }
 
 .LWS-column-section-current {
-    border: solid black 2px;
+    border: solid #031926 2px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -137,8 +137,8 @@
 }
 
 .LWS-column-section-max {
-    border: solid black 2px;
-    background: white;
+    border: solid #031926 2px;
+    background: #fdfffc;
     height: 2rem;
     width: 2rem;
     display: flex;

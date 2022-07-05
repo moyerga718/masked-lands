@@ -9,7 +9,7 @@
 }
 .labl > input + div{ /* DIV STYLES */
     cursor:pointer;
-    border:2px solid black;
+    border:2px solid #031926;
     background: #fdfffc;
 }
 .labl > input:checked + div{ /* (RADIO CHECKED) DIV STYLES */

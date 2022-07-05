@@ -1,7 +1,19 @@
 .subclass-stats-div {
     display: flex;
+    
 }
 
-.stat-column-spacer {
-    padding: 0 1rem 0 1rem;
+.subclass-description {
+    margin: 0 0 1rem 0;
 }
+
+.equipment-prof-div {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.5rem 0 0 0;
+}
+
+.proficiency-text {
+    margin: 0 1rem 0 0;
+}
+
