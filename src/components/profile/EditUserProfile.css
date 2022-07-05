@@ -1,3 +1,22 @@
+.edit-profile-container {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-profile-background {
+  padding: 2rem;
+    padding-bottom: 1.5rem;
+    margin-top: 4rem;
+    border: solid #031926 2px;
+    width: 24rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fdfffc;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
 .form-field {
     border: none;
     display: flex;
@@ -7,13 +26,15 @@
 }
 
 .profile__title {
-    font-family: CinzelRegular;
+    font-family: Bona Nova;
 }
 
 .edit-user-form {
     font-family: Bona Nova;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 24rem;
 }
 
@@ -91,4 +112,20 @@
     flex-direction: column;
     align-items:left ;
     width: 16.5rem;
+  }
+
+  .form-field-button {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0;
+    margin-top:0;
+  }
+
+  .button-div {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 0;
   }
