@@ -63,8 +63,8 @@ export const AttributeValueSelection = ({ newAttributeId, newAttributeValue, att
         return <>
             <div className="single-attribute-container-selected">
                 <div className="attribute-value-selected-bonus">
-                    <h2>{newAttributeValue + attBonusObj?.bonus}</h2>
-                    {/* <h4>{selectedAttNameObj?.name}</h4> */}
+                    <h2 className="att-val">{newAttributeValue + attBonusObj?.bonus}</h2>
+                    <h5 className="att-name">{selectedAttNameObj?.name}</h5>
                 </div>
                 <div className="attribute-value-radio-container">
                     {
@@ -88,8 +88,8 @@ export const AttributeValueSelection = ({ newAttributeId, newAttributeValue, att
         return <>
             <div className="single-attribute-container-selected">
                 <div className="attribute-value">
-                    <h2>{newAttributeValue}</h2>
-                    {/* <h4>{selectedAttNameObj?.name}</h4> */}
+                    <h2 className="att-val">{newAttributeValue}</h2>
+                    <h5 className="att-name">{selectedAttNameObj?.name}</h5>
                 </div>
                 <div className="attribute-value-radio-container">
                     {

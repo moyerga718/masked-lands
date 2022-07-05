@@ -97,6 +97,14 @@
     box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.2);
 }
 
+.att-name {
+  margin: 0rem;
+}
+
+.att-val {
+  margin: 0rem;
+}
+
 .bonus-att-name {
   color: blue;
 }

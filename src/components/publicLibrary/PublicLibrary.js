@@ -138,7 +138,7 @@ export const PublicLibrary = ( {searchTerms, speciesFilter, backgroundFilter, cl
         <h2 className="library-section-title">Character Library</h2>
         <div className="Character-Card-Container">
         {
-            (filteredCharacters) 
+            (sortedFilteredCharacters) 
             ? sortedFilteredCharacters.map( character => <PublicCharacterCard 
                 key={`character--${character.id}`}
                 allSpecies={species}

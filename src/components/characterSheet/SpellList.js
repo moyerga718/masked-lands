@@ -46,6 +46,7 @@ export const SpellList = ( {sortedDevotion, gods} ) => {
     {
         (charSpells) 
         ? <>
+            
             {
                 charSpells.map( charSpell => <SpellTextGenerator 
                     key={`spell--${charSpell.id}`}
@@ -54,6 +55,12 @@ export const SpellList = ( {sortedDevotion, gods} ) => {
                 />)
             }
         </>
+        : <></>
+
+    }
+    {
+        (charSpells === [])
+        ? <h4>No spells</h4>
         : <></>
     }
 

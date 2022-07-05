@@ -42,6 +42,7 @@
     border: black solid 2px;
     margin-bottom: 1rem;
     box-shadow: 5px 0 5px -2px rgba(0, 0, 0, 0.15);
+    background: white;
 }
 
 .char-image {

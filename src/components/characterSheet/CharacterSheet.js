@@ -444,29 +444,11 @@ export const CharacterSheet = () => {
                         : <></>
                 }
 
-                {/* <div className="proficiencies-section">
-                    <h3>Proficiencies</h3>
-                    <h4>Weapon Proficiencies</h4>
-                    {
-                        (charWeaponProfs)
-                            ? <>
-                                <ul className="weapon-prof-list">
-                                    {
-                                        charWeaponProfs.map(weaponProf => <WeaponProficiencyList
-                                            key={`weaponProficiency--${weaponProf.weaponTypeId}`}
-                                            weaponProfObj={weaponProf} />)
-                                    }
-                                </ul>
-                            </>
-                            : <></>
-                    }
-                </div> */}
-
-                <div>
+                <div className="button-div">
                     {
                         (characterInfo.userId === mlUserObject.id)
                             ? <>
-                                <button onClick={() => deleteCharacter()}>Delete</button>
+                                <button className="delete-button" onClick={() => deleteCharacter()}>Delete</button>
                             </>
                             : <></>
                     }

@@ -1,12 +1,13 @@
 .att-box-boosted {
-    border: solid blue 2px;
+    border: solid black 2px;
     width: 6rem;
     height: 6rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 5px 5px 10px rgba(0, 0, 255, 0.25);
+    box-shadow: 5px 5px 10px rgba(0, 0, 255, 0.15);
+    color: blue;
 }
 
 .att-box {
@@ -34,7 +35,8 @@
 }
 
 .att-mod-box-boosted {
-    border: solid blue 2px;
+    color: blue;
+    border: solid black 2px;
     background: #fdfffc;
     display: flex;
     justify-content: center;
@@ -43,7 +45,7 @@
     height: 2rem;
     margin-bottom: -1rem;
     margin-left: -1rem;
-    box-shadow: 6px 6px 11px rgba(0,0,255,0.2);
+    box-shadow: 6px 6px 11px rgba(0,0,255,0.1);
 }
 
 .att-and-mod-container {

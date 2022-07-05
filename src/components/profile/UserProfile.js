@@ -37,55 +37,58 @@ export const UserProfile = () => {
     return <>
         <div className="profile--container">
             {/* Display current user information */}
-            <section className="user--information">
-                <h2 className="user--information--title">Profile Information</h2>
-                <div className="user--info--field--container">
-                    <p><b>Full Name: </b></p>
-                    <p>{currentUser.firstName} {currentUser.lastName}</p>
-                </div>
-                <div className="user--info--field--container">
-                    <p><b>Username: </b></p>
-                    <p>{currentUser.username}</p>
+            <div className="profile-background">
+                <section className="user--information">
+                    <h2 className="user--information--title">Profile Information</h2>
+                    <div className="user--info--field--container">
+                        <p className="user-text"><b>Full Name: </b></p>
+                        <p className="user-text">{currentUser.firstName} {currentUser.lastName}</p>
+                    </div>
+                    <div className="user--info--field--container">
+                        <p className="user-text"><b>Username: </b></p>
+                        <p className="user-text">{currentUser.username}</p>
 
-                </div>
-                <div className="user--info--field--container">
-                    <p><b>Email: </b></p>
-                    <p>{currentUser.email}</p>
-                </div>
-                {/* Button links to editing user information */}
-                <div className="button--container">
-                    <button className="user--info--edit--button" onClick={
-                        () => {
-                            navigate(`/profile/${currentUser.id}/edit`)
-                        }
-                    }>Edit</button>
+                    </div>
+                    <div className="user--info--field--container">
+                        <p className="user-text"><b>Email: </b></p>
+                        <p className="user-text">{currentUser.email}</p>
+                    </div>
+                    {/* Button links to editing user information */}
+                    <div className="button--container">
+                        <button className="edit-button" onClick={
+                            () => {
+                                navigate(`/profile/${currentUser.id}/edit`)
+                            }
+                        }>Edit</button>
 
-                </div>
-            </section>
-
-
-
-            {/* Button links to character creation form */}
-            <div className="user--library--container">
-                <section className="user--library">
-                    <h2 className="user--library--title">Personal Library</h2>
-
-                    {/* Render character cards for all of this users characters */}
-
-                    <div className="profile-character-card-container">
-                        {
-                            currentUserCharacters.map(character => <PublicCharacterCard
-                                key={`character--${character.id}`}
-                                allSpecies={species}
-                                allClasses={classes}
-                                allBackgrounds={backgrounds}
-                                allSubclasses={subclasses}
-                                characterObj={character}
-                                currentUser={currentUser}
-                                userObj={mlUserObject} />)
-                        }
                     </div>
                 </section>
+
+
+
+                {/* Button links to character creation form */}
+                <div className="user--library--container">
+                    <section className="user--library">
+                        <h2 className="user--library--title">Personal Library</h2>
+
+                        {/* Render character cards for all of this users characters */}
+
+                        <div className="profile-character-card-container">
+                            {
+                                currentUserCharacters.map(character => <PublicCharacterCard
+                                    key={`character--${character.id}`}
+                                    allSpecies={species}
+                                    allClasses={classes}
+                                    allBackgrounds={backgrounds}
+                                    allSubclasses={subclasses}
+                                    characterObj={character}
+                                    currentUser={currentUser}
+                                    userObj={mlUserObject} />)
+                            }
+                        </div>
+                    </section>
+
+                </div>
 
             </div>
 
