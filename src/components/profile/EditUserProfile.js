@@ -39,6 +39,8 @@ export const EditUserProfile = () => {
 
     return (
         <>
+        <div className="edit-profile-container">
+            <div className="edit-profile-background">
             <form className="edit-user-form">
                 <h2 className="profile__title">Edit Profile Information</h2>
                 <div className="input--container">
@@ -110,15 +112,20 @@ export const EditUserProfile = () => {
                                 } />
                         </div>
                     </fieldset>
-                    <fieldset className="form-field">
+                    <fieldset className="form-field-button">
+                        <div className="button-div">
                             <button
                                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                                 className="submitButton">
                                 Save information
                             </button>
+                        </div>
                     </fieldset>
                 </div>
             </form>
+
+            </div>
+        </div>
         </>
     )
 
