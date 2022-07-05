@@ -1,17 +1,21 @@
 .Public-Library-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding-top: 1rem;
+    align-items: flex-start;
 }
 
 .Character-Card-Container {
     display: flex; 
     flex-wrap: wrap;
-    justify-content: center;
+    align-items: flex-start;
+    padding-left: 0rem;
+    /* margin-left: 1rem; */
 }
 
 .library-section-title {
     font-family: Bona Nova;
+    /* padding-left: 1.5rem; */
 }
 
 

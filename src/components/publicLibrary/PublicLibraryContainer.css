@@ -1,14 +1,27 @@
 .public-library-container {
     display: flex;
+    justify-content: center;
+    padding-top: 0rem;
+    align-items: flex-start;
+   
+}
+
+.public-library-background {
+    width: 80%;
+    /* padding: 0 2rem 2rem 2rem; */
+    padding-top: 0rem;
+   
 }
 
 .library-filters-div {
-    flex-basis: 17rem;
-    border-right: solid #031926 2px;
+    padding-bottom: 2rem;
+    padding-top: 1.2rem;
+    border-bottom: 2px gray solid;
+    margin-right: 3rem;
+    
 }
 
 .library-div {
     width: 100%;
-    
 }
 
