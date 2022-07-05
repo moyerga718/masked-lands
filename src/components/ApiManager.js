@@ -125,6 +125,16 @@ export const getSubclassArmorProficienciesFetch = (subclassId) => {
         .then(response => response.json())
 }
 
+export const getAllSubclassWeaponProficienciesFetch = () => {
+    return fetch(`http://localhost:8088/subclassWeaponProficiencies?_expand=weaponType`)
+        .then(response => response.json())
+}
+
+export const getAllSubclassArmorProficienciesFetch = () => {
+    return fetch(`http://localhost:8088/subclassArmorProficiencies?_expand=armorType`)
+        .then(response => response.json())
+}
+
 export const getAllGodsFetch = () => {
     return fetch(`http://localhost:8088/gods`)
         .then(response => response.json())
