@@ -1,5 +1,5 @@
 .god-div {
-    border: solid black 2px;
+    border: solid #031926 2px;
     width: 46%;
     margin-right: 2rem;
     margin-bottom: 2rem;
@@ -114,3 +114,13 @@
   .devotion-button:disabled {
     background: lightgray;
   }
+
+  .god-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.god-icon {
+  width: 2rem;
+}

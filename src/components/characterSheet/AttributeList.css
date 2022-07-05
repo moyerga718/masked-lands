@@ -1,5 +1,5 @@
 .att-box-boosted {
-    border: solid black 2px;
+    border: solid #031926 2px;
     width: 6rem;
     height: 6rem;
     display: flex;
@@ -11,7 +11,7 @@
 }
 
 .att-box {
-    border: solid black 2px;
+    border: solid #031926 2px;
     width: 6rem;
     height: 6rem;
     display: flex;
@@ -22,7 +22,7 @@
 }
 
 .att-mod-box {
-    border: solid black 2px;
+    border: solid #031926 2px;
     background: #fdfffc;
     display: flex;
     justify-content: center;
@@ -36,7 +36,7 @@
 
 .att-mod-box-boosted {
     color: blue;
-    border: solid black 2px;
+    border: solid #031926 2px;
     background: #fdfffc;
     display: flex;
     justify-content: center;

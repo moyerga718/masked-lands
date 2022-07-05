@@ -15,7 +15,7 @@ export const DevotionList = ({ devotionObj, gods }) => {
         return <div className="devotion-div" style={devotedStyle}>
             <div className="devotion-div-header">
                 <img className="devotion-icon" src={foundGod?.iconUrl} />
-                <h4 className="devotion-text">{foundGod?.name}</h4>
+                <h4 className="god-name">{foundGod?.shortName}</h4>
             </div>
             <div>
                 <div className="devotion-level-div">
@@ -32,7 +32,7 @@ export const DevotionList = ({ devotionObj, gods }) => {
         return <div className="devotion-div">
             <div className="devotion-div-header">
                 <img className="devotion-icon" src={foundGod?.iconUrl} />
-                <h4 className="devotion-text">{foundGod?.name}</h4>
+                <h4 className="god-name">{foundGod?.shortName}</h4>
             </div>
             <div>
                 <div className="devotion-level-div">
