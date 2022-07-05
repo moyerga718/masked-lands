@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getAllClassesFetch } from "../../ApiManager"
+import { getAllClassesFetch, getAllSubclassesFetch, getSubclassesByClassIdFetch } from "../../ApiManager"
 import { ClassRadioButton } from "./ClassRadioButton"
 import "../newCharacterForm.css"
 
@@ -7,14 +7,18 @@ import "../newCharacterForm.css"
 
 export const ClassSelection = ({ characterObj, setCharacter, allAttributes }) => {
     const [classes, setClasses] = useState([])
+    const [subclasses, setSubclasses] = useState([])
 
     //Get all class information
     useEffect(
         () => {
             getAllClassesFetch().then(setClasses)
+            getAllSubclassesFetch().then(setSubclasses)
         },
         []
     )
+
+    
 
     // For every class, invoke the ClassRadioButton component to create all radio buttons.
     return <>
@@ -26,6 +30,7 @@ export const ClassSelection = ({ characterObj, setCharacter, allAttributes }) =>
                 characterObj={characterObj}
                 setCharacter={setCharacter}
                 allAttributes={allAttributes}
+                subclasses={subclasses}
                 />)
             }
         </div>

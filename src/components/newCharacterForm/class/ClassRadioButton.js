@@ -1,7 +1,13 @@
-export const ClassRadioButton = ( {classObj, characterObj, setCharacter, allAttributes} ) => {
+import { SubclassList } from "./SubclassList"
+
+export const ClassRadioButton = ( {classObj, characterObj, setCharacter, allAttributes, subclasses} ) => {
+
+    
 
     //For the given classObj, find the name of the attribute that class gives a bonus to.
     const classAttribute = allAttributes.find(attribute => attribute.id === classObj.bonusAttributeId)
+
+    const classSubclasses = subclasses.filter(subclass => subclass?.classId === classObj?.id)
 
     //Create a radio button that displays the class name and associated attribute bonus. When selected, update the main character object
     return <>
@@ -23,8 +29,19 @@ export const ClassRadioButton = ( {classObj, characterObj, setCharacter, allAttr
                 <div className="selection-information-div">
                     <h3 className="selection-text">{`${classObj.name}`}</h3>
                     <p className="selection-text"><i>{`${classObj.description}`}</i></p>
-                    <h5 className="selection-text"></h5>
-                    <h5 className="selection-text"></h5>
+                    <h5 className="selection-text-subclass-title">Subclasses:</h5>
+                    {
+                        (classSubclasses)
+                        ? <div>
+                        {
+                            classSubclasses.map( subclassObj => <SubclassList 
+                                key={`subclass--${subclassObj?.id}`}
+                                subclassObj = {subclassObj}
+                                />)
+                        }
+                        </div>
+                        : <></>
+                    }
                 </div>
             </div>
         
