@@ -1,5 +1,6 @@
 html {
   font-size: 16px;
+  overflow-y: scroll;
 }
 
 body {
@@ -10,13 +11,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
  
-  background: #fdfffc;
+  /* background: #fdfffc; */
   color: #031926;
-  /* background: linear-gradient(-230deg, #fdfffc, #e0e0e0, #d6fafd);
-  background-size: 600% 600%;
-  -webkit-animation: Gradient 15s ease infinite;
-  -moz-animation: Gradient 15s ease infinite;
-  animation: Gradient 15s ease infinite; */
+  background: linear-gradient(94deg, #fdfffc, #fdfffc, #fdfffc, #f0f0f0, #e5edee, #f0f0f0, #fdfffc, #fdfffc, #fdfffc, #fdfffc, #fdfffc, #e4fffe, #dafffe, #ecfffe);
+    background-size: 2800% 2800%;
+
+    -webkit-animation: AnimationName 35s ease infinite;
+    -moz-animation: AnimationName 35s ease infinite;
+    animation: AnimationName 35s ease infinite;
 }
 
 h1 {
@@ -48,7 +50,23 @@ code {
     monospace;
 }
 
-@-webkit-keyframes Gradient {
+@-webkit-keyframes AnimationName {
+  0%{background-position:67% 0%}
+  50%{background-position:34% 100%}
+  100%{background-position:67% 0%}
+}
+@-moz-keyframes AnimationName {
+  0%{background-position:67% 0%}
+  50%{background-position:34% 100%}
+  100%{background-position:67% 0%}
+}
+@keyframes AnimationName {
+  0%{background-position:67% 0%}
+  50%{background-position:34% 100%}
+  100%{background-position:67% 0%}
+}
+
+/* @-webkit-keyframes Gradient {
   0% {
   background-position: 0% 50%
   }
@@ -82,7 +100,7 @@ background-position: 100% 50%
 100% {
 background-position: 0% 50%
 }
-}
+} */
 
 @font-face {
   font-family: "earthorbiter";
@@ -122,5 +140,5 @@ background-position: 0% 50%
 
 
 .site-container {
-  padding: 1rem 2rem;
+  padding: 1rem 0rem;
 }
