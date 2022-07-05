@@ -10,6 +10,7 @@ export const PublicLibrary = ( {searchTerms, speciesFilter, backgroundFilter, cl
 
     const [characters, setCharacters] = useState([])
     const [filteredCharacters, setFilteredCharacters] = useState([])
+    const [sortedFilteredCharacters, setSortedFilteredCharacters] = useState([])
     const [users, setUsers] = useState([])
     const [species,setSpecies] = useState([])
     const [backgrounds, setBackgrounds] = useState([])
@@ -62,6 +63,19 @@ export const PublicLibrary = ( {searchTerms, speciesFilter, backgroundFilter, cl
             getAllCharactersDetailedFetch().then(setFilteredCharacters)
         },
         [characters]
+    )
+
+    useEffect(
+        () => {
+            if (filteredCharacters) {
+                const copy = [...filteredCharacters]
+                const sorted = copy.sort((a,b) => {
+                    return b.id - a.id
+                })
+                setSortedFilteredCharacters(sorted)
+            }
+        },
+        [filteredCharacters]
     )
 
     const filterCharactersByNameSearch = (characterArray) => {
@@ -125,7 +139,7 @@ export const PublicLibrary = ( {searchTerms, speciesFilter, backgroundFilter, cl
         <div className="Character-Card-Container">
         {
             (filteredCharacters) 
-            ? filteredCharacters.map( character => <PublicCharacterCard 
+            ? sortedFilteredCharacters.map( character => <PublicCharacterCard 
                 key={`character--${character.id}`}
                 allSpecies={species}
                 allClasses={classes}
@@ -133,14 +147,16 @@ export const PublicLibrary = ( {searchTerms, speciesFilter, backgroundFilter, cl
                 allSubclasses={subclasses}
                 allUsers={users}
                 characterObj={character}/>)
-            : characters.map( character => <PublicCharacterCard 
-                key={`character--${character.id}`}
-                allSpecies={species}
-                allClasses={classes}
-                allBackgrounds={backgrounds}
-                allSubclasses={subclasses}
-                allUsers={users}
-                characterObj={character}/>)
+            : <></>
+            
+            //</>characters.map( character => <PublicCharacterCard 
+            //     key={`character--${character.id}`}
+            //     allSpecies={species}
+            //     allClasses={classes}
+            //     allBackgrounds={backgrounds}
+            //     allSubclasses={subclasses}
+            //     allUsers={users}
+            //     characterObj={character}/>)
         }
         </div>
     </section>
