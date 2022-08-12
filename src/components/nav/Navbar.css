@@ -8,7 +8,7 @@
     /* border-bottom: solid #031926 2px; */
     
     margin-bottom: 0;
-    padding: 0 2rem 0.5rem 2rem;
+    
     
 }
 
@@ -24,8 +24,6 @@
 }
 
 .header-title {
-    margin-top: -0.4rem;
-    
     font-family: CinzelRegular;
 }
 
