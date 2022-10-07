@@ -37,10 +37,9 @@ export const Navbar = ({ token, setToken, setUsername }) => {
                                 </Link>
                             </li>
                             <li className="navbar__item navbar__logout">
-                                <Link className="navbar__link" to="" onClick={() => {
+                                <Link className="navbar__link" to={`/login`} onClick={() => {
                                     setToken('')
                                     setUsername('')
-                                    navigate("/")
                                 }}>
                                     <h3>Logout</h3>
                                 </Link>
