@@ -122,8 +122,7 @@ export const NewCharacterFormContainer = () => {
   const [allAttributes, setAllAttributes] = useState([])
 
   // Get current user id from local storage
-  const localMlUser = localStorage.getItem("ml_user")
-  const mlUserObject = JSON.parse(localMlUser)
+  const userId = localStorage.getItem("user_id")
 
   //upon state initializing, get all attribute name/id pairings
   //Add userId to new character object
@@ -131,7 +130,7 @@ export const NewCharacterFormContainer = () => {
     () => {
       getAllAttributesFetch().then(setAllAttributes)
       const copy = { ...newCharacter }
-      copy.userId = mlUserObject.id
+      copy.userId = parseInt(userId)
       setNewCharacter(copy)
     },
     []

@@ -6,13 +6,14 @@ import { MaskedLands } from './components/MaskedLands';
 import './fonts/earthorbiter.ttf'
 import './fonts/ANGARSRUNES_PERSONAL.TTF'
 import './fonts/CINZELDECORATIVE-REGULAR.TTF'
+import { BrowserRouter } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <MaskedLands />
-  </React.StrictMode>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

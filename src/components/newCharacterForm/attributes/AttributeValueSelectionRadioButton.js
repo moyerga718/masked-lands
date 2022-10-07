@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 
 /*
 
-Okay I'm trying to figure out how the FRICK to make these radio buttons to work together. 
+Okay I'm trying to figure out how to make these radio buttons to work together. 
     *The character sheet works, but only if the user makes the right attribute selections the first time.
     *say someone chooses new attribute value 1 to go to charisma. They then want to change their selection to go to strength.
         * this changes the value of strength to attribute value 1, but that value doesn't reset in charisma.
