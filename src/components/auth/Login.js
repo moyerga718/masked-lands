@@ -1,30 +1,48 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
+import { loginUser } from "../../django-managers/AuthManager";
 import "./Login.css"
 
-export const Login = () => {
-    const [email, set] = useState("")
+export const Login = ({ setToken, setUserId, setUsername }) => {
+    const username = useRef()
+    const password = useRef()
     const navigate = useNavigate()
 
     const handleLogin = (e) => {
         e.preventDefault()
 
-        return fetch(`http://localhost:8088/users?email=${email}`)
-            .then(res => res.json())
-            .then(foundUsers => {
-                if (foundUsers.length === 1) {
-                    const user = foundUsers[0]
-                    localStorage.setItem("ml_user", JSON.stringify({
-                        id: user.id,
-                    }))
+        const user = {
+            username: username.current.value,
+            password: password.current.value
+        }
 
-                    navigate("/")
-                }
-                else {
-                    window.alert("Invalid login")
-                }
-            })
+        loginUser(user).then(res => {
+            if ("valid" in res && res.valid) {
+
+                setToken(res.token)
+                setUserId(res.user_id)
+                setUsername(res.username)
+                navigate("/")
+            }
+        })
+
+        // LOGIN FOR JSON SERVER
+        // return fetch(`http://localhost:8088/users?email=${email}`)
+        //     .then(res => res.json())
+        //     .then(foundUsers => {
+        //         if (foundUsers.length === 1) {
+        //             const user = foundUsers[0]
+        //             localStorage.setItem("ml_user", JSON.stringify({
+        //                 id: user.id,
+        //             }))
+
+        //             navigate("/")
+        //         }
+        //         else {
+        //             window.alert("Invalid login")
+        //         }
+        //     })
     }
 
     return (
@@ -36,13 +54,23 @@ export const Login = () => {
                     <h3 className="login--signin-text">Sign in</h3>
                     <form className="form--login" onSubmit={handleLogin}>
                         <fieldset className="form-field">
-
-                            <input type="email"
-                                value={email}
-                                onChange={evt => set(evt.target.value)}
+                            <input
                                 className="form-control"
-                                placeholder="Email address"
-                                required autoFocus />
+                                type="text"
+                                ref={username}
+                                name="username"
+                                placeholder = "Username"
+                                autoFocus
+                            />
+                        </fieldset>
+                        <fieldset className="form-field">
+                            <input
+                                className="form-control"
+                                type="password"
+                                ref={password}
+                                name="password"
+                                placeholder = "Password"
+                            />
                         </fieldset>
                         <fieldset className="form-field">
                             <div className="link--register">
