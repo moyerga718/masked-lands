@@ -26,23 +26,6 @@ export const Login = ({ setToken, setUserId, setUsername }) => {
                 navigate("/")
             }
         })
-
-        // LOGIN FOR JSON SERVER
-        // return fetch(`http://localhost:8088/users?email=${email}`)
-        //     .then(res => res.json())
-        //     .then(foundUsers => {
-        //         if (foundUsers.length === 1) {
-        //             const user = foundUsers[0]
-        //             localStorage.setItem("ml_user", JSON.stringify({
-        //                 id: user.id,
-        //             }))
-
-        //             navigate("/")
-        //         }
-        //         else {
-        //             window.alert("Invalid login")
-        //         }
-        //     })
     }
 
     return (

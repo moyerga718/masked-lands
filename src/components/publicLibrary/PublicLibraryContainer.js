@@ -4,26 +4,15 @@ import { useState } from "react"
 import "./PublicLibraryContainer.css"
 
 export const PublicLibraryContainer = () => {
-    const [searchTerms, setSearchTerms] = useState({
-        id: 1,
-        value: ""
-    })
-    const [speciesFilter, setSpeciesFilter] = useState({
-        id: 2,
-        value: "0"
-    })
-    const [backgroundFilter, setBackgroundFilter] = useState({
-        id: 3,
-        value: "0"
-    })
-    const [classFilter, setClassFilter] = useState({
-        id: 4,
-        value: "0"
-    })
-    const [subclassFilter, setSubclassFilter] = useState({
-        id: 5,
-        value: "0"
-    })
+    
+    const [characterCardData, setCharacterCardData] = useState([])
+
+    useEffect(
+        () => {
+            getAllCharacterCards().then(setCharacterCardData)
+        },
+        []
+    )
 
     return <>
         <section className="public-library-container">
@@ -32,7 +21,7 @@ export const PublicLibraryContainer = () => {
                     <LibraryFilters searchTerms={searchTerms} setSearchTerms={setSearchTerms} speciesFilter={speciesFilter} setSpeciesFilter={setSpeciesFilter} backgroundFilter={backgroundFilter} setBackgroundFilter={setBackgroundFilter} classFilter={classFilter} setClassFilter={setClassFilter} subclassFilter={subclassFilter} setSubclassFilter={setSubclassFilter}/>
                 </div>
                 <div className="library-div">
-                    <PublicLibrary searchTerms={searchTerms} speciesFilter={speciesFilter} backgroundFilter={backgroundFilter} classFilter={classFilter} subclassFilter={subclassFilter}/>
+                    <PublicLibrary characterCardData = {characterCardData}/>
                 </div>
             </div>
         </section>
