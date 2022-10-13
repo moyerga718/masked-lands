@@ -7,8 +7,8 @@ import { ClassFilter } from "./ClassFilter"
 import { SubclassFilter } from "./SubclassFilter"
 
 export const LibraryFilters = ({ searchTerms, setSearchTerms, speciesFilter, setSpeciesFilter, backgroundFilter, setBackgroundFilter, classFilter, setClassFilter, subclassFilter, setSubclassFilter }) => {
-    const [backgrounds, setBackgrounds] = useState([])
     const [species, setSpecies] = useState([])
+    const [backgrounds, setBackgrounds] = useState([])
     const [classes, setClasses] = useState([])
     const [subclasses, setSubclasses] = useState([])
     const [backgroundsFilteredBySpecies, setBackgroundsFilteredBySpecies] = useState([])
