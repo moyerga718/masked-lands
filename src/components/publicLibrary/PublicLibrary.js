@@ -10,7 +10,7 @@ import "./PublicLibrary.css"
 export const PublicLibrary = ( {characterCardData} ) => {
 
     // return JSX to make characters. For each character, invoke PublicCharacterCard component to generate card.
-     return <section className="Public-Library-section">
+    return <section className="Public-Library-section">
         <h2 className="library-section-title">Character Library</h2>
         <div className="Character-Card-Container">
         {

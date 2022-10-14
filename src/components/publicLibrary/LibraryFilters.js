@@ -1,148 +1,129 @@
 import "./LibraryFilters.css"
 import { useEffect, useState } from "react"
-import { getAllBackgroundsFetch, getAllSpeciesFetch, getAllClassesFetch, getAllSubclassesFetch } from "../ApiManager"
 import { SpeciesFilter } from "./SpeciesFilter"
 import { BackgroundFilter } from "./BackgroundFilter"
 import { ClassFilter } from "./ClassFilter"
 import { SubclassFilter } from "./SubclassFilter"
+import { getAllSpeciesAndBackgroundNames } from "../../django-managers/SpeciesManager"
+import { getAllClassAndSubclassNames } from "../../django-managers/ClassManager"
+import { getAllCharacterCards, getFilteredCharacterCards } from "../../django-managers/CharacterManager"
 
-export const LibraryFilters = ({ searchTerms, setSearchTerms, speciesFilter, setSpeciesFilter, backgroundFilter, setBackgroundFilter, classFilter, setClassFilter, subclassFilter, setSubclassFilter }) => {
+
+export const LibraryFilters = ({ setCharacterCardData }) => {
+
+    // State Variables
+
+    const [searchTerms, setSearchTerms] = useState("")
     const [species, setSpecies] = useState([])
-    const [backgrounds, setBackgrounds] = useState([])
     const [classes, setClasses] = useState([])
-    const [subclasses, setSubclasses] = useState([])
-    const [backgroundsFilteredBySpecies, setBackgroundsFilteredBySpecies] = useState([])
-    const [subclassesFilteredByClass, setSubclassesFilteredByClass] = useState([])
-    const [backgroundDisabled, setBackgroundDisabled] = useState(true)
-    const [subclassDisabled, setSubclassDisabled] = useState(true)
-    const [speciesSelected, setSpeciesSelected] = useState(false)
+    const [selectedSpecies, setSelectedSpecies] = useState(0)
+    const [selectedBackground, setSelectedBackground] = useState(0)
+    const [selectedClass, setSelectedClass] = useState(0)
+    const [selectedSubclass, setSelectedSubclass] = useState(0)
+    const [speciesBackgrounds, setSpeciesBackgrounds] = useState([])
+    const [classSubclasses, setClassSubclasses] = useState([])
+    const [filterActive, setFilterActive] = useState(false)
+
     const [speciesStyle, setSpeciesStyle] = useState({
         color: 'black',
     })
-    const [backgroundSelected, setBackgroundSelected] = useState(false)
     const [backgroundStyle, setBackgroundStyle] = useState({
         color: 'black',
     })
-    const [classSelected, setClassSelected] = useState(false)
     const [classStyle, setClassStyle] = useState({
         color: 'black',
     })
-    const [subclassSelected, setSubclassSelected] = useState(false)
     const [subclassStyle, setSubclassStyle] = useState({
         color: 'black',
     })
 
+    // Functions invoked when set/reset filters buttons are clicked
+
+    const setFilters = () => {
+        if (searchTerms.length || selectedSpecies || selectedBackground || selectedClass || selectedSubclass) {
+            setFilterActive(true)
+            getFilteredCharacterCards(searchTerms, selectedSpecies, selectedBackground, selectedClass, selectedSubclass).then(setCharacterCardData)
+        }
+    }
+    
     const resetFilters = () => {
-        const searchFilterCopy = {...searchTerms}
-        searchFilterCopy.value=""
-        setSearchTerms(searchFilterCopy)
-        const speciesFilterCopy = {...speciesFilter}
-        speciesFilterCopy.value = "0"
-        setSpeciesFilter(speciesFilterCopy)
-        const backgroundFilterCopy = {...backgroundFilter}
-        backgroundFilterCopy.value="0"
-        setBackgroundFilter(backgroundFilterCopy)
-        const classFilterCopy = {...classFilter}
-        classFilterCopy.value = "0"
-        setClassFilter(classFilterCopy)
-        const subclassFilterCopy = {...subclassFilter}
-        subclassFilterCopy.value = "0"
-        setSubclassFilter(subclassFilterCopy)
+        getAllCharacterCards().then(setCharacterCardData)
+        setSearchTerms("")
+        setSelectedSpecies(0)
+        setSelectedBackground(0)
+        setSelectedClass(0)
+        setSelectedSubclass(0)
+        setFilterActive(false)
     }
 
+    // Get all species/background/class/subclass data on render
     useEffect(
         () => {
-            getAllSpeciesFetch().then(setSpecies)
-            getAllBackgroundsFetch().then(setBackgrounds)
-            getAllClassesFetch().then(setClasses)
-            getAllSubclassesFetch().then(setSubclasses)
+            getAllSpeciesAndBackgroundNames().then(setSpecies)
+            getAllClassAndSubclassNames().then(setClasses)
         },
         []
     )
 
+
+    // When a species is selected, get all backgrounds within that species object, set them in their own state variable
     useEffect(
         () => {
-            if (backgroundFilter.value !== "0") {
-                setBackgroundSelected(true)
+            if (selectedSpecies) {
+                const speciesObj = species.find(species => species.id === selectedSpecies)
+                setSpeciesBackgrounds(speciesObj.backgrounds)
             } else {
-                setBackgroundSelected(false)
+                setSpeciesBackgrounds([])
             }
+
         },
-        [backgroundFilter]
+        [selectedSpecies]
     )
 
+    // When a class is selected, get all subclasses within that class object, set them in their own state variable.
     useEffect(
         () => {
-            if (speciesFilter.value !== "0" && backgrounds) {
-                const filteredBackgrounds = backgrounds.filter(background => background.speciesId === parseInt(speciesFilter.value))
-                setBackgroundsFilteredBySpecies(filteredBackgrounds)
-                setBackgroundDisabled(false)
-                setSpeciesSelected(true)
-            } else if (speciesFilter.value === "0") {
-                setBackgroundsFilteredBySpecies([])
-                const backgroundFilterCopy = {...backgroundFilter}
-                backgroundFilterCopy.value = "0"
-                setBackgroundFilter(backgroundFilterCopy)
-                setBackgroundDisabled(true)
-                setSpeciesSelected(false)
-                setBackgroundSelected(false)
-            }
-        },
-        [speciesFilter]
-    )
-
-    useEffect(
-        () => {
-            if (classFilter.value !== "0" && subclasses) {
-                const filteredSubclasses = subclasses.filter(subclass => subclass.classId === parseInt(classFilter.value))
-                setSubclassesFilteredByClass(filteredSubclasses)
-                setSubclassDisabled(false)
-                setClassSelected(true)
-            } else if (classFilter.value === "0") {
-                setSubclassesFilteredByClass([])
-                const subclassFilterCopy = {...subclassFilter}
-                subclassFilterCopy.value = "0"
-                setSubclassFilter(subclassFilterCopy)
-                setSubclassDisabled(true)
-                setClassSelected(false)
-                setSubclassSelected(false)
-            }
-        },
-        [classFilter]
-    )
-
-    useEffect(
-        () => {
-            if (subclassFilter.value !== "0") {
-                setSubclassSelected(true)
+            if (selectedClass) {
+                const classObj = classes.find(classObj => classObj.id === selectedClass)
+                setClassSubclasses(classObj.subclasses)
             } else {
-                setSubclassSelected(false)
+                setClassSubclasses([])
             }
+
         },
-        [subclassFilter]
+        [selectedClass]
     )
 
+    // Use effects that alter color of dropdown text.
     useEffect(
         () => {
-            if (speciesSelected) {
+            if (selectedSpecies) {
                 setSpeciesStyle({
-                    color:'#E84855'
+                    color: '#E84855'
                 })
+                setBackgroundStyle({
+                    color: 'black'
+                })
+                setSelectedBackground(0)
             } else {
                 setSpeciesStyle({
                     color: 'black'
                 })
+                setBackgroundStyle({
+                    color: 'black'
+                })
+                setSelectedBackground(0)
 
             }
         },
-        [speciesSelected]
+        [selectedSpecies]
     )
 
     useEffect(
         () => {
-            if (backgroundSelected) {
+            if (selectedBackground) {
                 setBackgroundStyle({
-                    color:'#E84855'
+                    color: '#E84855'
                 })
             } else {
                 setBackgroundStyle({
@@ -151,39 +132,45 @@ export const LibraryFilters = ({ searchTerms, setSearchTerms, speciesFilter, set
 
             }
         },
-        [backgroundSelected]
+        [selectedBackground]
     )
 
     useEffect(
         () => {
-            if (classSelected) {
+            if (selectedClass) {
                 setClassStyle({
-                    color:'#E84855'
+                    color: '#E84855'
                 })
+                setSubclassStyle({
+                    color: 'black'
+                })
+                setSelectedSubclass(0)
             } else {
                 setClassStyle({
                     color: 'black'
                 })
-
+                setSubclassStyle({
+                    color: 'black'
+                })
+                setSelectedSubclass(0)
             }
         },
-        [classSelected]
+        [selectedClass]
     )
 
     useEffect(
         () => {
-            if (subclassSelected) {
+            if (selectedSubclass) {
                 setSubclassStyle({
-                    color:'#E84855'
+                    color: '#E84855'
                 })
             } else {
                 setSubclassStyle({
                     color: 'black'
                 })
-
             }
         },
-        [subclassSelected]
+        [selectedSubclass]
     )
 
 
@@ -195,12 +182,10 @@ export const LibraryFilters = ({ searchTerms, setSearchTerms, speciesFilter, set
             <div className="search-bar-div">
                 <input
                     className="search-input"
-                    value={searchTerms.value}
+                    value={searchTerms}
                     onChange={
                         (changeEvent) => {
-                            const searchObjCopy = { ...searchTerms }
-                            searchObjCopy.value = changeEvent.target.value
-                            setSearchTerms(searchObjCopy)
+                            setSearchTerms(changeEvent.target.value)
                         }
                     }
                     type="text" placeholder="Search by Name" />
@@ -211,12 +196,9 @@ export const LibraryFilters = ({ searchTerms, setSearchTerms, speciesFilter, set
                 <div className="dropdown-filter-div">
                     <select
                         style={speciesStyle}
-                        value={speciesFilter.value}
+                        value={selectedSpecies}
                         onChange={(changeEvent) => {
-                            const speciesFilterCopy = { ...speciesFilter }
-                            speciesFilterCopy.value = changeEvent.target.value
-                            
-                            setSpeciesFilter(speciesFilterCopy)
+                            setSelectedSpecies(parseInt(changeEvent.target.value))
                         }}
                     >
                         <option value="0">Species</option>
@@ -231,19 +213,17 @@ export const LibraryFilters = ({ searchTerms, setSearchTerms, speciesFilter, set
                 </div>
 
                 <div className="dropdown-filter-div">
-                    <select 
-                    style={backgroundStyle}
-                        value={backgroundFilter.value}
+                    <select
+                        style={backgroundStyle}
+                        value={selectedBackground}
                         onChange={(changeEvent) => {
-                            const backgroundFilterCopy = { ...backgroundFilter }
-                            backgroundFilterCopy.value = changeEvent.target.value
-                            setBackgroundFilter(backgroundFilterCopy)
+                            setSelectedBackground(parseInt(changeEvent.target.value))
                         }}
-                        disabled={backgroundDisabled}>
+                        disabled={!selectedSpecies}>
                         <option value="0">Background</option>
                         {
-                            (backgroundsFilteredBySpecies)
-                                ? backgroundsFilteredBySpecies.map(backgroundObj => <BackgroundFilter
+                            (speciesBackgrounds.length)
+                                ? speciesBackgrounds.map(backgroundObj => <BackgroundFilter
                                     key={`background--${backgroundObj.id}`}
                                     backgroundObj={backgroundObj} />)
                                 : <></>
@@ -252,13 +232,11 @@ export const LibraryFilters = ({ searchTerms, setSearchTerms, speciesFilter, set
                 </div>
 
                 <div className="dropdown-filter-div">
-                    <select className="dropdown-select" 
-                    style={classStyle}
-                    value={classFilter.value}
+                    <select className="dropdown-select"
+                        style={classStyle}
+                        value={selectedClass}
                         onChange={(changeEvent) => {
-                            const classFilterCopy = { ...classFilter }
-                            classFilterCopy.value = changeEvent.target.value
-                            setClassFilter(classFilterCopy)
+                            setSelectedClass(parseInt(changeEvent.target.value))
                         }}>
                         <option value="0">Class</option>
                         {
@@ -273,18 +251,16 @@ export const LibraryFilters = ({ searchTerms, setSearchTerms, speciesFilter, set
 
                 <div className="dropdown-filter-div">
                     <select
-                        disabled={subclassDisabled}
+                        disabled={!selectedClass}
                         style={subclassStyle}
-                        value={subclassFilter.value}
+                        value={selectedSubclass}
                         onChange={(changeEvent) => {
-                            const subclassFilterCopy = { ...subclassFilter }
-                            subclassFilterCopy.value = changeEvent.target.value
-                            setSubclassFilter(subclassFilterCopy)
+                            setSelectedSubclass(parseInt(changeEvent.target.value))
                         }}>
                         <option value="0">Subclass</option>
                         {
-                            (subclassesFilteredByClass)
-                                ? subclassesFilteredByClass.map(subclassObj => <SubclassFilter
+                            (classSubclasses.length)
+                                ? classSubclasses.map(subclassObj => <SubclassFilter
                                     key={`subclass--${subclassObj.id}`}
                                     subclassObj={subclassObj} />)
                                 : <></>
@@ -293,8 +269,15 @@ export const LibraryFilters = ({ searchTerms, setSearchTerms, speciesFilter, set
                 </div>
 
                 <div>
-                    <button className="filter-btn" onClick={() => resetFilters()}>Clear filter</button>
+                    <button className="filter-btn" onClick={() => setFilters()}>Set filter</button>
                 </div>
+                {
+                    (filterActive)
+                        ? <div>
+                            <button className="filter-btn" onClick={() => resetFilters()}>Clear filter</button>
+                        </div>
+                        : <></>
+                }
             </div>
         </section>
     </>

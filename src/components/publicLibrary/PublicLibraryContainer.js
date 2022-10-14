@@ -1,6 +1,7 @@
 import { LibraryFilters } from "./LibraryFilters"
 import { PublicLibrary } from "./PublicLibrary"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { getAllCharacterCards } from "../../django-managers/CharacterManager"
 import "./PublicLibraryContainer.css"
 
 export const PublicLibraryContainer = () => {
@@ -18,7 +19,7 @@ export const PublicLibraryContainer = () => {
         <section className="public-library-container">
             <div className="public-library-background">
                 <div className="library-filters-div">
-                    <LibraryFilters searchTerms={searchTerms} setSearchTerms={setSearchTerms} speciesFilter={speciesFilter} setSpeciesFilter={setSpeciesFilter} backgroundFilter={backgroundFilter} setBackgroundFilter={setBackgroundFilter} classFilter={classFilter} setClassFilter={setClassFilter} subclassFilter={subclassFilter} setSubclassFilter={setSubclassFilter}/>
+                    <LibraryFilters setCharacterCardData = {setCharacterCardData}/>
                 </div>
                 <div className="library-div">
                     <PublicLibrary characterCardData = {characterCardData}/>
